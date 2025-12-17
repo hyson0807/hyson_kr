@@ -16,7 +16,7 @@ export default function MobileHeader({ theme }: MobileHeaderProps) {
   const navItems = [
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
-    { name: 'Projects', path: '/projects' },
+    { name: 'Apps', path: '/projects' },
     { name: 'Contact', path: '/contact' },
   ];
 
@@ -26,7 +26,7 @@ export default function MobileHeader({ theme }: MobileHeaderProps) {
     >
       <div className="flex items-center justify-between">
         <Link href="/" className={`text-xl font-bold ${theme.accent}`}>
-          Your Name
+          Hyson Works
         </Link>
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

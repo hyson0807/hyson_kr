@@ -1,58 +1,15 @@
+import Link from 'next/link';
+
 export default function ProjectsPage() {
-  const projects = [
+  const apps = [
     {
-      title: '프로젝트 1',
-      description: 'React와 TypeScript로 구현한 대시보드 애플리케이션',
+      title: 'IsoLog',
+      description: '일상의 순간을 기록하고 관리하는 라이프로그 앱',
       longDescription:
-        '사용자가 실시간으로 데이터를 모니터링하고 관리할 수 있는 대시보드를 구축했습니다. 차트 라이브러리를 활용하여 직관적인 데이터 시각화를 제공하며, 반응형 디자인으로 모바일 환경에서도 최적화된 경험을 제공합니다.',
-      tags: ['React', 'TypeScript', 'Tailwind', 'Chart.js'],
-      year: '2024',
-      link: '#',
-    },
-    {
-      title: '프로젝트 2',
-      description: 'Next.js 기반 블로그 플랫폼 개발',
-      longDescription:
-        'MDX를 활용한 정적 블로그 플랫폼입니다. SSG를 통해 빠른 로딩 속도를 제공하며, SEO 최적화를 통해 검색 엔진 노출을 개선했습니다. Vercel을 통해 자동 배포 파이프라인을 구축했습니다.',
-      tags: ['Next.js', 'MDX', 'Vercel', 'SEO'],
-      year: '2024',
-      link: '#',
-    },
-    {
-      title: '프로젝트 3',
-      description: '실시간 채팅 애플리케이션 구현',
-      longDescription:
-        'Socket.io를 활용한 실시간 채팅 애플리케이션입니다. 다중 채팅방 지원, 파일 전송, 읽음 표시 등의 기능을 구현했으며, MongoDB를 통해 채팅 내역을 저장합니다.',
-      tags: ['Socket.io', 'Node.js', 'MongoDB', 'React'],
-      year: '2023',
-      link: '#',
-    },
-    {
-      title: '프로젝트 4',
-      description: 'e-커머스 웹사이트 풀스택 개발',
-      longDescription:
-        '상품 검색, 장바구니, 결제 시스템을 포함한 완전한 e-커머스 플랫폼입니다. Stripe API를 연동하여 안전한 결제를 지원하며, PostgreSQL을 통해 데이터를 관리합니다.',
-      tags: ['Next.js', 'PostgreSQL', 'Stripe', 'Prisma'],
-      year: '2023',
-      link: '#',
-    },
-    {
-      title: '프로젝트 5',
-      description: '날씨 정보 앱 with OpenWeather API',
-      longDescription:
-        'OpenWeather API를 활용한 날씨 정보 애플리케이션입니다. 현재 날씨, 시간별/주간 예보, 위치 기반 검색 기능을 제공합니다. PWA로 구현하여 오프라인에서도 사용 가능합니다.',
-      tags: ['React', 'API', 'PWA', 'Service Worker'],
-      year: '2023',
-      link: '#',
-    },
-    {
-      title: '프로젝트 6',
-      description: '포트폴리오 관리 시스템',
-      longDescription:
-        'Vue.js와 Firebase를 활용한 포트폴리오 관리 시스템입니다. 실시간 데이터베이스를 통해 프로젝트를 추가/수정/삭제할 수 있으며, Vuetify를 통해 Material Design을 구현했습니다.',
-      tags: ['Vue.js', 'Firebase', 'Vuetify', 'Material Design'],
-      year: '2022',
-      link: '#',
+        '하루하루의 소중한 순간들을 간편하게 기록하고 관리할 수 있는 라이프로그 앱입니다. 직관적인 UI로 빠르게 기록하고, 타임라인 형식으로 지난 기록들을 돌아볼 수 있습니다. 사진, 텍스트, 위치 정보 등 다양한 형태로 일상을 남겨보세요.',
+      tags: ['Flutter', 'iOS', 'Android', 'Firebase'],
+      status: '출시',
+      platforms: ['App Store', 'Google Play'],
     },
   ];
 
@@ -60,80 +17,104 @@ export default function ProjectsPage() {
     <div className="min-h-screen py-24 px-6 md:px-12 lg:px-24">
       <div className="max-w-6xl mx-auto">
         <div className="mb-12">
-          <h1 className="text-5xl md:text-6xl font-bold mb-4 text-blue-600 dark:text-blue-400">Projects</h1>
+          <h1 className="text-5xl md:text-6xl font-bold mb-4 text-blue-600 dark:text-blue-400">Our Apps</h1>
           <p className="text-xl text-gray-600 dark:text-gray-400">
-            제가 작업한 프로젝트들입니다. 각 프로젝트는 사용자 경험과 코드 품질을 최우선으로 생각하며 개발했습니다.
+            Hyson Works에서 개발한 앱들입니다. 모든 앱은 사용자 경험을 최우선으로 생각하며 개발되었습니다.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
+        <div className="space-y-8">
+          {apps.map((app, index) => (
             <div
               key={index}
               className="bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-lg overflow-hidden hover:shadow-xl transition-all"
             >
-              {/* 프로젝트 썸네일 */}
-              <div className="w-full h-56 border-b border-gray-200 dark:border-zinc-800 flex items-center justify-center text-gray-600 dark:text-gray-400 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-zinc-800 dark:to-zinc-900">
-                <span className="text-4xl font-bold text-gray-300 dark:text-zinc-700">
-                  {project.title}
-                </span>
-              </div>
-
-              {/* 프로젝트 정보 */}
-              <div className="p-6">
-                <div className="flex items-start justify-between mb-3">
-                  <h3 className="text-2xl font-semibold">{project.title}</h3>
-                  <span className="text-sm text-gray-500 dark:text-gray-400">{project.year}</span>
-                </div>
-
-                <p className="text-gray-700 dark:text-gray-300 mb-3 font-medium">{project.description}</p>
-
-                <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm leading-relaxed">
-                  {project.longDescription}
-                </p>
-
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-3 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs font-medium rounded-full"
-                    >
-                      {tag}
+              <div className="grid md:grid-cols-2">
+                {/* 앱 썸네일 */}
+                <div className="h-64 md:h-auto flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-zinc-800 dark:to-zinc-900 p-8">
+                  <div className="text-center">
+                    <span className="text-6xl md:text-7xl font-bold text-blue-600 dark:text-blue-400">
+                      {app.title}
                     </span>
-                  ))}
+                    <div className="mt-4 flex justify-center gap-2">
+                      {app.platforms.map((platform) => (
+                        <span
+                          key={platform}
+                          className="px-3 py-1 bg-white dark:bg-zinc-800 text-gray-600 dark:text-gray-400 text-xs rounded-full"
+                        >
+                          {platform}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
 
-                <a
-                  href={project.link}
-                  className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 font-medium hover:underline"
-                >
-                  프로젝트 보기
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                    />
-                  </svg>
-                </a>
+                {/* 앱 정보 */}
+                <div className="p-8">
+                  <div className="flex items-center gap-3 mb-4">
+                    <h2 className="text-3xl font-bold">{app.title}</h2>
+                    <span className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-sm font-medium rounded-full">
+                      {app.status}
+                    </span>
+                  </div>
+
+                  <p className="text-xl text-gray-700 dark:text-gray-300 mb-4 font-medium">
+                    {app.description}
+                  </p>
+
+                  <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
+                    {app.longDescription}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {app.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-3 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-sm font-medium rounded-full"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="flex gap-4">
+                    <a
+                      href="#"
+                      className="inline-flex items-center gap-2 px-6 py-3 bg-black text-white rounded-lg font-medium hover:opacity-90 transition-opacity"
+                    >
+                      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                      </svg>
+                      App Store
+                    </a>
+                    <a
+                      href="#"
+                      className="inline-flex items-center gap-2 px-6 py-3 bg-black text-white rounded-lg font-medium hover:opacity-90 transition-opacity"
+                    >
+                      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z" />
+                      </svg>
+                      Google Play
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           ))}
         </div>
 
-        {/* CTA */}
+        {/* Coming Soon */}
         <div className="mt-16 text-center p-12 bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-lg">
-          <h2 className="text-3xl font-bold mb-4">함께 프로젝트를 만들어보시겠어요?</h2>
+          <h2 className="text-3xl font-bold mb-4">More Apps Coming Soon</h2>
           <p className="text-gray-600 dark:text-gray-400 mb-6">
-            새로운 아이디어가 있으시다면 언제든 연락주세요!
+            새로운 앱을 준비 중입니다. 곧 만나보실 수 있습니다!
           </p>
-          <a
+          <Link
             href="/contact"
             className="inline-block px-8 py-4 bg-blue-600 text-white rounded-lg font-medium hover:opacity-90 transition-opacity"
           >
-            연락하기
-          </a>
+            새 앱 소식 받기
+          </Link>
         </div>
       </div>
     </div>
