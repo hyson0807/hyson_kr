@@ -18,7 +18,7 @@ export default function AboutPage() {
                 사용자가 앱을 사용하면서 불편함을 느끼지 않도록, 세심한 부분까지 신경 쓰며 개발합니다.
               </p>
               <p>
-                Flutter를 주력으로 하여 iOS와 Android 모두에서 일관된 경험을 제공하는 크로스플랫폼 앱을 개발합니다.
+                React Native를 활용하여 iOS와 Android 모두에서 일관된 경험을 제공하는 크로스플랫폼 앱을 개발합니다.
                 작지만 완성도 높은 앱, 오래 사용하고 싶은 앱을 만들기 위해 꾸준히 노력하고 있습니다.
               </p>
             </div>
@@ -73,7 +73,7 @@ export default function AboutPage() {
               <div>
                 <h3 className="text-xl font-medium mb-4 text-blue-600 dark:text-blue-400">Mobile</h3>
                 <div className="space-y-3">
-                  {['Flutter', 'Dart', 'React Native', 'Swift', 'Kotlin'].map((skill) => (
+                  {['React Native', 'TypeScript', 'Swift', 'Kotlin'].map((skill) => (
                     <div key={skill} className="flex items-center gap-2">
                       <div className="w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full" />
                       <span className="text-gray-700 dark:text-gray-300">{skill}</span>

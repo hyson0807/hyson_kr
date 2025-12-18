@@ -5,15 +5,15 @@ export default function Home() {
     {
       title: 'IsoLog',
       description: '일상의 순간을 기록하고 관리하는 라이프로그 앱',
-      tags: ['Flutter', 'iOS', 'Android'],
+      tags: ['React Native', 'iOS', 'Android'],
     },
   ];
 
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center px-6 md:px-12 lg:px-24">
-        <div className="max-w-4xl">
+      <section className="min-h-screen flex items-center px-6 md:px-12 lg:px-24">
+        <div className="w-full max-w-6xl mx-auto">
           <h1 className="text-6xl md:text-8xl font-bold mb-6 text-blue-600 dark:text-blue-400">
             Hyson Works
           </h1>
@@ -22,7 +22,7 @@ export default function Home() {
           </p>
           <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-12 max-w-2xl">
             사용자 경험을 최우선으로 생각하는 1인 앱 개발 스튜디오입니다.
-            Flutter와 React Native를 활용하여 iOS와 Android 모두에서 동작하는 크로스플랫폼 앱을 개발합니다.
+            React Native를 활용하여 iOS와 Android 모두에서 동작하는 크로스플랫폼 앱을 개발합니다.
           </p>
           <div className="flex gap-4 flex-wrap">
             <Link
@@ -43,14 +43,14 @@ export default function Home() {
 
       {/* About Preview Section */}
       <section className="py-24 px-6 md:px-12 lg:px-24 border-t border-gray-200 dark:border-zinc-800">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold mb-8 text-blue-600 dark:text-blue-400">About Us</h2>
           <p className="text-lg text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
             Hyson Works는 사용자 중심의 모바일 앱을 개발하는 1인 앱 개발 스튜디오입니다.
             복잡한 기능보다 직관적이고 심플한 사용자 경험을 추구합니다.
           </p>
           <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
-            Flutter를 주력으로 하여 하나의 코드베이스로 iOS와 Android 모두에 최적화된 앱을 제공합니다.
+            React Native를 활용하여 하나의 코드베이스로 iOS와 Android 모두에 최적화된 앱을 제공합니다.
             작지만 완성도 높은 앱을 만들기 위해 꾸준히 노력하고 있습니다.
           </p>
           <Link
