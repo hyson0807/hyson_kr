@@ -58,8 +58,8 @@ function AppCard({ app, showCollabBadge = false }: { app: App; showCollabBadge?:
     >
       <div className="grid md:grid-cols-2">
         {/* 앱 썸네일 */}
-        <div className="relative h-64 md:h-80">
-          <Image src={app.image} alt={app.title} fill className="object-cover" />
+        <div className="relative aspect-[4/3] md:aspect-auto md:h-80">
+          <Image src={app.image} alt={app.title} fill className="object-contain" />
         </div>
 
         {/* 앱 정보 */}

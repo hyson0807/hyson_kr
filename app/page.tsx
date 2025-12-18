@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="min-h-screen flex items-center px-6 md:px-12 lg:px-24">
+      <section className="min-h-screen flex items-start px-6 pt-16 md:px-12 md:pt-30 lg:px-24 lg:pt-52">
         <div className="w-full max-w-6xl mx-auto">
           <h1 className="text-6xl md:text-8xl font-bold mb-6 text-blue-600 dark:text-blue-400">
             Hyson Works
@@ -83,7 +83,7 @@ export default function Home() {
                 href={`/projects#${app.id}`}
                 className="bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-lg p-6 hover:bg-gray-100 dark:hover:bg-zinc-800 transition-all hover:shadow-lg cursor-pointer block"
               >
-                <div className="relative w-full h-48 rounded-lg mb-4 overflow-hidden">
+                <div className="relative w-full aspect-[4/3] rounded-lg mb-4 overflow-hidden">
                   <Image
                     src={app.image}
                     alt={app.title}
