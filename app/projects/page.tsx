@@ -1,15 +1,27 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
+interface App {
+  title: string;
+  description: string;
+  longDescription: string;
+  tags: string[];
+  status: string;
+  platforms: string[];
+  image: string;
+}
+
 export default function ProjectsPage() {
-  const apps = [
+  const apps: App[] = [
     {
       title: 'IsoLog',
-      description: '일상의 순간을 기록하고 관리하는 라이프로그 앱',
+      description: '이소티논 복용자를 위한 스마트 복용 관리 앱',
       longDescription:
-        '하루하루의 소중한 순간들을 간편하게 기록하고 관리할 수 있는 라이프로그 앱입니다. 직관적인 UI로 빠르게 기록하고, 타임라인 형식으로 지난 기록들을 돌아볼 수 있습니다. 사진, 텍스트, 위치 정보 등 다양한 형태로 일상을 남겨보세요.',
-      tags: ['Flutter', 'iOS', 'Android', 'Firebase'],
+        '매일 복용 체크, 피부 상태 기록, 음주 예정일 경고까지. 이소티논 복용 중 필요한 모든 기능을 한 앱에 담았습니다. 복용 주기 설정, 캘린더 기록 조회, 복용 알림 등 편리한 기능으로 꾸준한 복용 습관을 만들어보세요.',
+      tags: ['React Native', 'iOS', 'Android'],
       status: '출시',
       platforms: ['App Store', 'Google Play'],
+      image: '/images/apps/isolog.png',
     },
   ];
 
@@ -27,26 +39,18 @@ export default function ProjectsPage() {
           {apps.map((app, index) => (
             <div
               key={index}
-              className="bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-lg overflow-hidden hover:shadow-xl transition-all"
+              id={app.title.toLowerCase()}
+              className="bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-lg overflow-hidden hover:shadow-xl transition-all scroll-mt-24"
             >
               <div className="grid md:grid-cols-2">
                 {/* 앱 썸네일 */}
-                <div className="h-64 md:h-auto flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-zinc-800 dark:to-zinc-900 p-8">
-                  <div className="text-center">
-                    <span className="text-6xl md:text-7xl font-bold text-blue-600 dark:text-blue-400">
-                      {app.title}
-                    </span>
-                    <div className="mt-4 flex justify-center gap-2">
-                      {app.platforms.map((platform) => (
-                        <span
-                          key={platform}
-                          className="px-3 py-1 bg-white dark:bg-zinc-800 text-gray-600 dark:text-gray-400 text-xs rounded-full"
-                        >
-                          {platform}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
+                <div className="relative h-64 md:h-80">
+                  <Image
+                    src={app.image}
+                    alt={app.title}
+                    fill
+                    className="object-cover"
+                  />
                 </div>
 
                 {/* 앱 정보 */}
@@ -79,7 +83,9 @@ export default function ProjectsPage() {
 
                   <div className="flex gap-4">
                     <a
-                      href="#"
+                      href="https://apps.apple.com/kr/app/%EC%9D%B4%EC%86%8C%ED%8B%B0%EB%85%BC-%EC%97%AC%EB%93%9C%EB%A6%84%EC%95%BD-%EB%B3%B5%EC%9A%A9%EA%B4%80%EB%A6%AC-isolog/id6756465278"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 px-6 py-3 bg-black text-white rounded-lg font-medium hover:opacity-90 transition-opacity"
                     >
                       <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
@@ -89,12 +95,12 @@ export default function ProjectsPage() {
                     </a>
                     <a
                       href="#"
-                      className="inline-flex items-center gap-2 px-6 py-3 bg-black text-white rounded-lg font-medium hover:opacity-90 transition-opacity"
+                      className="inline-flex items-center gap-2 px-6 py-3 bg-gray-300 dark:bg-zinc-700 text-gray-500 dark:text-gray-400 rounded-lg font-medium cursor-not-allowed"
                     >
                       <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z" />
                       </svg>
-                      Google Play
+                      Coming Soon
                     </a>
                   </div>
                 </div>

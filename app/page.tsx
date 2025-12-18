@@ -1,11 +1,20 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
+interface App {
+  title: string;
+  description: string;
+  tags: string[];
+  image: string;
+}
+
 export default function Home() {
-  const apps = [
+  const apps: App[] = [
     {
       title: 'IsoLog',
-      description: '일상의 순간을 기록하고 관리하는 라이프로그 앱',
+      description: '이소티논 복용자를 위한 스마트 복용 관리 앱',
       tags: ['React Native', 'iOS', 'Android'],
+      image: '/images/apps/isolog.png',
     },
   ];
 
@@ -82,14 +91,18 @@ export default function Home() {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {apps.map((app, index) => (
-              <div
+              <Link
                 key={index}
-                className="bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-lg p-6 hover:bg-gray-100 dark:hover:bg-zinc-800 transition-all hover:shadow-lg cursor-pointer"
+                href={`/projects#${app.title.toLowerCase()}`}
+                className="bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-lg p-6 hover:bg-gray-100 dark:hover:bg-zinc-800 transition-all hover:shadow-lg cursor-pointer block"
               >
-                <div className="w-full h-40 border border-gray-200 dark:border-zinc-800 rounded-lg mb-4 flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-zinc-800 dark:to-zinc-900">
-                  <span className="text-4xl font-bold text-blue-600 dark:text-blue-400">
-                    {app.title}
-                  </span>
+                <div className="relative w-full h-48 rounded-lg mb-4 overflow-hidden">
+                  <Image
+                    src={app.image}
+                    alt={app.title}
+                    fill
+                    className="object-contain"
+                  />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">{app.title}</h3>
                 <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm">{app.description}</p>
@@ -100,7 +113,7 @@ export default function Home() {
                     </span>
                   ))}
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
           <div className="mt-8 text-center md:hidden">

@@ -73,7 +73,7 @@ export default function AboutPage() {
               <div>
                 <h3 className="text-xl font-medium mb-4 text-blue-600 dark:text-blue-400">Mobile</h3>
                 <div className="space-y-3">
-                  {['React Native', 'TypeScript', 'Swift', 'Kotlin'].map((skill) => (
+                  {['React Native', 'TypeScript'].map((skill) => (
                     <div key={skill} className="flex items-center gap-2">
                       <div className="w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full" />
                       <span className="text-gray-700 dark:text-gray-300">{skill}</span>
@@ -85,7 +85,7 @@ export default function AboutPage() {
               <div>
                 <h3 className="text-xl font-medium mb-4 text-blue-600 dark:text-blue-400">Backend</h3>
                 <div className="space-y-3">
-                  {['Firebase', 'Supabase', 'Node.js', 'REST API', 'GraphQL'].map((skill) => (
+                  {['Supabase', 'Node.js', 'REST API'].map((skill) => (
                     <div key={skill} className="flex items-center gap-2">
                       <div className="w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full" />
                       <span className="text-gray-700 dark:text-gray-300">{skill}</span>
@@ -97,7 +97,7 @@ export default function AboutPage() {
               <div>
                 <h3 className="text-xl font-medium mb-4 text-blue-600 dark:text-blue-400">Tools</h3>
                 <div className="space-y-3">
-                  {['Git', 'Figma', 'VS Code', 'Xcode', 'Android Studio'].map((skill) => (
+                  {['Git'].map((skill) => (
                     <div key={skill} className="flex items-center gap-2">
                       <div className="w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full" />
                       <span className="text-gray-700 dark:text-gray-300">{skill}</span>

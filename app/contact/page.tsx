@@ -91,7 +91,7 @@ export default function ContactPage() {
               <h3 className="text-xl font-semibold mb-4">Hyson Works</h3>
               <div className="space-y-2 text-gray-600 dark:text-gray-400 text-sm">
                 <p>1인 앱 개발 스튜디오</p>
-                <p>크로스플랫폼 앱 개발 (Flutter / React Native)</p>
+                <p>크로스플랫폼 앱 개발 (React Native)</p>
               </div>
             </div>
           </div>
