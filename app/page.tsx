@@ -1,22 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
-
-interface App {
-  title: string;
-  description: string;
-  tags: string[];
-  image: string;
-}
+import { getReleasedApps } from './data';
 
 export default function Home() {
-  const apps: App[] = [
-    {
-      title: 'IsoLog',
-      description: '이소티논 복용자를 위한 스마트 복용 관리 앱',
-      tags: ['React Native', 'iOS', 'Android'],
-      image: '/images/apps/isolog.png',
-    },
-  ];
+  const apps = getReleasedApps();
 
   return (
     <div className="min-h-screen">
@@ -90,10 +77,10 @@ export default function Home() {
             </Link>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {apps.map((app, index) => (
+            {apps.map((app) => (
               <Link
-                key={index}
-                href={`/projects#${app.title.toLowerCase()}`}
+                key={app.id}
+                href={`/projects#${app.id}`}
                 className="bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-lg p-6 hover:bg-gray-100 dark:hover:bg-zinc-800 transition-all hover:shadow-lg cursor-pointer block"
               >
                 <div className="relative w-full h-48 rounded-lg mb-4 overflow-hidden">
