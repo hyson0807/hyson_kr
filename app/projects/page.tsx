@@ -1,5 +1,8 @@
+'use client';
+
 import Image from 'next/image';
 import { getInternalApps, getCollaborationApps, App } from '../data';
+import { AnimatedSection } from '../components/AnimatedSection';
 
 // 스토어 버튼 컴포넌트
 function StoreButton({
@@ -112,49 +115,59 @@ export default function ProjectsPage() {
   return (
     <div className="min-h-screen py-24 px-6 md:px-12 lg:px-24">
       <div className="max-w-6xl mx-auto">
-        <div className="mb-12">
-          <h1 className="text-5xl md:text-6xl font-bold mb-4 text-blue-600 dark:text-blue-400">
-            Our Apps
-          </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400">
-            Hyson Works에서 개발한 앱들입니다. 모든 앱은 사용자 경험을 최우선으로 생각하며
-            개발되었습니다.
-          </p>
-        </div>
+        <AnimatedSection animation="fadeIn">
+          <div className="mb-12">
+            <h1 className="text-5xl md:text-6xl font-bold mb-4 text-blue-600 dark:text-blue-400">
+              Our Apps
+            </h1>
+            <p className="text-xl text-gray-600 dark:text-gray-400">
+              Hyson Works에서 개발한 앱들입니다. 모든 앱은 사용자 경험을 최우선으로 생각하며
+              개발되었습니다.
+            </p>
+          </div>
+        </AnimatedSection>
 
         <div className="space-y-8">
-          {internalApps.map((app) => (
-            <AppCard key={app.id} app={app} />
+          {internalApps.map((app, index) => (
+            <AnimatedSection key={app.id} animation="fadeUp" delay={(index % 2) * 100 as 0 | 100}>
+              <AppCard app={app} />
+            </AnimatedSection>
           ))}
 
           {/* Coming Soon 카드 */}
-          <div className="bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 border-dashed rounded-lg overflow-hidden">
-            <div className="flex items-center justify-center h-64 md:h-80">
-              <div className="text-center px-8">
-                <div className="w-16 h-16 mx-auto mb-4 bg-gray-200 dark:bg-zinc-800 rounded-full flex items-center justify-center">
-                  <svg className="w-8 h-8 text-gray-400 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                  </svg>
+          <AnimatedSection animation="fadeUp" delay={100}>
+            <div className="bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 border-dashed rounded-lg overflow-hidden">
+              <div className="flex items-center justify-center h-64 md:h-80">
+                <div className="text-center px-8">
+                  <div className="w-16 h-16 mx-auto mb-4 bg-gray-200 dark:bg-zinc-800 rounded-full flex items-center justify-center">
+                    <svg className="w-8 h-8 text-gray-400 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                    </svg>
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-400 dark:text-gray-500 mb-2">새로운 앱 준비중</h3>
+                  <p className="text-gray-400 dark:text-gray-500">곧 새로운 앱으로 찾아뵙겠습니다</p>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-400 dark:text-gray-500 mb-2">새로운 앱 준비중</h3>
-                <p className="text-gray-400 dark:text-gray-500">곧 새로운 앱으로 찾아뵙겠습니다</p>
               </div>
             </div>
-          </div>
+          </AnimatedSection>
         </div>
 
         {/* 참여 프로젝트 섹션 */}
         <div className="mt-24">
-          <div className="mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">참여 프로젝트</h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400">
-              Hyson Works 대표가 외부 프로젝트에 개발자로 참여하여 함께 만든 앱입니다.
-            </p>
-          </div>
+          <AnimatedSection animation="fadeUp">
+            <div className="mb-12">
+              <h2 className="text-4xl md:text-5xl font-bold mb-4">참여 프로젝트</h2>
+              <p className="text-xl text-gray-600 dark:text-gray-400">
+                Hyson Works 대표가 외부 프로젝트에 개발자로 참여하여 함께 만든 앱입니다.
+              </p>
+            </div>
+          </AnimatedSection>
 
           <div className="space-y-8">
-            {collaborationApps.map((app) => (
-              <AppCard key={app.id} app={app} showCollabBadge />
+            {collaborationApps.map((app, index) => (
+              <AnimatedSection key={app.id} animation="fadeUp" delay={(index % 2) * 100 as 0 | 100}>
+                <AppCard app={app} showCollabBadge />
+              </AnimatedSection>
             ))}
           </div>
         </div>

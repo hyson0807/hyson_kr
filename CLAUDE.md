@@ -5,7 +5,7 @@
 - **슬로건**: 꾸준히, 더 나은 앱을 만듭니다
 - **이메일**: contact@hyson.kr
 - **GitHub**: github.com/hyson0807
-- **서비스**: 크로스플랫폼 앱 개발 (Flutter / React Native)
+- **서비스**: 크로스플랫폼 앱 개발 (React Native)
 
 ## 기술 스택
 - Next.js 16 (App Router) + TypeScript + Tailwind CSS 4
@@ -97,12 +97,42 @@ app/
 │   ├── Sidebar.tsx    # 데스크톱 네비게이션
 │   ├── MobileHeader.tsx # 모바일 헤더
 │   └── types.ts       # 테마 타입 정의
+├── data/              # 앱 데이터 중앙 관리
+│   ├── types.ts       # App 인터페이스 및 타입 정의
+│   ├── apps.ts        # 앱 데이터 + 헬퍼 함수
+│   └── index.ts       # export 통합
 ├── layout.tsx         # 전역 레이아웃
 ├── page.tsx           # 홈 (Hero, About, Apps, Contact CTA)
 ├── about/page.tsx     # 회사 소개 (핵심 가치, 기술 스택, 서비스)
-├── projects/page.tsx  # 앱 소개 (IsoLog 등)
+├── projects/page.tsx  # 앱 소개 (내부 프로젝트 + 참여 프로젝트)
 └── contact/page.tsx   # 연락처 및 문의 폼
 ```
+
+---
+
+## 앱 데이터 구조 (app/data/)
+
+### App 인터페이스
+```typescript
+interface App {
+  id: string;              // URL hash용 (isolog, linkjob)
+  title: string;
+  description: string;     // 짧은 설명
+  longDescription?: string; // 상세 설명
+  tags: string[];
+  status: AppStatus;       // 'released' | 'coming_soon' | 'development'
+  platforms: Platform[];   // 'ios' | 'android' | 'web'
+  projectType: ProjectType; // 'internal' | 'collaboration'
+  image: string;
+  storeLinks: StoreLinks;
+}
+```
+
+### 헬퍼 함수
+- `getInternalApps()` - 내부 프로젝트만
+- `getCollaborationApps()` - 협업 프로젝트만
+- `getReleasedApps()` - 출시된 앱만
+- `getAppById(id)` - ID로 앱 찾기
 
 ---
 
@@ -111,7 +141,7 @@ app/
 ### 홈 (page.tsx)
 - Hero Section: 회사명 + 슬로건
 - About Preview: 간단한 회사 소개
-- Our Apps: 출시 앱 카드
+- Our Apps: 출시 앱 카드 (내부 + 협업 프로젝트)
 - Contact CTA: 연락 유도
 
 ### About (about/page.tsx)
@@ -121,19 +151,25 @@ app/
 - 서비스 태그
 
 ### Apps (projects/page.tsx)
-- 출시 앱 상세 정보
+- 내부 프로젝트: 직접 개발한 앱
+- 참여 프로젝트: 외부 협업 앱
+- Coming Soon 카드
 - App Store / Google Play 링크
-- Coming Soon 섹션
 
 ### Contact (contact/page.tsx)
 - 연락 방법 (이메일, GitHub)
 - 회사 정보 카드
-- 문의 폼
+- 문의 폼 (Web3Forms 연동)
 
 ---
 
 ## 출시 앱
-- **IsoLog**: 일상의 순간을 기록하고 관리하는 라이프로그 앱 (Flutter, iOS, Android)
+
+### 내부 프로젝트
+- **IsoLog**: 이소티논 복용자를 위한 스마트 복용 관리 앱 (React Native, iOS, Android)
+
+### 참여 프로젝트
+- **LinkJob**: 외국인 구인구직 플랫폼 (React Native, iOS, Android)
 
 ---
 
@@ -146,4 +182,4 @@ app/
 
 ---
 
-**업데이트**: 2025-12-17
+**업데이트**: 2025-12-18

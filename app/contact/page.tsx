@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { AnimatedSection } from '../components/AnimatedSection';
 
 export default function ContactPage() {
   const [result, setResult] = useState('');
@@ -53,16 +54,18 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen py-24 px-6 md:px-12 lg:px-24">
       <div className="max-w-6xl mx-auto">
-        <div className="mb-12 text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-4 text-blue-600 dark:text-blue-400">Contact</h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400">
-            앱 개발 문의, 협업 제안, 또는 궁금한 점이 있으시다면 언제든 연락 주세요!
-          </p>
-        </div>
+        <AnimatedSection animation="fadeIn">
+          <div className="mb-12 text-center">
+            <h1 className="text-5xl md:text-6xl font-bold mb-4 text-blue-600 dark:text-blue-400">Contact</h1>
+            <p className="text-xl text-gray-600 dark:text-gray-400">
+              앱 개발 문의, 협업 제안, 또는 궁금한 점이 있으시다면 언제든 연락 주세요!
+            </p>
+          </div>
+        </AnimatedSection>
 
         <div className="grid md:grid-cols-2 gap-12">
           {/* 연락 방법 */}
-          <div>
+          <AnimatedSection animation="fadeLeft">
             <h2 className="text-3xl font-bold mb-6">연락 방법</h2>
             <p className="text-gray-600 dark:text-gray-400 mb-8">
               아래 연락처로 직접 연락하시거나, 옆의 폼을 통해 메시지를 보내주세요.
@@ -71,51 +74,56 @@ export default function ContactPage() {
 
             <div className="space-y-6">
               {contactMethods.map((method, index) => (
-                <a
-                  key={index}
-                  href={method.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-start gap-4 p-4 bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors group"
-                >
-                  <div className="p-3 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-lg group-hover:scale-110 transition-transform">
-                    {method.icon}
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-lg mb-1">{method.title}</h3>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm">{method.value}</p>
-                  </div>
-                </a>
+                <AnimatedSection key={index} animation="fadeUp" delay={(index * 100) as 0 | 100}>
+                  <a
+                    href={method.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-start gap-4 p-4 bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors group"
+                  >
+                    <div className="p-3 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-lg group-hover:scale-110 transition-transform">
+                      {method.icon}
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-lg mb-1">{method.title}</h3>
+                      <p className="text-gray-600 dark:text-gray-400 text-sm">{method.value}</p>
+                    </div>
+                  </a>
+                </AnimatedSection>
               ))}
             </div>
 
             {/* 회사 정보 */}
-            <div className="mt-8 p-6 bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-lg">
-              <h3 className="text-xl font-semibold mb-4">Hyson Works</h3>
-              <div className="space-y-2 text-gray-600 dark:text-gray-400 text-sm">
-                <p>1인 앱 개발 스튜디오</p>
-                <p>크로스플랫폼 앱 개발 (React Native)</p>
+            <AnimatedSection animation="fadeUp" delay={200}>
+              <div className="mt-8 p-6 bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-lg">
+                <h3 className="text-xl font-semibold mb-4">Hyson Works</h3>
+                <div className="space-y-2 text-gray-600 dark:text-gray-400 text-sm">
+                  <p>1인 앱 개발 스튜디오</p>
+                  <p>크로스플랫폼 앱 개발 (React Native)</p>
+                </div>
               </div>
-            </div>
-          </div>
+            </AnimatedSection>
+          </AnimatedSection>
 
           {/* 연락 폼 */}
-          <div>
+          <AnimatedSection animation="fadeRight">
             {isSubmitted ? (
-              <div className="flex flex-col items-center justify-center h-full min-h-[400px] text-center">
-                <div className="p-4 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-full mb-6">
-                  <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
+              <AnimatedSection animation="scale">
+                <div className="flex flex-col items-center justify-center h-full min-h-[400px] text-center">
+                  <div className="p-4 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-full mb-6">
+                    <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <h2 className="text-3xl font-bold mb-4">메시지 전송 완료</h2>
+                  <p className="text-gray-600 dark:text-gray-400 mb-2">
+                    문의해 주셔서 감사합니다.
+                  </p>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    빠른 시일 내에 답변드리겠습니다.
+                  </p>
                 </div>
-                <h2 className="text-3xl font-bold mb-4">메시지 전송 완료</h2>
-                <p className="text-gray-600 dark:text-gray-400 mb-2">
-                  문의해 주셔서 감사합니다.
-                </p>
-                <p className="text-gray-600 dark:text-gray-400">
-                  빠른 시일 내에 답변드리겠습니다.
-                </p>
-              </div>
+              </AnimatedSection>
             ) : (
               <>
                 <h2 className="text-3xl font-bold mb-6">메시지 보내기</h2>
@@ -195,7 +203,7 @@ export default function ContactPage() {
                 </form>
               </>
             )}
-          </div>
+          </AnimatedSection>
         </div>
       </div>
     </div>

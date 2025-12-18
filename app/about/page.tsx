@@ -1,12 +1,18 @@
+'use client';
+
+import { AnimatedSection } from '../components/AnimatedSection';
+
 export default function AboutPage() {
   return (
     <div className="min-h-screen py-24 px-6 md:px-12 lg:px-24">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-5xl md:text-6xl font-bold mb-12 text-blue-600 dark:text-blue-400">About Us</h1>
+        <AnimatedSection animation="fadeIn">
+          <h1 className="text-5xl md:text-6xl font-bold mb-12 text-blue-600 dark:text-blue-400">About Us</h1>
+        </AnimatedSection>
 
         <div className="space-y-12">
           {/* 회사 소개 */}
-          <section>
+          <AnimatedSection animation="fadeUp">
             <h2 className="text-3xl font-semibold mb-6">Hyson Works</h2>
             <div className="space-y-4 text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
               <p>
@@ -22,55 +28,65 @@ export default function AboutPage() {
                 작지만 완성도 높은 앱, 오래 사용하고 싶은 앱을 만들기 위해 꾸준히 노력하고 있습니다.
               </p>
             </div>
-          </section>
+          </AnimatedSection>
 
           {/* 핵심 가치 */}
           <section>
-            <h2 className="text-3xl font-semibold mb-6">핵심 가치</h2>
+            <AnimatedSection animation="fadeUp">
+              <h2 className="text-3xl font-semibold mb-6">핵심 가치</h2>
+            </AnimatedSection>
             <div className="grid md:grid-cols-3 gap-6">
-              <div className="p-6 bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-lg">
-                <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4">
-                  <svg className="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
+              <AnimatedSection animation="fadeUp" delay={0}>
+                <div className="p-6 bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-lg h-full">
+                  <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4">
+                    <svg className="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-medium mb-2">심플함</h3>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm">
+                    불필요한 기능은 덜어내고, 핵심에 집중합니다. 누구나 쉽게 사용할 수 있는 직관적인 인터페이스를 추구합니다.
+                  </p>
                 </div>
-                <h3 className="text-xl font-medium mb-2">심플함</h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm">
-                  불필요한 기능은 덜어내고, 핵심에 집중합니다. 누구나 쉽게 사용할 수 있는 직관적인 인터페이스를 추구합니다.
-                </p>
-              </div>
+              </AnimatedSection>
 
-              <div className="p-6 bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-lg">
-                <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4">
-                  <svg className="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
+              <AnimatedSection animation="fadeUp" delay={100}>
+                <div className="p-6 bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-lg h-full">
+                  <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4">
+                    <svg className="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-medium mb-2">완성도</h3>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm">
+                    세부적인 디테일까지 신경 씁니다. 작은 부분에서도 사용자가 불편함을 느끼지 않도록 꼼꼼히 개발합니다.
+                  </p>
                 </div>
-                <h3 className="text-xl font-medium mb-2">완성도</h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm">
-                  세부적인 디테일까지 신경 씁니다. 작은 부분에서도 사용자가 불편함을 느끼지 않도록 꼼꼼히 개발합니다.
-                </p>
-              </div>
+              </AnimatedSection>
 
-              <div className="p-6 bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-lg">
-                <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4">
-                  <svg className="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                  </svg>
+              <AnimatedSection animation="fadeUp" delay={200}>
+                <div className="p-6 bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-lg h-full">
+                  <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4">
+                    <svg className="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-medium mb-2">꾸준함</h3>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm">
+                    출시 후에도 지속적으로 개선합니다. 사용자 피드백을 반영하여 더 나은 앱으로 발전시켜 나갑니다.
+                  </p>
                 </div>
-                <h3 className="text-xl font-medium mb-2">꾸준함</h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm">
-                  출시 후에도 지속적으로 개선합니다. 사용자 피드백을 반영하여 더 나은 앱으로 발전시켜 나갑니다.
-                </p>
-              </div>
+              </AnimatedSection>
             </div>
           </section>
 
           {/* 기술 스택 */}
           <section>
-            <h2 className="text-3xl font-semibold mb-6">기술 스택</h2>
+            <AnimatedSection animation="fadeUp">
+              <h2 className="text-3xl font-semibold mb-6">기술 스택</h2>
+            </AnimatedSection>
             <div className="grid md:grid-cols-3 gap-8">
-              <div>
+              <AnimatedSection animation="fadeUp" delay={0}>
                 <h3 className="text-xl font-medium mb-4 text-blue-600 dark:text-blue-400">Mobile</h3>
                 <div className="space-y-3">
                   {['React Native', 'TypeScript'].map((skill) => (
@@ -80,9 +96,9 @@ export default function AboutPage() {
                     </div>
                   ))}
                 </div>
-              </div>
+              </AnimatedSection>
 
-              <div>
+              <AnimatedSection animation="fadeUp" delay={100}>
                 <h3 className="text-xl font-medium mb-4 text-blue-600 dark:text-blue-400">Backend</h3>
                 <div className="space-y-3">
                   {['Supabase', 'Node.js', 'REST API'].map((skill) => (
@@ -92,9 +108,9 @@ export default function AboutPage() {
                     </div>
                   ))}
                 </div>
-              </div>
+              </AnimatedSection>
 
-              <div>
+              <AnimatedSection animation="fadeUp" delay={200}>
                 <h3 className="text-xl font-medium mb-4 text-blue-600 dark:text-blue-400">Tools</h3>
                 <div className="space-y-3">
                   {['Git'].map((skill) => (
@@ -104,12 +120,12 @@ export default function AboutPage() {
                     </div>
                   ))}
                 </div>
-              </div>
+              </AnimatedSection>
             </div>
           </section>
 
           {/* 서비스 */}
-          <section>
+          <AnimatedSection animation="fadeUp">
             <h2 className="text-3xl font-semibold mb-6">서비스</h2>
             <div className="flex flex-wrap gap-3">
               {[
@@ -128,7 +144,7 @@ export default function AboutPage() {
                 </span>
               ))}
             </div>
-          </section>
+          </AnimatedSection>
         </div>
       </div>
     </div>
