@@ -1,4 +1,11 @@
-# 개인 홈페이지 개발 가이드
+# Hyson Works 회사 소개 페이지 개발 가이드
+
+## 프로젝트 정보
+- **회사명**: Hyson Works
+- **슬로건**: 꾸준히, 더 나은 앱을 만듭니다
+- **이메일**: contact@hyson.kr
+- **GitHub**: github.com/hyson0807
+- **서비스**: 크로스플랫폼 앱 개발 (Flutter / React Native)
 
 ## 기술 스택
 - Next.js 16 (App Router) + TypeScript + Tailwind CSS 4
@@ -11,7 +18,7 @@
 ```css
 배경: bg-zinc-950, bg-zinc-900
 텍스트: text-white, text-gray-400
-포인트: text-blue-400, bg-blue-500
+포인트: text-blue-400, bg-blue-500, bg-blue-600
 호버: hover:bg-zinc-800
 보더: border-zinc-800
 ```
@@ -86,13 +93,47 @@ className="hover:bg-zinc-800 transition-colors"
 ## 폴더 구조
 ```
 app/
-├── components/     # 공통 컴포넌트 (Sidebar, MobileHeader, types)
-├── layout.tsx      # 전역 레이아웃
-├── page.tsx        # 홈
-├── about/page.tsx
-├── projects/page.tsx
-└── contact/page.tsx
+├── components/        # 공통 컴포넌트
+│   ├── Sidebar.tsx    # 데스크톱 네비게이션
+│   ├── MobileHeader.tsx # 모바일 헤더
+│   └── types.ts       # 테마 타입 정의
+├── layout.tsx         # 전역 레이아웃
+├── page.tsx           # 홈 (Hero, About, Apps, Contact CTA)
+├── about/page.tsx     # 회사 소개 (핵심 가치, 기술 스택, 서비스)
+├── projects/page.tsx  # 앱 소개 (IsoLog 등)
+└── contact/page.tsx   # 연락처 및 문의 폼
 ```
+
+---
+
+## 페이지별 구성
+
+### 홈 (page.tsx)
+- Hero Section: 회사명 + 슬로건
+- About Preview: 간단한 회사 소개
+- Our Apps: 출시 앱 카드
+- Contact CTA: 연락 유도
+
+### About (about/page.tsx)
+- 회사 소개
+- 핵심 가치 (심플함, 완성도, 꾸준함)
+- 기술 스택 (Mobile, Backend, Tools)
+- 서비스 태그
+
+### Apps (projects/page.tsx)
+- 출시 앱 상세 정보
+- App Store / Google Play 링크
+- Coming Soon 섹션
+
+### Contact (contact/page.tsx)
+- 연락 방법 (이메일, GitHub)
+- 회사 정보 카드
+- 문의 폼
+
+---
+
+## 출시 앱
+- **IsoLog**: 일상의 순간을 기록하고 관리하는 라이프로그 앱 (Flutter, iOS, Android)
 
 ---
 
@@ -101,7 +142,8 @@ app/
 - [ ] 호버 효과 + 트랜지션 적용
 - [ ] 색상 팔레트 준수
 - [ ] TypeScript 타입 정의
+- [ ] 앱 스토어 링크 연결
 
 ---
 
-**업데이트**: 2025-10-24
+**업데이트**: 2025-12-17
