@@ -88,6 +88,28 @@ className="hover:opacity-90 transition-opacity"
 className="hover:bg-zinc-800 transition-colors"
 ```
 
+### 스크롤 애니메이션 (AnimatedSection)
+```tsx
+import { AnimatedSection } from './components/AnimatedSection';
+
+// 기본 사용 (fadeUp)
+<AnimatedSection>
+  <div>콘텐츠</div>
+</AnimatedSection>
+
+// 애니메이션 타입: fadeUp | fadeIn | fadeLeft | fadeRight | scale
+<AnimatedSection animation="fadeIn">
+
+// 딜레이 (ms): 0 | 100 | 200 | 300 | 400 | 500
+<AnimatedSection delay={200}>
+
+// 지속시간 (ms): 300 | 500 | 700 | 1000
+<AnimatedSection duration={500}>
+
+// 조합 예시
+<AnimatedSection animation="fadeUp" delay={100} duration={700}>
+```
+
 ---
 
 ## 폴더 구조
@@ -96,7 +118,10 @@ app/
 ├── components/        # 공통 컴포넌트
 │   ├── Sidebar.tsx    # 데스크톱 네비게이션
 │   ├── MobileHeader.tsx # 모바일 헤더
+│   ├── AnimatedSection.tsx # 스크롤 애니메이션 래퍼
 │   └── types.ts       # 테마 타입 정의
+├── hooks/             # 커스텀 훅
+│   └── useInView.ts   # Intersection Observer 기반 가시성 감지
 ├── data/              # 앱 데이터 중앙 관리
 │   ├── types.ts       # App 인터페이스 및 타입 정의
 │   ├── apps.ts        # 앱 데이터 + 헬퍼 함수
