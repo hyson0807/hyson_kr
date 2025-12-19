@@ -9,7 +9,7 @@ interface AnimatedSectionProps {
   children: ReactNode;
   animation?: AnimationType;
   delay?: number; // 0, 100, 200, 300, 400, 500
-  duration?: number; // 300, 500, 700, 1000
+  duration?: number; // 300, 500, 700, 1000,
   className?: string;
 }
 
