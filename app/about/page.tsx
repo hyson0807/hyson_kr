@@ -1,6 +1,16 @@
-'use client';
-
+import { Metadata } from 'next';
 import { AnimatedSection } from '../components/AnimatedSection';
+
+export const metadata: Metadata = {
+  title: '회사 소개',
+  description:
+    '하이슨 워크는 사용자 중심의 모바일 앱을 개발하는 1인 앱 개발 스튜디오입니다. React Native를 활용한 크로스플랫폼 앱 개발 전문.',
+  openGraph: {
+    title: '회사 소개 | Hyson Works',
+    description:
+      '하이슨 워크는 사용자 중심의 모바일 앱을 개발하는 1인 앱 개발 스튜디오입니다.',
+  },
+};
 
 export default function AboutPage() {
   return (

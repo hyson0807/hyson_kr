@@ -1,56 +1,41 @@
-'use client';
-
-import { useState } from 'react';
+import { Metadata } from 'next';
 import { AnimatedSection } from '../components/AnimatedSection';
+import ContactForm from './ContactForm';
+
+export const metadata: Metadata = {
+  title: '문의하기',
+  description:
+    '하이슨 워크에 앱 개발 문의, 협업 제안을 보내주세요. 빠른 시일 내에 답변드리겠습니다.',
+  openGraph: {
+    title: '문의하기 | Hyson Works',
+    description: '하이슨 워크에 앱 개발 문의, 협업 제안을 보내주세요.',
+  },
+};
+
+const contactMethods = [
+  {
+    icon: (
+      <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+      </svg>
+    ),
+    title: 'Email',
+    value: 'contact@hyson.kr',
+    link: 'mailto:contact@hyson.kr',
+  },
+  {
+    icon: (
+      <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+      </svg>
+    ),
+    title: 'GitHub',
+    value: 'github.com/hyson0807',
+    link: 'https://github.com/hyson0807',
+  },
+];
 
 export default function ContactPage() {
-  const [result, setResult] = useState('');
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setResult('전송 중...');
-
-    const formData = new FormData(e.currentTarget);
-    formData.append('access_key', process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || '');
-
-    const response = await fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      body: formData,
-    });
-
-    const data = await response.json();
-
-    if (data.success) {
-      setIsSubmitted(true);
-    } else {
-      setResult('전송에 실패했습니다. 다시 시도해주세요.');
-    }
-  };
-
-  const contactMethods = [
-    {
-      icon: (
-        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
-        </svg>
-      ),
-      title: 'Email',
-      value: 'contact@hyson.kr',
-      link: 'mailto:contact@hyson.kr',
-    },
-    {
-      icon: (
-        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-        </svg>
-      ),
-      title: 'GitHub',
-      value: 'github.com/hyson0807',
-      link: 'https://github.com/hyson0807',
-    },
-  ];
-
   return (
     <div className="min-h-screen py-24 px-6 md:px-12 lg:px-24">
       <div className="max-w-6xl mx-auto">
@@ -107,102 +92,7 @@ export default function ContactPage() {
 
           {/* 연락 폼 */}
           <AnimatedSection animation="fadeRight">
-            {isSubmitted ? (
-              <AnimatedSection animation="scale">
-                <div className="flex flex-col items-center justify-center h-full min-h-[400px] text-center">
-                  <div className="p-4 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-full mb-6">
-                    <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <h2 className="text-3xl font-bold mb-4">메시지 전송 완료</h2>
-                  <p className="text-gray-600 dark:text-gray-400 mb-2">
-                    문의해 주셔서 감사합니다.
-                  </p>
-                  <p className="text-gray-600 dark:text-gray-400">
-                    빠른 시일 내에 답변드리겠습니다.
-                  </p>
-                </div>
-              </AnimatedSection>
-            ) : (
-              <>
-                <h2 className="text-3xl font-bold mb-6">메시지 보내기</h2>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  {/* Web3Forms 설정 */}
-                  <input type="hidden" name="subject" value="[Hyson Works] 새로운 문의가 도착했습니다" />
-                  <input type="hidden" name="from_name" value="Hyson Works Contact Form" />
-
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium mb-2">
-                      이름 / 회사명 *
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      required
-                      className="w-full px-4 py-3 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-400"
-                      placeholder="홍길동 / ABC 컴퍼니"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium mb-2">
-                      답변 받을 이메일 *
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      required
-                      className="w-full px-4 py-3 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-400"
-                      placeholder="your@email.com"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="inquiry_type" className="block text-sm font-medium mb-2">
-                      문의 유형 *
-                    </label>
-                    <input
-                      type="text"
-                      id="inquiry_type"
-                      name="inquiry_type"
-                      required
-                      className="w-full px-4 py-3 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-400"
-                      placeholder="앱 개발 문의 / 협업 제안 / 기타"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium mb-2">
-                      메시지 *
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      required
-                      rows={6}
-                      className="w-full px-4 py-3 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-400 resize-none"
-                      placeholder="문의 내용을 자세히 적어주세요..."
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="w-full px-8 py-4 bg-blue-600 text-white rounded-lg font-medium hover:opacity-90 transition-opacity"
-                  >
-                    메시지 보내기
-                  </button>
-
-                  {result && (
-                    <p className="text-center font-medium text-gray-600 dark:text-gray-400">
-                      {result}
-                    </p>
-                  )}
-                </form>
-              </>
-            )}
+            <ContactForm />
           </AnimatedSection>
         </div>
       </div>

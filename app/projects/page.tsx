@@ -1,8 +1,17 @@
-'use client';
-
+import { Metadata } from 'next';
 import Image from 'next/image';
 import { getInternalApps, getCollaborationApps, App } from '../data';
 import { AnimatedSection } from '../components/AnimatedSection';
+
+export const metadata: Metadata = {
+  title: '앱 소개',
+  description:
+    'Hyson Works에서 개발한 앱들을 소개합니다. IsoLog, LinkJob 등 사용자 경험을 최우선으로 생각하는 크로스플랫폼 앱.',
+  openGraph: {
+    title: '앱 소개 | Hyson Works',
+    description: 'Hyson Works에서 개발한 앱들을 소개합니다.',
+  },
+};
 
 // 스토어 버튼 컴포넌트
 function StoreButton({
