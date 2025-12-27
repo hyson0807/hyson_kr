@@ -16,6 +16,7 @@ export const apps: App[] = [
     storeLinks: {
       appStore:
         'https://apps.apple.com/kr/app/%EC%9D%B4%EC%86%8C%ED%8B%B0%EB%85%BC-%EC%97%AC%EB%93%9C%EB%A6%84%EC%95%BD-%EB%B3%B5%EC%9A%A9%EA%B4%80%EB%A6%AC-isolog/id6756465278',
+      playStore: 'https://play.google.com/store/apps/details?id=com.hyson.isoLog'
     },
   },
   // 협업 프로젝트
