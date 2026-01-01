@@ -10,11 +10,13 @@ interface Content {
   source: string;
   language: string;
   contentType: string;
+  thumbnailUrl?: string | null;
   isBanned?: boolean;
+  isVerified?: boolean;
   createdAt: string;
 }
 
-type FilterType = "all" | "active" | "banned";
+type FilterType = "all" | "active" | "banned" | "verified" | "unverified";
 
 export default function AdminPage() {
   const [password, setPassword] = useState("");
@@ -23,6 +25,7 @@ export default function AdminPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [filter, setFilter] = useState<FilterType>("all");
+  const [selectedContent, setSelectedContent] = useState<Content | null>(null);
 
   // 세션 체크
   useEffect(() => {
@@ -94,19 +97,60 @@ export default function AdminPage() {
             c.urlHash === urlHash ? { ...c, isBanned: !currentBanned } : c
           )
         );
+        // 선택된 콘텐츠도 업데이트
+        if (selectedContent?.urlHash === urlHash) {
+          setSelectedContent((prev) =>
+            prev ? { ...prev, isBanned: !currentBanned } : null
+          );
+        }
       }
     } catch {
       alert("Ban 처리 실패");
     }
   };
 
+  const toggleVerify = async (urlHash: string, currentVerified: boolean) => {
+    try {
+      const res = await fetch("/api/isolog/verify", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${password}`,
+        },
+        body: JSON.stringify({
+          urlHash,
+          isVerified: !currentVerified,
+        }),
+      });
+
+      if (res.ok) {
+        setContents((prev) =>
+          prev.map((c) =>
+            c.urlHash === urlHash ? { ...c, isVerified: !currentVerified } : c
+          )
+        );
+        // 선택된 콘텐츠도 업데이트
+        if (selectedContent?.urlHash === urlHash) {
+          setSelectedContent((prev) =>
+            prev ? { ...prev, isVerified: !currentVerified } : null
+          );
+        }
+      }
+    } catch {
+      alert("Verify 처리 실패");
+    }
+  };
+
   const filteredContents = contents.filter((c) => {
     if (filter === "banned") return c.isBanned === true;
     if (filter === "active") return !c.isBanned;
+    if (filter === "verified") return c.isVerified === true;
+    if (filter === "unverified") return !c.isVerified && !c.isBanned;
     return true;
   });
 
   const bannedCount = contents.filter((c) => c.isBanned).length;
+  const verifiedCount = contents.filter((c) => c.isVerified).length;
 
   // 로그인 화면
   if (!isAuthenticated) {
@@ -138,114 +182,207 @@ export default function AdminPage() {
 
   // 관리자 대시보드
   return (
-    <div className="min-h-screen bg-zinc-950 text-white p-6">
-      <div className="max-w-6xl mx-auto">
-        {/* 헤더 */}
-        <div className="flex items-center justify-between mb-8">
-          <h1 className="text-2xl font-bold">IsoLog 콘텐츠 관리</h1>
-          <div className="flex items-center gap-4">
-            <span className="text-sm text-gray-400">
-              총 {contents.length}개 | Ban {bannedCount}개
-            </span>
-            <button
-              onClick={() => {
-                sessionStorage.removeItem("isolog_admin_auth");
-                setIsAuthenticated(false);
-              }}
-              className="px-4 py-2 text-sm bg-zinc-800 rounded-lg hover:bg-zinc-700"
-            >
-              로그아웃
-            </button>
-          </div>
+    <div className="h-screen bg-zinc-950 text-white flex flex-col">
+      {/* 헤더 */}
+      <div className="flex items-center justify-between px-6 py-4 border-b border-zinc-800">
+        <h1 className="text-xl font-bold">IsoLog 콘텐츠 관리</h1>
+        <div className="flex items-center gap-4">
+          <span className="text-sm text-gray-400">
+            총 {contents.length}개 | 확인 {verifiedCount}개 | Ban {bannedCount}개
+          </span>
+          <button
+            onClick={() => {
+              sessionStorage.removeItem("isolog_admin_auth");
+              setIsAuthenticated(false);
+            }}
+            className="px-4 py-2 text-sm bg-zinc-800 rounded-lg hover:bg-zinc-700"
+          >
+            로그아웃
+          </button>
         </div>
+      </div>
 
-        {/* 필터 */}
-        <div className="flex gap-2 mb-6">
-          {(["all", "active", "banned"] as const).map((f) => (
-            <button
-              key={f}
-              onClick={() => setFilter(f)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                filter === f
-                  ? "bg-blue-600 text-white"
-                  : "bg-zinc-800 text-gray-400 hover:bg-zinc-700"
-              }`}
-            >
-              {f === "all" ? "전체" : f === "active" ? "활성" : "Ban됨"}
-            </button>
-          ))}
-        </div>
+      {/* 필터 */}
+      <div className="flex gap-2 px-6 py-3 border-b border-zinc-800">
+        {(["all", "unverified", "verified", "banned"] as const).map((f) => (
+          <button
+            key={f}
+            onClick={() => setFilter(f)}
+            className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+              filter === f
+                ? "bg-blue-600 text-white"
+                : "bg-zinc-800 text-gray-400 hover:bg-zinc-700"
+            }`}
+          >
+            {f === "all" ? "전체" : f === "unverified" ? "미확인" : f === "verified" ? "확인됨" : "Ban됨"}
+          </button>
+        ))}
+      </div>
 
-        {/* 콘텐츠 목록 */}
-        {loading ? (
-          <div className="text-center py-12 text-gray-400">로딩 중...</div>
-        ) : error ? (
-          <div className="text-center py-12 text-red-400">{error}</div>
-        ) : (
-          <div className="space-y-3">
-            {filteredContents.map((content) => (
-              <div
-                key={content.urlHash}
-                className={`p-4 rounded-lg border ${
-                  content.isBanned
-                    ? "bg-red-950/30 border-red-900/50"
-                    : "bg-zinc-900 border-zinc-800"
-                }`}
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-1 flex-wrap">
-                      <span
-                        className={`text-xs px-2 py-0.5 rounded ${
-                          content.language === "ko"
-                            ? "bg-blue-900/50 text-blue-300"
-                            : "bg-green-900/50 text-green-300"
-                        }`}
-                      >
-                        {content.language}
-                      </span>
-                      <span className="text-xs px-2 py-0.5 rounded bg-zinc-800 text-gray-400">
-                        {content.contentType || "article"}
-                      </span>
-                      {content.isBanned && (
-                        <span className="text-xs px-2 py-0.5 rounded bg-red-900/50 text-red-300">
-                          BANNED
-                        </span>
-                      )}
-                    </div>
-                    <a
-                      href={content.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-medium text-white hover:text-blue-400 line-clamp-1"
+      {/* 메인 콘텐츠 */}
+      <div className="flex flex-1 overflow-hidden">
+        {/* 좌측: 리스트 */}
+        <div className="w-1/2 border-r border-zinc-800 overflow-y-auto">
+          {loading ? (
+            <div className="text-center py-12 text-gray-400">로딩 중...</div>
+          ) : error ? (
+            <div className="text-center py-12 text-red-400">{error}</div>
+          ) : (
+            <div>
+              {filteredContents.map((content) => (
+                <div
+                  key={content.urlHash}
+                  onClick={() => setSelectedContent(content)}
+                  className={`px-4 py-3 border-b border-zinc-800 cursor-pointer transition-colors ${
+                    selectedContent?.urlHash === content.urlHash
+                      ? "bg-blue-600/20 border-l-2 border-l-blue-500"
+                      : content.isBanned
+                      ? "bg-red-950/20 hover:bg-red-950/30"
+                      : "hover:bg-zinc-900"
+                  }`}
+                >
+                  <div className="flex items-center gap-2 mb-1">
+                    <span
+                      className={`text-xs px-1.5 py-0.5 rounded ${
+                        content.language === "ko"
+                          ? "bg-blue-900/50 text-blue-300"
+                          : "bg-green-900/50 text-green-300"
+                      }`}
                     >
-                      {content.title}
-                    </a>
-                    <p className="text-sm text-gray-400 line-clamp-2 mt-1">
-                      {content.snippet}
-                    </p>
-                    <div className="flex items-center gap-4 mt-2 text-xs text-gray-500">
-                      <span>{content.source}</span>
-                      <span>
-                        {new Date(content.createdAt).toLocaleDateString()}
+                      {content.language}
+                    </span>
+                    <span className="text-xs text-gray-500">
+                      {content.contentType || "article"}
+                    </span>
+                    {content.isVerified && (
+                      <span className="text-xs px-1.5 py-0.5 rounded bg-emerald-900/50 text-emerald-300">
+                        ✓
                       </span>
-                    </div>
+                    )}
+                    {content.isBanned && (
+                      <span className="text-xs px-1.5 py-0.5 rounded bg-red-900/50 text-red-300">
+                        BAN
+                      </span>
+                    )}
                   </div>
+                  <p className="text-sm font-medium text-white line-clamp-1">
+                    {content.title}
+                  </p>
+                  <p className="text-xs text-gray-500 mt-1">
+                    {content.source} · {new Date(content.createdAt).toLocaleDateString()}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* 우측: 미리보기 */}
+        <div className="w-1/2 flex flex-col overflow-hidden bg-zinc-900">
+          {selectedContent ? (
+            <div className="flex-1 flex flex-col items-center justify-center p-8 overflow-y-auto">
+              {/* 썸네일 */}
+              {selectedContent.thumbnailUrl && (
+                <div className="mb-6 rounded-lg overflow-hidden shadow-lg">
+                  <img
+                    src={selectedContent.thumbnailUrl}
+                    alt={selectedContent.title}
+                    className="max-w-md max-h-64 object-cover"
+                  />
+                </div>
+              )}
+
+              {/* 콘텐츠 정보 */}
+              <div className="max-w-2xl w-full text-center">
+                {/* 태그 */}
+                <div className="flex items-center justify-center gap-2 mb-4">
+                  <span
+                    className={`text-xs px-2 py-1 rounded ${
+                      selectedContent.language === "ko"
+                        ? "bg-blue-900/50 text-blue-300"
+                        : "bg-green-900/50 text-green-300"
+                    }`}
+                  >
+                    {selectedContent.language}
+                  </span>
+                  <span className="text-xs px-2 py-1 rounded bg-zinc-800 text-gray-400">
+                    {selectedContent.contentType || "article"}
+                  </span>
+                  {selectedContent.isVerified && (
+                    <span className="text-xs px-2 py-1 rounded bg-emerald-900/50 text-emerald-300">
+                      VERIFIED
+                    </span>
+                  )}
+                  {selectedContent.isBanned && (
+                    <span className="text-xs px-2 py-1 rounded bg-red-900/50 text-red-300">
+                      BANNED
+                    </span>
+                  )}
+                </div>
+
+                {/* 제목 */}
+                <h2 className="text-xl font-bold text-white mb-4">
+                  {selectedContent.title}
+                </h2>
+
+                {/* 요약 */}
+                <p className="text-gray-400 mb-6 leading-relaxed">
+                  {selectedContent.snippet}
+                </p>
+
+                {/* 메타 정보 */}
+                <div className="text-sm text-gray-500 mb-8">
+                  {selectedContent.source} · {new Date(selectedContent.createdAt).toLocaleDateString()}
+                </div>
+
+                {/* 버튼들 */}
+                <div className="flex items-center justify-center gap-3">
+                  <a
+                    href={selectedContent.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-6 py-2.5 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-500 transition-colors font-medium"
+                  >
+                    새 탭에서 열기
+                  </a>
                   <button
-                    onClick={() => toggleBan(content.urlHash, !!content.isBanned)}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors shrink-0 ${
-                      content.isBanned
+                    onClick={() =>
+                      toggleVerify(selectedContent.urlHash, !!selectedContent.isVerified)
+                    }
+                    className={`px-6 py-2.5 text-sm rounded-lg font-medium transition-colors ${
+                      selectedContent.isVerified
+                        ? "bg-zinc-600 hover:bg-zinc-500 text-white"
+                        : "bg-emerald-600 hover:bg-emerald-500 text-white"
+                    }`}
+                  >
+                    {selectedContent.isVerified ? "확인 취소" : "확인 완료"}
+                  </button>
+                  <button
+                    onClick={() =>
+                      toggleBan(selectedContent.urlHash, !!selectedContent.isBanned)
+                    }
+                    className={`px-6 py-2.5 text-sm rounded-lg font-medium transition-colors ${
+                      selectedContent.isBanned
                         ? "bg-green-600 hover:bg-green-500 text-white"
                         : "bg-red-600 hover:bg-red-500 text-white"
                     }`}
                   >
-                    {content.isBanned ? "복원" : "Ban"}
+                    {selectedContent.isBanned ? "복원" : "Ban"}
                   </button>
                 </div>
+
+                {/* URL */}
+                <p className="mt-6 text-xs text-gray-600 break-all">
+                  {selectedContent.url}
+                </p>
               </div>
-            ))}
-          </div>
-        )}
+            </div>
+          ) : (
+            <div className="flex-1 flex items-center justify-center text-gray-500">
+              콘텐츠를 선택하세요
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
