@@ -241,36 +241,77 @@ export default function AdminPage() {
                       : "hover:bg-zinc-900"
                   }`}
                 >
-                  <div className="flex items-center gap-2 mb-1">
-                    <span
-                      className={`text-xs px-1.5 py-0.5 rounded ${
-                        content.language === "ko"
-                          ? "bg-blue-900/50 text-blue-300"
-                          : "bg-green-900/50 text-green-300"
-                      }`}
-                    >
-                      {content.language}
-                    </span>
-                    <span className="text-xs text-gray-500">
-                      {content.contentType || "article"}
-                    </span>
-                    {content.isVerified && (
-                      <span className="text-xs px-1.5 py-0.5 rounded bg-emerald-900/50 text-emerald-300">
-                        ✓
-                      </span>
-                    )}
-                    {content.isBanned && (
-                      <span className="text-xs px-1.5 py-0.5 rounded bg-red-900/50 text-red-300">
-                        BAN
-                      </span>
-                    )}
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span
+                          className={`text-xs px-1.5 py-0.5 rounded ${
+                            content.language === "ko"
+                              ? "bg-blue-900/50 text-blue-300"
+                              : "bg-green-900/50 text-green-300"
+                          }`}
+                        >
+                          {content.language}
+                        </span>
+                        <span className="text-xs text-gray-500">
+                          {content.contentType || "article"}
+                        </span>
+                        {content.isVerified && (
+                          <span className="text-xs px-1.5 py-0.5 rounded bg-emerald-900/50 text-emerald-300">
+                            ✓
+                          </span>
+                        )}
+                        {content.isBanned && (
+                          <span className="text-xs px-1.5 py-0.5 rounded bg-red-900/50 text-red-300">
+                            BAN
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-sm font-medium text-white line-clamp-1">
+                        {content.title}
+                      </p>
+                      <p className="text-xs text-gray-500 mt-1">
+                        {content.source} · {new Date(content.createdAt).toLocaleDateString()}
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-1 shrink-0">
+                      <a
+                        href={content.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="px-2 py-1 text-xs bg-zinc-700 text-gray-300 rounded hover:bg-zinc-600 transition-colors"
+                      >
+                        열기
+                      </a>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          toggleVerify(content.urlHash, !!content.isVerified);
+                        }}
+                        className={`px-2 py-1 text-xs rounded transition-colors ${
+                          content.isVerified
+                            ? "bg-emerald-700 text-emerald-200 hover:bg-emerald-600"
+                            : "bg-zinc-700 text-gray-300 hover:bg-zinc-600"
+                        }`}
+                      >
+                        {content.isVerified ? "✓" : "확인"}
+                      </button>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          toggleBan(content.urlHash, !!content.isBanned);
+                        }}
+                        className={`px-2 py-1 text-xs rounded transition-colors ${
+                          content.isBanned
+                            ? "bg-green-700 text-green-200 hover:bg-green-600"
+                            : "bg-red-700 text-red-200 hover:bg-red-600"
+                        }`}
+                      >
+                        {content.isBanned ? "복원" : "Ban"}
+                      </button>
+                    </div>
                   </div>
-                  <p className="text-sm font-medium text-white line-clamp-1">
-                    {content.title}
-                  </p>
-                  <p className="text-xs text-gray-500 mt-1">
-                    {content.source} · {new Date(content.createdAt).toLocaleDateString()}
-                  </p>
                 </div>
               ))}
             </div>
