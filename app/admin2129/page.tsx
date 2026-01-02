@@ -109,6 +109,35 @@ export default function AdminPage() {
     }
   };
 
+  const deleteContent = async (urlHash: string, title: string) => {
+    if (!confirm(`정말 삭제하시겠습니까?\n\n"${title}"\n\n이 작업은 되돌릴 수 없습니다.`)) {
+      return;
+    }
+
+    try {
+      const res = await fetch("/api/isolog/delete", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${password}`,
+        },
+        body: JSON.stringify({ urlHash }),
+      });
+
+      if (res.ok) {
+        setContents((prev) => prev.filter((c) => c.urlHash !== urlHash));
+        // 선택된 콘텐츠가 삭제된 경우 선택 해제
+        if (selectedContent?.urlHash === urlHash) {
+          setSelectedContent(null);
+        }
+      } else {
+        alert("삭제 실패");
+      }
+    } catch {
+      alert("삭제 처리 실패");
+    }
+  };
+
   const toggleVerify = async (urlHash: string, currentVerified: boolean) => {
     try {
       const res = await fetch("/api/isolog/verify", {
@@ -309,6 +338,15 @@ export default function AdminPage() {
                         }`}
                       >
                         {content.isBanned ? "복원" : "Ban"}
+                      </button>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          deleteContent(content.urlHash, content.title);
+                        }}
+                        className="px-2 py-1 text-xs rounded transition-colors bg-zinc-800 text-gray-400 hover:bg-red-800 hover:text-red-200"
+                      >
+                        삭제
                       </button>
                     </div>
                   </div>

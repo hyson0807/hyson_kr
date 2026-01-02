@@ -22,3 +22,10 @@
 - 연락 방법 (이메일, GitHub)
 - 회사 정보 카드
 - 문의 폼 (Web3Forms 연동)
+
+## IsoLog Admin (admin2129/page.tsx)
+- 비밀번호 인증 (sessionStorage 기반)
+- 콘텐츠 목록 (좌측 패널) + 미리보기 (우측 패널)
+- 필터: 전체 / 미확인 / 확인됨 / Ban됨
+- 액션: 확인(Verify), Ban, 삭제(영구 제거)
+- DynamoDB 연동 API 사용

@@ -13,6 +13,14 @@ app/
 │   ├── types.ts       # App 인터페이스 및 타입 정의
 │   ├── apps.ts        # 앱 데이터 + 헬퍼 함수
 │   └── index.ts       # export 통합
+├── lib/               # 외부 서비스 연동
+│   └── dynamodb.ts    # AWS DynamoDB 클라이언트
+├── api/isolog/        # IsoLog 관리 API
+│   ├── contents/route.ts  # 콘텐츠 목록 조회
+│   ├── ban/route.ts       # 콘텐츠 Ban 토글
+│   ├── verify/route.ts    # 콘텐츠 검증 토글
+│   └── delete/route.ts    # 콘텐츠 영구 삭제
+├── admin2129/page.tsx # IsoLog 콘텐츠 관리자 페이지
 ├── layout.tsx         # 전역 레이아웃
 ├── page.tsx           # 홈 (Hero, About, Apps, Contact CTA)
 ├── about/page.tsx     # 회사 소개 (핵심 가치, 기술 스택, 서비스)
