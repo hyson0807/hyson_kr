@@ -25,6 +25,7 @@ export default function AdminPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [filter, setFilter] = useState<FilterType>("all");
+  const [languageFilter, setLanguageFilter] = useState<"all" | "ko" | "en">("all");
   const [selectedContent, setSelectedContent] = useState<Content | null>(null);
 
   // 세션 체크
@@ -171,10 +172,16 @@ export default function AdminPage() {
   };
 
   const filteredContents = contents.filter((c) => {
+    // 기본 필터
     if (filter === "banned") return c.isBanned === true;
     if (filter === "active") return !c.isBanned;
     if (filter === "verified") return c.isVerified === true;
-    if (filter === "unverified") return !c.isVerified && !c.isBanned;
+    if (filter === "unverified") {
+      if (c.isVerified || c.isBanned) return false;
+      // 언어 필터 적용
+      if (languageFilter !== "all" && c.language !== languageFilter) return false;
+      return true;
+    }
     return true;
   });
 
@@ -232,20 +239,51 @@ export default function AdminPage() {
       </div>
 
       {/* 필터 */}
-      <div className="flex gap-2 px-6 py-3 border-b border-zinc-800">
-        {(["all", "unverified", "verified", "banned"] as const).map((f) => (
-          <button
-            key={f}
-            onClick={() => setFilter(f)}
-            className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-              filter === f
-                ? "bg-blue-600 text-white"
-                : "bg-zinc-800 text-gray-400 hover:bg-zinc-700"
-            }`}
-          >
-            {f === "all" ? "전체" : f === "unverified" ? "미확인" : f === "verified" ? "확인됨" : "Ban됨"}
-          </button>
-        ))}
+      <div className="flex items-center gap-4 px-6 py-3 border-b border-zinc-800">
+        <div className="flex gap-2">
+          {(["all", "unverified", "verified", "banned"] as const).map((f) => (
+            <button
+              key={f}
+              onClick={() => {
+                setFilter(f);
+                if (f !== "unverified") setLanguageFilter("all");
+              }}
+              className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                filter === f
+                  ? "bg-blue-600 text-white"
+                  : "bg-zinc-800 text-gray-400 hover:bg-zinc-700"
+              }`}
+            >
+              {f === "all" ? "전체" : f === "unverified" ? "미확인" : f === "verified" ? "확인됨" : "Ban됨"}
+            </button>
+          ))}
+        </div>
+
+        {/* 언어 필터 (미확인 탭에서만) */}
+        {filter === "unverified" && (
+          <>
+            <div className="w-px h-6 bg-zinc-700" />
+            <div className="flex gap-1">
+              {(["all", "ko", "en"] as const).map((lang) => (
+                <button
+                  key={lang}
+                  onClick={() => setLanguageFilter(lang)}
+                  className={`px-3 py-1 rounded text-xs font-medium transition-colors ${
+                    languageFilter === lang
+                      ? lang === "ko"
+                        ? "bg-blue-600 text-white"
+                        : lang === "en"
+                        ? "bg-green-600 text-white"
+                        : "bg-zinc-600 text-white"
+                      : "bg-zinc-800 text-gray-400 hover:bg-zinc-700"
+                  }`}
+                >
+                  {lang === "all" ? "전체" : lang.toUpperCase()}
+                </button>
+              ))}
+            </div>
+          </>
+        )}
       </div>
 
       {/* 메인 콘텐츠 */}
