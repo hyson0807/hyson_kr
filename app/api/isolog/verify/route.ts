@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { UpdateCommand } from "@aws-sdk/lib-dynamodb";
+import { GetCommand, UpdateCommand } from "@aws-sdk/lib-dynamodb";
 import { docClient, TABLE_NAME } from "@/app/lib/dynamodb";
 
 export async function POST(request: Request) {
@@ -19,20 +19,65 @@ export async function POST(request: Request) {
       );
     }
 
-    const command = new UpdateCommand({
+    // 1. 아이템 조회 (language, publishedAt, createdAt 필요)
+    const getCommand = new GetCommand({
       TableName: TABLE_NAME,
       Key: {
         PK: "CONTENT",
         SK: urlHash,
       },
-      UpdateExpression: "SET isVerified = :isVerified",
-      ExpressionAttributeValues: {
-        ":isVerified": isVerified,
-      },
-      ReturnValues: "ALL_NEW",
     });
 
-    const { Attributes } = await docClient.send(command);
+    const { Item } = await docClient.send(getCommand);
+
+    if (!Item) {
+      return NextResponse.json(
+        { error: "Content not found" },
+        { status: 404 }
+      );
+    }
+
+    // 2. 조건부 업데이트
+    let updateCommand;
+
+    if (isVerified) {
+      // 승인: GSI 필드 추가
+      const verifiedLanguage = `VERIFIED#${Item.language}`;
+      const publishDate = Item.publishedAt || Item.createdAt;
+
+      updateCommand = new UpdateCommand({
+        TableName: TABLE_NAME,
+        Key: {
+          PK: "CONTENT",
+          SK: urlHash,
+        },
+        UpdateExpression:
+          "SET isVerified = :true, verifiedLanguage = :vl, publishDate = :pd",
+        ExpressionAttributeValues: {
+          ":true": true,
+          ":vl": verifiedLanguage,
+          ":pd": publishDate,
+        },
+        ReturnValues: "ALL_NEW",
+      });
+    } else {
+      // 승인 취소: GSI 필드 제거
+      updateCommand = new UpdateCommand({
+        TableName: TABLE_NAME,
+        Key: {
+          PK: "CONTENT",
+          SK: urlHash,
+        },
+        UpdateExpression:
+          "SET isVerified = :false REMOVE verifiedLanguage, publishDate",
+        ExpressionAttributeValues: {
+          ":false": false,
+        },
+        ReturnValues: "ALL_NEW",
+      });
+    }
+
+    const { Attributes } = await docClient.send(updateCommand);
 
     return NextResponse.json({
       success: true,
