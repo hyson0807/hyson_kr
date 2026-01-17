@@ -10,11 +10,12 @@
 ## 콘텐츠 흐름
 
 ```
-크롤링된 콘텐츠 → DynamoDB 저장 → 관리자 페이지에서 Verify → 앱 정보탭에 표시
+크롤링된 콘텐츠 → DynamoDB 저장 → AI 분석 (선택) → 관리자 페이지에서 Verify → 앱 정보탭에 표시
 ```
 
 - 관리자 페이지에서 **인증(verify)된 글만** 앱의 정보탭에 표시됨
 - Ban된 콘텐츠는 앱에 표시되지 않음
+- AI 분석을 통해 자동으로 적합도 점수 및 추천 판정 제공
 
 ---
 
@@ -52,6 +53,15 @@
 - **KO**: 한국어 콘텐츠 (파란색 버튼)
 - **EN**: 영어 콘텐츠 (녹색 버튼)
 
+### AI 판정 필터 (미확인 탭 전용)
+| 필터 | 설명 | 색상 |
+|------|------|------|
+| AI전체 | 모든 AI 판정 | 회색 |
+| ✓승인 | AI가 approve로 판정 | 녹색 |
+| ?검토 | AI가 review로 판정 | 노란색 |
+| ✗거절 | AI가 reject로 판정 | 빨간색 |
+| 미분석 | AI 분석 미완료 | 보라색 |
+
 ---
 
 ## 콘텐츠 데이터 구조
@@ -69,6 +79,11 @@ interface Content {
   isBanned?: boolean;        // Ban 상태
   isVerified?: boolean;      // 인증 상태
   createdAt: string;         // 생성 시간 (ISO)
+  // AI 분석 필드
+  aiScore?: number;          // 0-100 적합도 점수
+  aiReason?: string;         // AI 판단 이유 (한 줄)
+  aiVerdict?: "approve" | "reject" | "review";  // AI 추천 판정
+  aiAnalyzedAt?: string;     // 분석 시간 (ISO)
 }
 ```
 
@@ -144,3 +159,61 @@ app/
 └── lib/
     └── dynamodb.ts           # DynamoDB 클라이언트 설정
 ```
+
+---
+
+## AI 자동 검증 시스템
+
+### 개요
+OpenAI GPT-4o-mini를 활용하여 크롤링된 콘텐츠를 자동으로 분석하고 적합도를 평가
+
+### 실행 방법
+```bash
+# IsoLog 프로젝트에서 실행
+cd ../IsoLog
+npx ts-node scripts/verify-contents-ai.ts
+```
+
+### 스크립트 파일
+- **위치**: `../IsoLog/scripts/verify-contents-ai.ts`
+- **의존성**: `openai` 패키지 (devDependencies)
+- **환경변수**: `OPENAI_API_KEY` (.env.local)
+
+### 분석 기준
+1. **이소티논 관련성**: 이소트레티노인/아큐탄 복용 관련 정보인지
+2. **스팸 필터링**: 스팸성 콘텐츠가 아닌지
+3. **광고 필터링**: 상품 판매/홍보 글이 아닌지
+
+### AI 판정 및 자동 처리
+| 판정 | 점수 | 설명 | 자동 처리 |
+|------|------|------|----------|
+| approve | 80점 이상 | 이소티논 복용과 직접 관련된 유용한 정보 | ✅ 자동 Verify |
+| review | 50-79점 | 관련성이 있으나 검토 필요 | 수동 검토 필요 |
+| reject | 50점 미만 | 스팸, 광고, 무관한 콘텐츠 | 🚫 자동 Ban |
+
+### 워크플로우
+```
+1. 크롤링 스크립트 실행
+   npx ts-node scripts/fetch-contents.ts
+
+2. AI 검증 스크립트 실행
+   npx ts-node scripts/verify-contents-ai.ts
+   - 80점 이상: 자동 verify (isVerified=true)
+   - 50점 미만: 자동 ban (isBanned=true)
+
+3. 관리자 페이지에서 50-79점 콘텐츠 수동 검토
+   - 노란색(review): 직접 URL 확인 후 verify/ban 결정
+```
+
+---
+
+## GitHub Actions
+
+### 콘텐츠 자동 수집 워크플로우
+- **파일**: `../IsoLog/.github/workflows/fetch-contents.yml`
+- **스케줄**: 3일마다 UTC 00:00 (KST 09:00) 실행
+- **수동 실행**: workflow_dispatch 지원
+
+### 실행 단계
+1. 콘텐츠 크롤링 (`fetch-contents.ts`)
+2. AI 분석 및 자동 verify/ban (`verify-contents-ai.ts`)

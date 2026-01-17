@@ -14,6 +14,11 @@ interface Content {
   isBanned?: boolean;
   isVerified?: boolean;
   createdAt: string;
+  // AI 분석 필드
+  aiScore?: number;
+  aiReason?: string;
+  aiVerdict?: "approve" | "reject" | "review";
+  aiAnalyzedAt?: string;
 }
 
 type FilterType = "all" | "active" | "banned" | "verified" | "unverified";
@@ -26,6 +31,7 @@ export default function AdminPage() {
   const [error, setError] = useState("");
   const [filter, setFilter] = useState<FilterType>("all");
   const [languageFilter, setLanguageFilter] = useState<"all" | "ko" | "en">("all");
+  const [aiFilter, setAiFilter] = useState<"all" | "approve" | "review" | "reject" | "unanalyzed">("all");
   const [selectedContent, setSelectedContent] = useState<Content | null>(null);
 
   // 세션 체크
@@ -180,6 +186,11 @@ export default function AdminPage() {
       if (c.isVerified || c.isBanned) return false;
       // 언어 필터 적용
       if (languageFilter !== "all" && c.language !== languageFilter) return false;
+      // AI 필터 적용
+      if (aiFilter === "unanalyzed" && c.aiAnalyzedAt) return false;
+      if (aiFilter === "approve" && c.aiVerdict !== "approve") return false;
+      if (aiFilter === "review" && c.aiVerdict !== "review") return false;
+      if (aiFilter === "reject" && c.aiVerdict !== "reject") return false;
       return true;
     }
     return true;
@@ -246,7 +257,10 @@ export default function AdminPage() {
               key={f}
               onClick={() => {
                 setFilter(f);
-                if (f !== "unverified") setLanguageFilter("all");
+                if (f !== "unverified") {
+                  setLanguageFilter("all");
+                  setAiFilter("all");
+                }
               }}
               className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-colors ${
                 filter === f
@@ -279,6 +293,32 @@ export default function AdminPage() {
                   }`}
                 >
                   {lang === "all" ? "전체" : lang.toUpperCase()}
+                </button>
+              ))}
+            </div>
+
+            {/* AI 판정 필터 */}
+            <div className="w-px h-6 bg-zinc-700" />
+            <div className="flex gap-1">
+              {(["all", "approve", "review", "reject", "unanalyzed"] as const).map((ai) => (
+                <button
+                  key={ai}
+                  onClick={() => setAiFilter(ai)}
+                  className={`px-3 py-1 rounded text-xs font-medium transition-colors ${
+                    aiFilter === ai
+                      ? ai === "approve"
+                        ? "bg-green-600 text-white"
+                        : ai === "reject"
+                        ? "bg-red-600 text-white"
+                        : ai === "review"
+                        ? "bg-yellow-600 text-white"
+                        : ai === "unanalyzed"
+                        ? "bg-purple-600 text-white"
+                        : "bg-zinc-600 text-white"
+                      : "bg-zinc-800 text-gray-400 hover:bg-zinc-700"
+                  }`}
+                >
+                  {ai === "all" ? "AI전체" : ai === "approve" ? "✓승인" : ai === "reject" ? "✗거절" : ai === "review" ? "?검토" : "미분석"}
                 </button>
               ))}
             </div>
@@ -331,6 +371,21 @@ export default function AdminPage() {
                         {content.isBanned && (
                           <span className="text-xs px-1.5 py-0.5 rounded bg-red-900/50 text-red-300">
                             BAN
+                          </span>
+                        )}
+                        {/* AI 점수 배지 */}
+                        {content.aiVerdict && (
+                          <span
+                            className={`text-xs px-1.5 py-0.5 rounded ${
+                              content.aiVerdict === "approve"
+                                ? "bg-green-900/50 text-green-300"
+                                : content.aiVerdict === "reject"
+                                ? "bg-red-900/50 text-red-300"
+                                : "bg-yellow-900/50 text-yellow-300"
+                            }`}
+                            title={content.aiReason}
+                          >
+                            AI {content.aiScore}
                           </span>
                         )}
                       </div>
@@ -435,7 +490,34 @@ export default function AdminPage() {
                       BANNED
                     </span>
                   )}
+                  {/* AI 분석 결과 배지 */}
+                  {selectedContent.aiVerdict && (
+                    <span
+                      className={`text-xs px-2 py-1 rounded ${
+                        selectedContent.aiVerdict === "approve"
+                          ? "bg-green-900/50 text-green-300"
+                          : selectedContent.aiVerdict === "reject"
+                          ? "bg-red-900/50 text-red-300"
+                          : "bg-yellow-900/50 text-yellow-300"
+                      }`}
+                    >
+                      AI {selectedContent.aiVerdict.toUpperCase()} ({selectedContent.aiScore}점)
+                    </span>
+                  )}
                 </div>
+
+                {/* AI 분석 이유 */}
+                {selectedContent.aiReason && (
+                  <div className="bg-zinc-800/50 border border-zinc-700 rounded-lg p-3 mb-4">
+                    <p className="text-xs text-gray-400 mb-1">🤖 AI 분석</p>
+                    <p className="text-sm text-gray-300">{selectedContent.aiReason}</p>
+                    {selectedContent.aiAnalyzedAt && (
+                      <p className="text-xs text-gray-500 mt-2">
+                        분석일: {new Date(selectedContent.aiAnalyzedAt).toLocaleString()}
+                      </p>
+                    )}
+                  </div>
+                )}
 
                 {/* 제목 */}
                 <h2 className="text-xl font-bold text-white mb-4">
