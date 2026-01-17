@@ -24,6 +24,7 @@
 | 폴더 구조 | `.claude/docs/project-structure.md` |
 | 앱 데이터 구조 (App 인터페이스, 헬퍼 함수) | `.claude/docs/app-data.md` |
 | 페이지별 구성 | `.claude/docs/pages.md` |
+| IsoLog 관리자 페이지 (콘텐츠 Verify 시스템) | `.claude/docs/admin-page.md` |
 
 ---
 
@@ -31,6 +32,9 @@
 
 ### 내부 프로젝트
 - **IsoLog**: 이소티논 복용자를 위한 스마트 복용 관리 앱 (React Native, iOS, Android)
+  - **관리자 페이지**: `/admin2129` - 앱 콘텐츠 verify 페이지 (상세: `.claude/docs/admin-page.md`)
+  - **앱 프로젝트 경로**: `../IsoLog/`
+  - **콘텐츠 흐름**: 관리자 페이지에서 인증(verify)된 글만 앱의 정보탭에 표시됨
 
 ### 참여 프로젝트
 - **LinkJob**: 외국인 구인구직 플랫폼 (React Native, iOS, Android)
