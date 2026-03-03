@@ -49,6 +49,18 @@ export default function Sidebar({ theme }: SidebarProps) {
       ),
     },
     {
+      name: 'Programs',
+      path: '/programs',
+      icon: (
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M9 3h6m-9 4h12a2 2 0 012 2v8a2 2 0 01-2 2H6a2 2 0 01-2-2V9a2 2 0 012-2zm4 8l2 2 4-4"
+        />
+      ),
+    },
+    {
       name: 'Contact',
       path: '/contact',
       icon: (

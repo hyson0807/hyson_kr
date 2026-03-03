@@ -17,6 +17,7 @@ export default function MobileHeader({ theme }: MobileHeaderProps) {
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
     { name: 'Apps', path: '/projects' },
+    { name: 'Programs', path: '/programs' },
     { name: 'Contact', path: '/contact' },
   ];
 
