@@ -1,10 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { getReleasedApps } from './data';
+import { getReleasedApps, getAvailablePrograms, App, Program } from './data';
 import { AnimatedSection } from './components/AnimatedSection';
 
 export default function Home() {
   const apps = getReleasedApps();
+  const hymoPrograms = getAvailablePrograms().filter((program) => program.id === 'hymo');
+  const featuredProjects: (App | Program)[] = [...apps, ...hymoPrograms];
+
+  const isProgram = (item: App | Program): item is Program => 'downloadPath' in item;
 
   return (
     <div className="min-h-screen">
@@ -18,13 +22,14 @@ export default function Home() {
           </AnimatedSection>
           <AnimatedSection animation="fadeUp" delay={100}>
             <p className="text-2xl md:text-3xl text-gray-600 dark:text-gray-400 mb-8">
-              꾸준히, 더 나은 앱을 만듭니다
+              꾸준히, 더 나은 제품을 만듭니다
             </p>
           </AnimatedSection>
           <AnimatedSection animation="fadeUp" delay={200}>
             <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-12 max-w-2xl">
-              사용자 경험을 최우선으로 생각하는 1인 앱 개발 스튜디오입니다.
-              React Native를 활용하여 iOS와 Android 모두에서 동작하는 크로스플랫폼 앱을 개발합니다.
+              좋은 앱은 설명이 필요 없습니다.
+              <br />
+              iOS, Android, 웹을 아우르는 제품을 만드는 1인 개발 스튜디오입니다.
             </p>
           </AnimatedSection>
           <AnimatedSection animation="fadeUp" delay={300}>
@@ -33,7 +38,7 @@ export default function Home() {
                 href="/projects"
                 className="px-8 py-4 bg-blue-600 text-white rounded-lg font-medium hover:opacity-90 transition-opacity"
               >
-                앱 둘러보기
+                프로젝트 둘러보기
               </Link>
               <Link
                 href="/contact"
@@ -53,15 +58,9 @@ export default function Home() {
             <h2 className="text-4xl md:text-5xl font-bold mb-8 text-blue-600 dark:text-blue-400">About Us</h2>
           </AnimatedSection>
           <AnimatedSection animation="fadeUp" delay={100}>
-            <p className="text-lg text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
-              Hyson Works는 사용자 중심의 모바일 앱을 개발하는 1인 앱 개발 스튜디오입니다.
-              복잡한 기능보다 직관적이고 심플한 사용자 경험을 추구합니다.
-            </p>
-          </AnimatedSection>
-          <AnimatedSection animation="fadeUp" delay={200}>
             <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
-              React Native를 활용하여 하나의 코드베이스로 iOS와 Android 모두에 최적화된 앱을 제공합니다.
-              작지만 완성도 높은 앱을 만들기 위해 꾸준히 노력하고 있습니다.
+              기능을 쌓기보다, 경험을 다듬습니다.
+              사용자가 앱을 열었을 때 고민 없이 사용할 수 있도록 — 그것이 Hyson Works가 제품을 만드는 방식입니다.
             </p>
           </AnimatedSection>
           <AnimatedSection animation="fadeUp" delay={300}>
@@ -83,12 +82,12 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <AnimatedSection animation="fadeUp">
             <div className="flex items-center justify-between mb-12">
-              <h2 className="text-4xl md:text-5xl font-bold text-blue-600 dark:text-blue-400">Our Apps</h2>
+              <h2 className="text-4xl md:text-5xl font-bold text-blue-600 dark:text-blue-400">Our Projects</h2>
               <Link
                 href="/projects"
                 className="hidden md:inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 font-medium hover:underline"
               >
-                전체 보기
+                전체 프로젝트 보기
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
@@ -96,24 +95,30 @@ export default function Home() {
             </div>
           </AnimatedSection>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {apps.map((app, index) => (
-              <AnimatedSection key={app.id} animation="fadeUp" delay={(index % 3) * 100 as 0 | 100 | 200}>
+            {featuredProjects.map((project, index) => (
+              <AnimatedSection key={project.id} animation="fadeUp" delay={(index % 3) * 100 as 0 | 100 | 200}>
                 <Link
-                  href={`/projects#${app.id}`}
+                  href={isProgram(project) ? '/programs' : `/projects#${project.id}`}
                   className="bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-lg p-6 hover:bg-gray-100 dark:hover:bg-zinc-800 transition-all hover:shadow-lg cursor-pointer block h-full"
                 >
                   <div className="relative w-full aspect-[4/3] rounded-lg mb-4 overflow-hidden">
-                    <Image
-                      src={app.image}
-                      alt={app.title}
-                      fill
-                      className="object-contain"
-                    />
+                    {isProgram(project) ? (
+                      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-100 dark:from-zinc-800 dark:to-zinc-900">
+                        <span className="text-lg font-semibold text-blue-700 dark:text-blue-300">Hymo</span>
+                      </div>
+                    ) : (
+                      <Image
+                        src={project.image}
+                        alt={project.title}
+                        fill
+                        className="object-contain"
+                      />
+                    )}
                   </div>
-                  <h3 className="text-xl font-semibold mb-2">{app.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm">{app.description}</p>
+                  <h3 className="text-xl font-semibold mb-2">{isProgram(project) ? project.name : project.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm">{project.description}</p>
                   <div className="flex flex-wrap gap-2">
-                    {app.tags.map((tag) => (
+                    {project.tags.map((tag) => (
                       <span key={tag} className="px-2 py-1 text-blue-600 dark:text-blue-400 text-xs font-medium">
                         #{tag}
                       </span>
@@ -129,7 +134,7 @@ export default function Home() {
                 href="/projects"
                 className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 font-medium hover:underline"
               >
-                전체 앱 보기
+                전체 프로젝트 보기
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
@@ -148,10 +153,11 @@ export default function Home() {
             </h2>
           </AnimatedSection>
           <AnimatedSection animation="fadeUp" delay={100}>
-            <p className="text-xl text-gray-600 dark:text-gray-400 mb-12">
-              앱 개발 문의, 협업 제안, 또는 궁금한 점이 있으시다면
-              <br />
-              언제든 연락 주세요!
+            <p className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
+              아이디어가 있으신가요?
+            </p>
+            <p className="text-lg text-gray-600 dark:text-gray-400 mb-12">
+              함께 만들어 봅시다. 앱 개발, 웹 서비스, 기술 자문까지 — 편하게 이야기 나눠요.
             </p>
           </AnimatedSection>
           <AnimatedSection animation="fadeUp" delay={200}>

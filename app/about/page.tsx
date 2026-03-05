@@ -4,11 +4,11 @@ import { AnimatedSection } from '../components/AnimatedSection';
 export const metadata: Metadata = {
   title: '회사 소개',
   description:
-    '하이슨 워크는 사용자 중심의 모바일 앱을 개발하는 1인 앱 개발 스튜디오입니다. React Native를 활용한 크로스플랫폼 앱 개발 전문.',
+    '하이슨 워크는 사용자 중심의 앱과 웹 서비스를 개발하는 1인 스튜디오입니다. React Native와 Next.js 기반으로 제품을 구축합니다.',
   openGraph: {
     title: '회사 소개 | Hyson Works',
     description:
-      '하이슨 워크는 사용자 중심의 모바일 앱을 개발하는 1인 앱 개발 스튜디오입니다.',
+      '하이슨 워크는 사용자 중심의 앱과 웹 서비스를 개발하는 1인 스튜디오입니다.',
   },
 };
 
@@ -26,16 +26,15 @@ export default function AboutPage() {
             <h2 className="text-3xl font-semibold mb-6">Hyson Works</h2>
             <div className="space-y-4 text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
               <p>
-                Hyson Works는 사용자 중심의 모바일 앱을 개발하는 1인 앱 개발 스튜디오입니다.
-                &quot;꾸준히, 더 나은 앱을 만듭니다&quot;라는 슬로건 아래, 일상에 도움이 되는 앱을 만들어가고 있습니다.
+                Hyson Works는 &quot;쓰고 싶은 앱&quot;을 직접 만들기 위해 시작된 1인 스튜디오입니다.
               </p>
               <p>
-                복잡한 기능보다 직관적이고 심플한 사용자 경험을 추구합니다.
-                사용자가 앱을 사용하면서 불편함을 느끼지 않도록, 세심한 부분까지 신경 쓰며 개발합니다.
+                사용자로서 느꼈던 불편함을 개발자로서 해결합니다.
+                화려한 기능보다는 매일 꺼내 쓰고 싶은 앱, 한 번 열면 바로 이해되는 서비스를 지향합니다.
               </p>
               <p>
-                React Native를 활용하여 iOS와 Android 모두에서 일관된 경험을 제공하는 크로스플랫폼 앱을 개발합니다.
-                작지만 완성도 높은 앱, 오래 사용하고 싶은 앱을 만들기 위해 꾸준히 노력하고 있습니다.
+                React Native와 Next.js를 기반으로 하나의 코드로 iOS, Android, 웹 모두에서 일관된 경험을 제공합니다.
+                출시 이후에도 꾸준히 개선하며, 사용자와 함께 성장하는 제품을 만들어 갑니다.
               </p>
             </div>
           </AnimatedSection>
@@ -55,7 +54,7 @@ export default function AboutPage() {
                   </div>
                   <h3 className="text-xl font-medium mb-2">심플함</h3>
                   <p className="text-gray-600 dark:text-gray-400 text-sm">
-                    불필요한 기능은 덜어내고, 핵심에 집중합니다. 누구나 쉽게 사용할 수 있는 직관적인 인터페이스를 추구합니다.
+                    덜어낼수록 좋아집니다. 기능을 추가하기 전에 &quot;정말 필요한가&quot;를 먼저 묻습니다. 사용자가 생각하지 않아도 되는 인터페이스가 최고의 인터페이스입니다.
                   </p>
                 </div>
               </AnimatedSection>
@@ -69,7 +68,7 @@ export default function AboutPage() {
                   </div>
                   <h3 className="text-xl font-medium mb-2">완성도</h3>
                   <p className="text-gray-600 dark:text-gray-400 text-sm">
-                    세부적인 디테일까지 신경 씁니다. 작은 부분에서도 사용자가 불편함을 느끼지 않도록 꼼꼼히 개발합니다.
+                    1px의 차이가 경험을 바꿉니다. 버튼 하나, 애니메이션 하나에도 의도를 담습니다. 작은 디테일이 모여 믿음직한 제품이 됩니다.
                   </p>
                 </div>
               </AnimatedSection>
@@ -83,7 +82,7 @@ export default function AboutPage() {
                   </div>
                   <h3 className="text-xl font-medium mb-2">꾸준함</h3>
                   <p className="text-gray-600 dark:text-gray-400 text-sm">
-                    출시 후에도 지속적으로 개선합니다. 사용자 피드백을 반영하여 더 나은 앱으로 발전시켜 나갑니다.
+                    출시는 시작입니다. 앱스토어에 올리는 것으로 끝이 아닙니다. 사용자 피드백을 듣고, 매 업데이트마다 조금씩 더 나은 버전을 만들어 갑니다.
                   </p>
                 </div>
               </AnimatedSection>
@@ -99,7 +98,7 @@ export default function AboutPage() {
               <AnimatedSection animation="fadeUp" delay={0}>
                 <h3 className="text-xl font-medium mb-4 text-blue-600 dark:text-blue-400">Mobile</h3>
                 <div className="space-y-3">
-                  {['React Native', 'TypeScript'].map((skill) => (
+                  {['React Native', 'Next.js', 'Swift'].map((skill) => (
                     <div key={skill} className="flex items-center gap-2">
                       <div className="w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full" />
                       <span className="text-gray-700 dark:text-gray-300">{skill}</span>
@@ -111,7 +110,7 @@ export default function AboutPage() {
               <AnimatedSection animation="fadeUp" delay={100}>
                 <h3 className="text-xl font-medium mb-4 text-blue-600 dark:text-blue-400">Backend</h3>
                 <div className="space-y-3">
-                  {['Supabase', 'Node.js', 'REST API'].map((skill) => (
+                  {['Express', 'NestJS', 'PostgreSQL'].map((skill) => (
                     <div key={skill} className="flex items-center gap-2">
                       <div className="w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full" />
                       <span className="text-gray-700 dark:text-gray-300">{skill}</span>
@@ -139,11 +138,11 @@ export default function AboutPage() {
             <h2 className="text-3xl font-semibold mb-6">서비스</h2>
             <div className="flex flex-wrap gap-3">
               {[
-                '크로스플랫폼 앱 개발',
-                'iOS 앱 개발',
-                'Android 앱 개발',
+                '크로스플랫폼 앱/웹 개발',
+                'iOS/Android 앱 개발',
+                '웹 서비스 개발',
                 'UI/UX 디자인',
-                '앱 유지보수',
+                '앱/웹 유지보수',
                 '기술 컨설팅',
               ].map((service) => (
                 <span

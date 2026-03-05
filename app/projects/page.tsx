@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
-import { getInternalApps, getCollaborationApps, App } from '../data';
+import { getInternalApps, getCollaborationApps, getAvailablePrograms, App, Program } from '../data';
 import { AnimatedSection } from '../components/AnimatedSection';
 
 export const metadata: Metadata = {
@@ -42,7 +42,7 @@ function StoreButton({
   const labels = {
     appStore: 'App Store',
     playStore: 'Google Play',
-    website: '웹사이트',
+    website: 'Website',
   };
 
   if (!url) {
@@ -63,6 +63,26 @@ function StoreButton({
     >
       {icons[type]}
       {labels[type]}
+    </a>
+  );
+}
+
+function ProgramDownloadButton({ program }: { program: Program }) {
+  if (program.status !== 'available' || !program.downloadPath) {
+    return (
+      <span className="inline-flex items-center gap-2 px-6 py-3 bg-gray-300 dark:bg-zinc-700 text-gray-500 dark:text-gray-400 rounded-lg font-medium cursor-not-allowed">
+        Coming Soon
+      </span>
+    );
+  }
+
+  return (
+    <a
+      href={program.downloadPath}
+      download
+      className="inline-flex items-center gap-2 px-6 py-3 bg-black text-white rounded-lg font-medium hover:opacity-90 transition-opacity"
+    >
+      다운로드
     </a>
   );
 }
@@ -130,9 +150,40 @@ function AppCard({ app, showCollabBadge = false }: { app: App; showCollabBadge?:
   );
 }
 
+function ProgramCard({ program }: { program: Program }) {
+  return (
+    <div className="bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-lg p-8 hover:shadow-xl transition-all">
+      <div className="flex items-center gap-3 mb-4">
+        <h2 className="text-3xl font-bold">{program.name}</h2>
+        <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-sm font-medium rounded-full">
+          데스크톱 프로그램
+        </span>
+        <span className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-sm font-medium rounded-full">
+          {program.status === 'available' ? '다운로드 가능' : '준비 중'}
+        </span>
+      </div>
+      <p className="text-xl text-gray-700 dark:text-gray-300 mb-4 font-medium">{program.description}</p>
+      <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">{program.longDescription}</p>
+      <div className="flex flex-wrap gap-2 mb-6">
+        {program.tags.map((tag) => (
+          <span
+            key={tag}
+            className="px-3 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-sm font-medium rounded-full"
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
+      <ProgramDownloadButton program={program} />
+    </div>
+  );
+}
+
 export default function ProjectsPage() {
   const internalApps = getInternalApps();
   const collaborationApps = getCollaborationApps();
+  const availablePrograms = getAvailablePrograms();
+  const hymoPrograms = availablePrograms.filter((program) => program.id === 'hymo');
 
   return (
     <div className="min-h-screen py-24 px-6 md:px-12 lg:px-24">
@@ -140,10 +191,10 @@ export default function ProjectsPage() {
         <AnimatedSection animation="fadeIn">
           <div className="mb-12">
             <h1 className="text-5xl md:text-6xl font-bold mb-4 text-blue-600 dark:text-blue-400">
-              Our Apps
+              Our Projects
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-400">
-              Hyson Works에서 개발한 앱들입니다. 모든 앱은 사용자 경험을 최우선으로 생각하며
+              Hyson Works에서 진행한 프로젝트들입니다. 모든 프로젝트는 사용자 경험을 최우선으로 생각하며
               개발되었습니다.
             </p>
           </div>
@@ -153,6 +204,16 @@ export default function ProjectsPage() {
           {internalApps.map((app, index) => (
             <AnimatedSection key={app.id} animation="fadeUp" delay={(index % 2) * 100 as 0 | 100}>
               <AppCard app={app} />
+            </AnimatedSection>
+          ))}
+
+          {hymoPrograms.map((program, index) => (
+            <AnimatedSection
+              key={program.id}
+              animation="fadeUp"
+              delay={((internalApps.length + index) % 2) * 100 as 0 | 100}
+            >
+              <ProgramCard program={program} />
             </AnimatedSection>
           ))}
 
