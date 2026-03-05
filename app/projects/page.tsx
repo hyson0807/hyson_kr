@@ -2,11 +2,15 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 import { getInternalApps, getCollaborationApps, getAvailablePrograms, App, Program } from '../data';
 import { AnimatedSection } from '../components/AnimatedSection';
+import { calcDelay } from '../components/animation-utils';
 
 export const metadata: Metadata = {
   title: '앱 소개',
   description:
     'Hyson Works에서 개발한 앱들을 소개합니다. IsoLog, LinkJob 등 사용자 경험을 최우선으로 생각하는 크로스플랫폼 앱.',
+  alternates: {
+    canonical: '/projects',
+  },
   openGraph: {
     title: '앱 소개 | Hyson Works',
     description: 'Hyson Works에서 개발한 앱들을 소개합니다.',
@@ -90,7 +94,7 @@ function ProgramDownloadButton({ program }: { program: Program }) {
 // 앱 카드 컴포넌트
 function AppCard({ app, showCollabBadge = false }: { app: App; showCollabBadge?: boolean }) {
   return (
-    <div
+    <article
       id={app.id}
       className="bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-lg overflow-hidden hover:shadow-xl transition-all scroll-mt-24"
     >
@@ -146,7 +150,7 @@ function AppCard({ app, showCollabBadge = false }: { app: App; showCollabBadge?:
           </div>
         </div>
       </div>
-    </div>
+    </article>
   );
 }
 
@@ -202,7 +206,7 @@ export default function ProjectsPage() {
 
         <div className="space-y-8">
           {internalApps.map((app, index) => (
-            <AnimatedSection key={app.id} animation="fadeUp" delay={(index % 2) * 100 as 0 | 100}>
+            <AnimatedSection key={app.id} animation="fadeUp" delay={calcDelay(index, 2)}>
               <AppCard app={app} />
             </AnimatedSection>
           ))}
@@ -211,7 +215,7 @@ export default function ProjectsPage() {
             <AnimatedSection
               key={program.id}
               animation="fadeUp"
-              delay={((internalApps.length + index) % 2) * 100 as 0 | 100}
+              delay={calcDelay(internalApps.length + index, 2)}
             >
               <ProgramCard program={program} />
             </AnimatedSection>
@@ -241,14 +245,14 @@ export default function ProjectsPage() {
             <div className="mb-12">
               <h2 className="text-4xl md:text-5xl font-bold mb-4">참여 프로젝트</h2>
               <p className="text-xl text-gray-600 dark:text-gray-400">
-                Hyson Works 대표가 외부 프로젝트에 개발자로 참여하여 함께 만든 앱입니다.
+                WELKIT 팀과 함께 설계하고, 직접 만든 서비스들입니다.
               </p>
             </div>
           </AnimatedSection>
 
           <div className="space-y-8">
             {collaborationApps.map((app, index) => (
-              <AnimatedSection key={app.id} animation="fadeUp" delay={(index % 2) * 100 as 0 | 100}>
+              <AnimatedSection key={app.id} animation="fadeUp" delay={calcDelay(index, 2)}>
                 <AppCard app={app} showCollabBadge />
               </AnimatedSection>
             ))}

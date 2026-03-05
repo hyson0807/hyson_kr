@@ -97,6 +97,8 @@ interface Content {
 | 확인 (Verify) | 인증 상태 토글 | `POST /api/isolog/verify` |
 | Ban | Ban 상태 토글 | `POST /api/isolog/ban` |
 | 삭제 | 콘텐츠 영구 삭제 (확인 다이얼로그) | `DELETE /api/isolog/delete` |
+| 65점 이하 전체선택 | 미확인 탭에서 AI 65점 이하 항목 일괄 선택 | - |
+| 벌크 삭제 | 선택된 항목 일괄 삭제 (확인 다이얼로그) | `DELETE /api/isolog/delete` (배열) |
 
 ---
 
@@ -119,8 +121,11 @@ interface Content {
 - **요청**: `{ urlHash: string, isBanned: boolean }`
 
 ### `DELETE /api/isolog/delete`
-- **목적**: 콘텐츠 영구 삭제
-- **요청**: `{ urlHash: string }`
+- **목적**: 콘텐츠 영구 삭제 (단건 또는 벌크)
+- **단건 요청**: `{ urlHash: string }`
+- **벌크 요청**: `{ urlHashes: string[] }`
+  - DynamoDB `BatchWriteItem`으로 25개씩 청크 처리
+  - **응답**: `{ success: true, deletedCount: number, failed: string[] }`
 
 ---
 
@@ -150,13 +155,17 @@ ADMIN_PASSWORD
 ```
 app/
 ├── admin2129/
-│   └── page.tsx              # 관리자 페이지 메인 컴포넌트
+│   ├── page.tsx              # 관리자 페이지 메인 컴포넌트
+│   └── layout.tsx            # ErrorBoundary 적용 레이아웃
 ├── api/isolog/
 │   ├── contents/route.ts     # 콘텐츠 조회 API
 │   ├── verify/route.ts       # 인증 토글 API
 │   ├── delete/route.ts       # 삭제 API
 │   └── ban/route.ts          # Ban 토글 API
+├── components/
+│   └── ErrorBoundary.tsx     # React ErrorBoundary 컴포넌트
 └── lib/
+    ├── auth.ts               # timing-safe 인증 유틸리티 (crypto.timingSafeEqual)
     └── dynamodb.ts           # DynamoDB 클라이언트 설정
 ```
 

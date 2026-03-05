@@ -3,13 +3,15 @@
 import { ReactNode } from 'react';
 import { useInView } from '../hooks/useInView';
 
+import type { AnimationDelay } from './animation-utils';
+
 type AnimationType = 'fadeUp' | 'fadeIn' | 'fadeLeft' | 'fadeRight' | 'scale';
 
 interface AnimatedSectionProps {
   children: ReactNode;
   animation?: AnimationType;
-  delay?: number; // 0, 100, 200, 300, 400, 500
-  duration?: number; // 300, 500, 700, 1000,
+  delay?: AnimationDelay;
+  duration?: number; // 300, 500, 700, 1000
   className?: string;
 }
 

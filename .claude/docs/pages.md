@@ -18,10 +18,15 @@
 - Coming Soon 카드
 - App Store / Google Play 링크
 
+## Programs (programs/page.tsx)
+- 데스크톱 프로그램 목록 (Hymo 등)
+- 다운로드 버튼 (status에 따라 활성/비활성)
+- Coming Soon 카드
+
 ## Contact (contact/page.tsx)
 - 연락 방법 (이메일, GitHub)
 - 회사 정보 카드
-- 문의 폼 (Web3Forms 연동)
+- ContactForm 컴포넌트 (Web3Forms 연동, 환경변수 검증 포함)
 
 ## IsoLog Admin (admin2129/page.tsx)
 - 비밀번호 인증 (sessionStorage 기반)

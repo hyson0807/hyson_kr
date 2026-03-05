@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: '회사 소개',
   description:
     '하이슨 워크는 사용자 중심의 앱과 웹 서비스를 개발하는 1인 스튜디오입니다. React Native와 Next.js 기반으로 제품을 구축합니다.',
+  alternates: {
+    canonical: '/about',
+  },
   openGraph: {
     title: '회사 소개 | Hyson Works',
     description:

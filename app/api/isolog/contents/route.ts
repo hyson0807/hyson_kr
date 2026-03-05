@@ -1,13 +1,11 @@
 import { NextResponse } from "next/server";
 import { ScanCommand } from "@aws-sdk/lib-dynamodb";
 import { docClient, TABLE_NAME } from "@/app/lib/dynamodb";
+import { verifyAdminAuth } from "@/app/lib/auth";
 
 export async function GET(request: Request) {
-  // 인증 체크
-  const authHeader = request.headers.get("Authorization");
-  if (authHeader !== `Bearer ${process.env.ADMIN_PASSWORD}`) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const authError = verifyAdminAuth(request);
+  if (authError) return authError;
 
   try {
     const command = new ScanCommand({
@@ -20,7 +18,8 @@ export async function GET(request: Request) {
 
     const { Items } = await docClient.send(command);
 
-    // createdAt 기준 최신순 정렬
+    // 인메모리 정렬: Scan은 전체 RCU를 소비하지만, 아이템 수가 수천 건 이하이므로 허용 가능.
+    // 아이템이 만 건 이상으로 늘어나면 GSI + Query 기반으로 전환하여 RCU 절감 필요.
     const sorted = (Items || []).sort((a, b) =>
       b.createdAt.localeCompare(a.createdAt)
     );

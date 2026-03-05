@@ -5,6 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
+      disallow: ['/admin2129/', '/api/'],
     },
     sitemap: 'https://hyson.kr/sitemap.xml',
   };

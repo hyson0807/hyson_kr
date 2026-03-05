@@ -1,11 +1,15 @@
 import { Metadata } from 'next';
 import { getAvailablePrograms, Program } from '../data';
 import { AnimatedSection } from '../components/AnimatedSection';
+import { calcDelay } from '../components/animation-utils';
 
 export const metadata: Metadata = {
   title: '프로그램 다운로드',
   description:
     'Hyson Works에서 제공하는 데스크톱 프로그램을 다운로드하세요. 현재 Hymo(macOS)를 제공합니다.',
+  alternates: {
+    canonical: '/programs',
+  },
   openGraph: {
     title: '프로그램 다운로드 | Hyson Works',
     description: 'Hyson Works에서 제공하는 데스크톱 프로그램 다운로드 페이지입니다.',
@@ -89,7 +93,7 @@ export default function ProgramsPage() {
 
         <div className="space-y-8">
           {availablePrograms.map((program, index) => (
-            <AnimatedSection key={program.id} animation="fadeUp" delay={(index % 2) * 100 as 0 | 100}>
+            <AnimatedSection key={program.id} animation="fadeUp" delay={calcDelay(index, 2)}>
               <ProgramCard program={program} />
             </AnimatedSection>
           ))}

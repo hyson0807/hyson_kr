@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 interface Content {
   urlHash: string;
@@ -33,6 +33,9 @@ export default function AdminPage() {
   const [languageFilter, setLanguageFilter] = useState<"all" | "ko" | "en">("all");
   const [aiFilter, setAiFilter] = useState<"all" | "approve" | "review" | "reject" | "unanalyzed">("all");
   const [selectedContent, setSelectedContent] = useState<Content | null>(null);
+  const [visibleCount, setVisibleCount] = useState(50);
+  const [selectedHashes, setSelectedHashes] = useState<Set<string>>(new Set());
+  const [bulkDeleting, setBulkDeleting] = useState(false);
 
   // 세션 체크
   useEffect(() => {
@@ -77,7 +80,9 @@ export default function AdminPage() {
 
       const data = await res.json();
       setContents(data.contents);
-    } catch {
+      setVisibleCount(50);
+    } catch (err) {
+      console.error("콘텐츠 조회 실패:", err);
       setError("콘텐츠를 불러오는데 실패했습니다.");
     } finally {
       setLoading(false);
@@ -98,20 +103,23 @@ export default function AdminPage() {
         }),
       });
 
-      if (res.ok) {
-        setContents((prev) =>
-          prev.map((c) =>
-            c.urlHash === urlHash ? { ...c, isBanned: !currentBanned } : c
-          )
-        );
-        // 선택된 콘텐츠도 업데이트
-        if (selectedContent?.urlHash === urlHash) {
-          setSelectedContent((prev) =>
-            prev ? { ...prev, isBanned: !currentBanned } : null
-          );
-        }
+      if (!res.ok) {
+        alert(`Ban 처리 실패 (${res.status})`);
+        return;
       }
-    } catch {
+
+      setContents((prev) =>
+        prev.map((c) =>
+          c.urlHash === urlHash ? { ...c, isBanned: !currentBanned } : c
+        )
+      );
+      if (selectedContent?.urlHash === urlHash) {
+        setSelectedContent((prev) =>
+          prev ? { ...prev, isBanned: !currentBanned } : null
+        );
+      }
+    } catch (err) {
+      console.error("Ban 토글 실패:", err);
       alert("Ban 처리 실패");
     }
   };
@@ -131,18 +139,77 @@ export default function AdminPage() {
         body: JSON.stringify({ urlHash }),
       });
 
-      if (res.ok) {
-        setContents((prev) => prev.filter((c) => c.urlHash !== urlHash));
-        // 선택된 콘텐츠가 삭제된 경우 선택 해제
-        if (selectedContent?.urlHash === urlHash) {
-          setSelectedContent(null);
-        }
-      } else {
-        alert("삭제 실패");
+      if (!res.ok) {
+        alert(`삭제 실패 (${res.status})`);
+        return;
       }
-    } catch {
+
+      setContents((prev) => prev.filter((c) => c.urlHash !== urlHash));
+      if (selectedContent?.urlHash === urlHash) {
+        setSelectedContent(null);
+      }
+    } catch (err) {
+      console.error("삭제 실패:", err);
       alert("삭제 처리 실패");
     }
+  };
+
+  const bulkDeleteContents = async () => {
+    if (selectedHashes.size === 0) return;
+    if (!confirm(`${selectedHashes.size}개 콘텐츠를 삭제하시겠습니까?\n이 작업은 되돌릴 수 없습니다.`)) return;
+
+    setBulkDeleting(true);
+    try {
+      const res = await fetch("/api/isolog/delete", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${password}`,
+        },
+        body: JSON.stringify({ urlHashes: Array.from(selectedHashes) }),
+      });
+
+      if (!res.ok) {
+        alert(`벌크 삭제 실패 (${res.status})`);
+        return;
+      }
+
+      const data = await res.json();
+      const failedSet = new Set(data.failed || []);
+      setContents((prev) => prev.filter((c) => !selectedHashes.has(c.urlHash) || failedSet.has(c.urlHash)));
+      if (selectedContent && selectedHashes.has(selectedContent.urlHash) && !failedSet.has(selectedContent.urlHash)) {
+        setSelectedContent(null);
+      }
+      setSelectedHashes(new Set());
+
+      if (data.failed?.length > 0) {
+        alert(`${data.deletedCount}개 삭제 완료, ${data.failed.length}개 실패`);
+      }
+    } catch (err) {
+      console.error("벌크 삭제 실패:", err);
+      alert("벌크 삭제 처리 실패");
+    } finally {
+      setBulkDeleting(false);
+    }
+  };
+
+  const toggleHashSelection = (urlHash: string) => {
+    setSelectedHashes((prev) => {
+      const next = new Set(prev);
+      if (next.has(urlHash)) {
+        next.delete(urlHash);
+      } else {
+        next.add(urlHash);
+      }
+      return next;
+    });
+  };
+
+  const selectLowScoreItems = () => {
+    const lowScoreHashes = filteredContents
+      .filter((c) => typeof c.aiScore === "number" && c.aiScore <= 65)
+      .map((c) => c.urlHash);
+    setSelectedHashes(new Set(lowScoreHashes));
   };
 
   const toggleVerify = async (urlHash: string, currentVerified: boolean) => {
@@ -159,45 +226,57 @@ export default function AdminPage() {
         }),
       });
 
-      if (res.ok) {
-        setContents((prev) =>
-          prev.map((c) =>
-            c.urlHash === urlHash ? { ...c, isVerified: !currentVerified } : c
-          )
-        );
-        // 선택된 콘텐츠도 업데이트
-        if (selectedContent?.urlHash === urlHash) {
-          setSelectedContent((prev) =>
-            prev ? { ...prev, isVerified: !currentVerified } : null
-          );
-        }
+      if (!res.ok) {
+        alert(`Verify 처리 실패 (${res.status})`);
+        return;
       }
-    } catch {
+
+      setContents((prev) =>
+        prev.map((c) =>
+          c.urlHash === urlHash ? { ...c, isVerified: !currentVerified } : c
+        )
+      );
+      if (selectedContent?.urlHash === urlHash) {
+        setSelectedContent((prev) =>
+          prev ? { ...prev, isVerified: !currentVerified } : null
+        );
+      }
+    } catch (err) {
+      console.error("Verify 토글 실패:", err);
       alert("Verify 처리 실패");
     }
   };
 
-  const filteredContents = contents.filter((c) => {
-    // 기본 필터
-    if (filter === "banned") return c.isBanned === true;
-    if (filter === "active") return !c.isBanned;
-    if (filter === "verified") return c.isVerified === true;
-    if (filter === "unverified") {
-      if (c.isVerified || c.isBanned) return false;
-      // 언어 필터 적용
-      if (languageFilter !== "all" && c.language !== languageFilter) return false;
-      // AI 필터 적용
-      if (aiFilter === "unanalyzed" && c.aiAnalyzedAt) return false;
-      if (aiFilter === "approve" && c.aiVerdict !== "approve") return false;
-      if (aiFilter === "review" && c.aiVerdict !== "review") return false;
-      if (aiFilter === "reject" && c.aiVerdict !== "reject") return false;
+  const filteredContents = useMemo(() =>
+    contents.filter((c) => {
+      if (filter === "banned") return c.isBanned === true;
+      if (filter === "active") return !c.isBanned;
+      if (filter === "verified") return c.isVerified === true;
+      if (filter === "unverified") {
+        if (c.isVerified || c.isBanned) return false;
+        if (languageFilter !== "all" && c.language !== languageFilter) return false;
+        if (aiFilter === "unanalyzed" && c.aiAnalyzedAt) return false;
+        if (aiFilter === "approve" && c.aiVerdict !== "approve") return false;
+        if (aiFilter === "review" && c.aiVerdict !== "review") return false;
+        if (aiFilter === "reject" && c.aiVerdict !== "reject") return false;
+        return true;
+      }
       return true;
-    }
-    return true;
-  });
+    }),
+    [contents, filter, languageFilter, aiFilter]
+  );
 
-  const bannedCount = contents.filter((c) => c.isBanned).length;
-  const verifiedCount = contents.filter((c) => c.isVerified).length;
+  const lowScoreCount = useMemo(() =>
+    filter === "unverified"
+      ? filteredContents.filter((c) => typeof c.aiScore === "number" && c.aiScore <= 65).length
+      : 0,
+    [filteredContents, filter]
+  );
+
+  const { bannedCount, verifiedCount } = useMemo(() => ({
+    bannedCount: contents.filter((c) => c.isBanned).length,
+    verifiedCount: contents.filter((c) => c.isVerified).length,
+  }), [contents]);
 
   // 로그인 화면
   if (!isAuthenticated) {
@@ -257,6 +336,8 @@ export default function AdminPage() {
               key={f}
               onClick={() => {
                 setFilter(f);
+                setVisibleCount(50);
+                setSelectedHashes(new Set());
                 if (f !== "unverified") {
                   setLanguageFilter("all");
                   setAiFilter("all");
@@ -281,7 +362,7 @@ export default function AdminPage() {
               {(["all", "ko", "en"] as const).map((lang) => (
                 <button
                   key={lang}
-                  onClick={() => setLanguageFilter(lang)}
+                  onClick={() => { setLanguageFilter(lang); setVisibleCount(50); }}
                   className={`px-3 py-1 rounded text-xs font-medium transition-colors ${
                     languageFilter === lang
                       ? lang === "ko"
@@ -303,7 +384,7 @@ export default function AdminPage() {
               {(["all", "approve", "review", "reject", "unanalyzed"] as const).map((ai) => (
                 <button
                   key={ai}
-                  onClick={() => setAiFilter(ai)}
+                  onClick={() => { setAiFilter(ai); setVisibleCount(50); }}
                   className={`px-3 py-1 rounded text-xs font-medium transition-colors ${
                     aiFilter === ai
                       ? ai === "approve"
@@ -326,6 +407,36 @@ export default function AdminPage() {
         )}
       </div>
 
+      {/* 벌크 선택 바 (미확인 탭에서만) */}
+      {filter === "unverified" && (
+        <div className="flex items-center gap-3 px-6 py-2 border-b border-zinc-800 bg-zinc-900/50">
+          <button
+            onClick={selectLowScoreItems}
+            disabled={bulkDeleting || lowScoreCount === 0}
+            className="px-3 py-1.5 text-xs font-medium rounded-lg bg-yellow-600/20 text-yellow-300 hover:bg-yellow-600/30 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+          >
+            65점 이하 전체선택 ({lowScoreCount}개)
+          </button>
+          {selectedHashes.size > 0 && (
+            <>
+              <button
+                onClick={() => setSelectedHashes(new Set())}
+                className="px-3 py-1.5 text-xs font-medium rounded-lg bg-zinc-700 text-gray-300 hover:bg-zinc-600 transition-colors"
+              >
+                선택해제
+              </button>
+              <button
+                onClick={bulkDeleteContents}
+                disabled={bulkDeleting}
+                className="px-3 py-1.5 text-xs font-medium rounded-lg bg-red-600 text-white hover:bg-red-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {bulkDeleting ? "삭제 중..." : `🗑 ${selectedHashes.size}개 삭제`}
+              </button>
+            </>
+          )}
+        </div>
+      )}
+
       {/* 메인 콘텐츠 */}
       <div className="flex flex-1 overflow-hidden">
         {/* 좌측: 리스트 */}
@@ -336,7 +447,7 @@ export default function AdminPage() {
             <div className="text-center py-12 text-red-400">{error}</div>
           ) : (
             <div>
-              {filteredContents.map((content) => (
+              {filteredContents.slice(0, visibleCount).map((content) => (
                 <div
                   key={content.urlHash}
                   onClick={() => setSelectedContent(content)}
@@ -349,6 +460,19 @@ export default function AdminPage() {
                   }`}
                 >
                   <div className="flex items-start justify-between gap-3">
+                    {/* 체크박스 (미확인 탭 + 선택모드) */}
+                    {filter === "unverified" && selectedHashes.size > 0 && (
+                      <input
+                        type="checkbox"
+                        checked={selectedHashes.has(content.urlHash)}
+                        onChange={(e) => {
+                          e.stopPropagation();
+                          toggleHashSelection(content.urlHash);
+                        }}
+                        onClick={(e) => e.stopPropagation()}
+                        className="mt-1 shrink-0 w-4 h-4 accent-red-500 cursor-pointer"
+                      />
+                    )}
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-1">
                         <span
@@ -445,6 +569,14 @@ export default function AdminPage() {
                   </div>
                 </div>
               ))}
+              {filteredContents.length > visibleCount && (
+                <button
+                  onClick={() => setVisibleCount((prev) => prev + 50)}
+                  className="w-full py-3 text-sm text-gray-400 hover:text-white hover:bg-zinc-800 transition-colors"
+                >
+                  더 보기 ({filteredContents.length - visibleCount}개 남음)
+                </button>
+              )}
             </div>
           )}
         </div>
@@ -459,6 +591,8 @@ export default function AdminPage() {
                   <img
                     src={selectedContent.thumbnailUrl}
                     alt={selectedContent.title}
+                    loading="lazy"
+                    decoding="async"
                     className="max-w-md max-h-64 object-cover"
                   />
                 </div>

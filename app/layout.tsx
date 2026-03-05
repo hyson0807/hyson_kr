@@ -17,11 +17,11 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Hyson Works - 하이슨 워크 | 크로스플랫폼 앱 개발',
+    default: 'Hyson Works - 하이슨 워크 | 앱 · 웹 · 소프트웨어 개발',
     template: '%s | Hyson Works',
   },
   description:
-    '하이슨 워크는 React Native 기반 크로스플랫폼 앱을 개발합니다. 꾸준히, 더 나은 앱을 만듭니다. iOS, Android 앱 개발 전문.',
+    '하이슨 워크는 앱, 웹, 데스크톱 소프트웨어를 개발하는 1인 스튜디오입니다. iOS, Android, 웹을 아우르는 제품을 꾸준히, 더 나은 방향으로 만듭니다.',
   keywords: [
     '하이슨 워크',
     '하이슨',
@@ -30,16 +30,22 @@ export const metadata: Metadata = {
     'hyson works',
     'Hyson Works',
     '앱 개발',
+    '웹 개발',
+    '소프트웨어 개발',
     'React Native',
+    'Next.js',
     '크로스플랫폼',
-    'iOS 앱 개발',
-    'Android 앱 개발',
-    '모바일 앱 개발',
+    'iOS',
+    'Android',
+    '1인 개발 스튜디오',
   ],
   authors: [{ name: 'Hyson Works', url: 'https://hyson.kr' }],
   creator: 'Hyson Works',
   publisher: 'Hyson Works',
   metadataBase: new URL('https://hyson.kr'),
+  verification: {
+    other: { 'naver-site-verification': '58279195c51aaf1e6c1bc1fa40d6c565280ae88e' },
+  },
   alternates: {
     canonical: '/',
   },
@@ -48,24 +54,15 @@ export const metadata: Metadata = {
     locale: 'ko_KR',
     url: 'https://hyson.kr',
     siteName: 'Hyson Works - 하이슨 워크',
-    title: 'Hyson Works - 하이슨 워크 | 크로스플랫폼 앱 개발',
+    title: 'Hyson Works - 하이슨 워크 | 앱 · 웹 · 소프트웨어 개발',
     description:
-      '하이슨 워크는 React Native 기반 크로스플랫폼 앱을 개발합니다. 꾸준히, 더 나은 앱을 만듭니다.',
-    images: [
-      {
-        url: '/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'Hyson Works - 하이슨 워크',
-      },
-    ],
+      '하이슨 워크는 앱, 웹, 데스크톱 소프트웨어를 개발하는 1인 스튜디오입니다. 꾸준히, 더 나은 제품을 만듭니다.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Hyson Works - 하이슨 워크 | 크로스플랫폼 앱 개발',
+    title: 'Hyson Works - 하이슨 워크 | 앱 · 웹 · 소프트웨어 개발',
     description:
-      '하이슨 워크는 React Native 기반 크로스플랫폼 앱을 개발합니다. 꾸준히, 더 나은 앱을 만듭니다.',
-    images: ['/og-image.png'],
+      '하이슨 워크는 앱, 웹, 데스크톱 소프트웨어를 개발하는 1인 스튜디오입니다. 꾸준히, 더 나은 제품을 만듭니다.',
   },
   robots: {
     index: true,
@@ -89,8 +86,24 @@ export default function RootLayout({
   const currentTheme = themes.dark;
 
   return (
-    <html lang="ko">
+    <html lang="ko" className="dark">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: 'Hyson Works',
+              alternateName: '하이슨 워크',
+              url: 'https://hyson.kr',
+              description:
+                '하이슨 워크는 앱, 웹, 데스크톱 소프트웨어를 개발하는 1인 스튜디오입니다. 꾸준히, 더 나은 제품을 만듭니다.',
+              email: 'contact@hyson.kr',
+              sameAs: ['https://github.com/hyson0807'],
+            }),
+          }}
+        />
         <div className={`min-h-screen ${currentTheme.bg} ${currentTheme.text}`}>
           {/* 사이드바 (데스크톱) */}
           <Sidebar theme={currentTheme} />

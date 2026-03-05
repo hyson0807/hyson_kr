@@ -1,11 +1,15 @@
 import { Metadata } from 'next';
 import { AnimatedSection } from '../components/AnimatedSection';
+import { calcDelay } from '../components/animation-utils';
 import ContactForm from './ContactForm';
 
 export const metadata: Metadata = {
   title: '문의하기',
   description:
     '하이슨 워크에 앱 개발 문의, 협업 제안을 보내주세요. 빠른 시일 내에 답변드리겠습니다.',
+  alternates: {
+    canonical: '/contact',
+  },
   openGraph: {
     title: '문의하기 | Hyson Works',
     description: '하이슨 워크에 앱 개발 문의, 협업 제안을 보내주세요.',
@@ -59,7 +63,7 @@ export default function ContactPage() {
 
             <div className="space-y-6">
               {contactMethods.map((method, index) => (
-                <AnimatedSection key={index} animation="fadeUp" delay={(index * 100) as 0 | 100}>
+                <AnimatedSection key={index} animation="fadeUp" delay={calcDelay(index, 2)}>
                   <a
                     href={method.link}
                     target="_blank"

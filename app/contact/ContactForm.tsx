@@ -11,8 +11,14 @@ export default function ContactForm() {
     e.preventDefault();
     setResult('전송 중...');
 
+    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+    if (!accessKey) {
+      setResult('폼 설정 오류: 관리자에게 문의하세요.');
+      return;
+    }
+
     const formData = new FormData(e.currentTarget);
-    formData.append('access_key', process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || '');
+    formData.append('access_key', accessKey);
 
     const response = await fetch('https://api.web3forms.com/submit', {
       method: 'POST',

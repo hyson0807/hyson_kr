@@ -19,6 +19,12 @@ className="flex items-center w-full px-4 py-2 bg-zinc-900 text-white rounded-lg 
 // 호버 효과 + 트랜지션 필수
 className="hover:opacity-90 transition-opacity"
 className="hover:bg-zinc-800 transition-colors"
+
+// 호버 규칙:
+// - 배경색 변경: transition-colors 사용
+// - 투명도 변경: transition-opacity 사용
+// - 복합 효과 (그림자 등): transition-all 사용
+// - CTA 버튼에는 focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 추가
 ```
 
 ## 스크롤 애니메이션 (AnimatedSection)
