@@ -9,6 +9,7 @@ export type ProgramPlatform = 'macos' | 'windows' | 'linux';
 export interface StoreLinks {
   appStore?: string;
   playStore?: string;
+  website?: string;
 }
 
 export interface App {

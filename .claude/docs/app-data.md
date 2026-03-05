@@ -3,7 +3,7 @@
 ## App 인터페이스
 ```typescript
 interface App {
-  id: string;              // URL hash용 (isolog, linkjob)
+  id: string;              // URL hash용 (isolog, linkjob, irubitteo)
   title: string;
   description: string;     // 짧은 설명
   longDescription?: string; // 상세 설명
@@ -12,7 +12,7 @@ interface App {
   platforms: Platform[];   // 'ios' | 'android' | 'web'
   projectType: ProjectType; // 'internal' | 'collaboration'
   image: string;
-  storeLinks: StoreLinks;
+  storeLinks: StoreLinks;  // appStore?, playStore?, website?
 }
 ```
 

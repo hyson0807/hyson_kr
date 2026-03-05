@@ -37,6 +37,36 @@ export const apps: App[] = [
       playStore: 'https://play.google.com/store/apps/details?id=com.welkit.kgency',
     },
   },
+  {
+    id: 'irubitteo',
+    title: '이루빛터',
+    description: '장애인 근로자와 기업을 매칭하는 웹 플랫폼',
+    longDescription:
+      '장애인 근로자와 기업을 연결하는 매칭 플랫폼입니다. 기업은 적합한 인재를 찾고, 장애인 근로자는 자신에게 맞는 일자리를 쉽게 탐색할 수 있습니다. 모두가 함께 성장하는 포용적 채용 환경을 만들어갑니다.',
+    tags: ['Web'],
+    status: 'released',
+    platforms: ['web'],
+    projectType: 'collaboration',
+    image: '/images/apps/irubitteo.png',
+    storeLinks: {
+      website: 'https://www.irubitteo.com',
+    },
+  },
+  {
+    id: 'youngcosmed',
+    title: 'Young Cosmed',
+    description: 'K-Beauty 의료미용 제품 B2B 플랫폼',
+    longDescription:
+      '한국 의료미용 제품을 글로벌 시장에 연결하는 B2B 플랫폼입니다. 필러, 스킨부스터 등 검증된 한국 제조사의 제품을 소개하고, 해외 바이어와의 직접 소통을 지원합니다.',
+    tags: ['Web'],
+    status: 'released',
+    platforms: ['web'],
+    projectType: 'collaboration',
+    image: '/images/apps/youngcosmed.png',
+    storeLinks: {
+      website: 'https://youngcosmed.com',
+    },
+  },
 ];
 
 export const getAppsByType = (type: ProjectType): App[] => {
