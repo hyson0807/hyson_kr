@@ -6,13 +6,13 @@ import ContactForm from './ContactForm';
 export const metadata: Metadata = {
   title: '문의하기',
   description:
-    '하이슨 워크에 앱 개발 문의, 협업 제안을 보내주세요. 빠른 시일 내에 답변드리겠습니다.',
+    'Hyson Works에 프로젝트 문의, 협업 제안을 보내주세요. 빠른 시일 내에 답변드리겠습니다.',
   alternates: {
     canonical: '/contact',
   },
   openGraph: {
     title: '문의하기 | Hyson Works',
-    description: '하이슨 워크에 앱 개발 문의, 협업 제안을 보내주세요.',
+    description: 'Hyson Works에 프로젝트 문의, 협업 제안을 보내주세요.',
   },
 };
 

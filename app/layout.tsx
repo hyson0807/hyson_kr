@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     template: '%s | Hyson Works',
   },
   description:
-    '하이슨 워크는 앱, 웹, 데스크톱 소프트웨어를 개발하는 1인 스튜디오입니다. iOS, Android, 웹을 아우르는 제품을 꾸준히, 더 나은 방향으로 만듭니다.',
+    'Hyson Works는 모바일 앱부터 웹 서비스, 데스크톱 프로그램까지 직접 기획하고 개발하는 1인 스튜디오입니다.',
   keywords: [
     '하이슨 워크',
     '하이슨',
@@ -56,13 +56,13 @@ export const metadata: Metadata = {
     siteName: 'Hyson Works - 하이슨 워크',
     title: 'Hyson Works - 하이슨 워크 | 앱 · 웹 · 소프트웨어 개발',
     description:
-      '하이슨 워크는 앱, 웹, 데스크톱 소프트웨어를 개발하는 1인 스튜디오입니다. 꾸준히, 더 나은 제품을 만듭니다.',
+      'Hyson Works는 모바일 앱부터 웹 서비스, 데스크톱 프로그램까지 직접 기획하고 개발하는 1인 스튜디오입니다.',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Hyson Works - 하이슨 워크 | 앱 · 웹 · 소프트웨어 개발',
     description:
-      '하이슨 워크는 앱, 웹, 데스크톱 소프트웨어를 개발하는 1인 스튜디오입니다. 꾸준히, 더 나은 제품을 만듭니다.',
+      'Hyson Works는 모바일 앱부터 웹 서비스, 데스크톱 프로그램까지 직접 기획하고 개발하는 1인 스튜디오입니다.',
   },
   robots: {
     index: true,
@@ -98,7 +98,7 @@ export default function RootLayout({
               alternateName: '하이슨 워크',
               url: 'https://hyson.kr',
               description:
-                '하이슨 워크는 앱, 웹, 데스크톱 소프트웨어를 개발하는 1인 스튜디오입니다. 꾸준히, 더 나은 제품을 만듭니다.',
+                'Hyson Works는 모바일 앱부터 웹 서비스, 데스크톱 프로그램까지 직접 기획하고 개발하는 1인 스튜디오입니다.',
               email: 'contact@hyson.kr',
               sameAs: ['https://github.com/hyson0807'],
             }),
