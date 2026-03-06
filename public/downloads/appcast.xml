@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Hymo Updates</title>
+    <link>https://hyson.kr/downloads/appcast.xml</link>
+    <description>Hymo app updates</description>
+    <language>ko</language>
+    <item>
+      <title>Version 1.2</title>
+      <sparkle:version>3</sparkle:version>
+      <sparkle:shortVersionString>1.2</sparkle:shortVersionString>
+      <pubDate>Thu, 06 Mar 2026 00:00:00 +0900</pubDate>
+      <enclosure
+        url="https://hyson.kr/downloads/hymo_app.dmg"
+        sparkle:edSignature="Y6XsiohL61+s7Xx01V7KM3u2Rmi+6sOZZW31Qm+k5UtAtXsv4eMff1IKHQP5fd+fLAWbv0oyHkRUygLeCIvjAw=="
+        length="1687908"
+        type="application/octet-stream"
+      />
+    </item>
+  </channel>
+</rss>

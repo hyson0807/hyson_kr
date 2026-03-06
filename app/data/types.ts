@@ -34,4 +34,5 @@ export interface Program {
   downloadPath?: string;
   status: ProgramStatus;
   tags: string[];
+  image?: string;
 }

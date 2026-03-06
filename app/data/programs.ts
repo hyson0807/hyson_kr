@@ -11,6 +11,7 @@ export const programs: Program[] = [
     downloadPath: '/downloads/hymo_app.dmg',
     status: 'available',
     tags: ['macOS', 'SwiftUI', 'Memo'],
+    image: '/images/apps/hymo.png',
   },
 ];
 

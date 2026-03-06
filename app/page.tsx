@@ -105,9 +105,16 @@ export default function Home() {
                   className="bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-lg p-6 hover:bg-gray-100 dark:hover:bg-zinc-800 transition-all hover:shadow-lg cursor-pointer block h-full"
                 >
                   <div className="relative w-full aspect-[4/3] rounded-lg mb-4 overflow-hidden">
-                    {isProgram(project) ? (
+                    {isProgram(project) && project.image ? (
+                      <Image
+                        src={project.image}
+                        alt={project.name}
+                        fill
+                        className="object-contain"
+                      />
+                    ) : isProgram(project) ? (
                       <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-100 dark:from-zinc-800 dark:to-zinc-900">
-                        <span className="text-lg font-semibold text-blue-700 dark:text-blue-300">Hymo</span>
+                        <span className="text-lg font-semibold text-blue-700 dark:text-blue-300">{project.name}</span>
                       </div>
                     ) : (
                       <Image

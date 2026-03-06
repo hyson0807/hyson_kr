@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Image from 'next/image';
 import { getAvailablePrograms, Program } from '../data';
 import { AnimatedSection } from '../components/AnimatedSection';
 import { calcDelay } from '../components/animation-utils';
@@ -46,6 +47,9 @@ function ProgramCard({ program }: { program: Program }) {
   return (
     <article className="bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-lg p-8 hover:shadow-xl transition-all">
       <div className="flex flex-wrap items-center gap-3 mb-4">
+        {program.image && (
+          <Image src={program.image} alt={program.name} width={48} height={48} className="rounded-lg" />
+        )}
         <h2 className="text-3xl font-bold">{program.name}</h2>
         <span className="px-3 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-sm font-medium rounded-full">
           {platformLabel[program.platform]}
