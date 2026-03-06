@@ -11,9 +11,9 @@
       <sparkle:shortVersionString>1.3</sparkle:shortVersionString>
       <pubDate>Thu, 06 Mar 2026 00:00:00 +0900</pubDate>
       <enclosure
-        url="https://hyson.kr/downloads/hymo_app.dmg"
-        sparkle:edSignature="prCsPxt6GA+VVqv44FdGZvrfCakzygpqKb7lJ1v+P7NqY4DaU2OzqgN7n4ETp8vL/VSB7JRVfliSVEoDHLCtAg=="
-        length="1695801"
+        url="https://hyson.kr/downloads/hymo_update.zip"
+        sparkle:edSignature="P1jtcM7N92lZ2TXf/PjmfU9O0U9bmjeGPpxmgR8GC6nLQU9+Ef3/QK40OBrtYamGcQP0iN+0rpncsib1xYllAQ=="
+        length="1384913"
         type="application/octet-stream"
       />
     </item>
