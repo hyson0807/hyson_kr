@@ -6,11 +6,11 @@
         <description>Hymo app updates</description>
         <language>ko</language>
         <item>
-            <title>Version 1.5</title>
-            <sparkle:version>6</sparkle:version>
-            <sparkle:shortVersionString>1.5</sparkle:shortVersionString>
+            <title>Version 1.4</title>
+            <sparkle:version>5</sparkle:version>
+            <sparkle:shortVersionString>1.4</sparkle:shortVersionString>
             <pubDate>Sat, 07 Mar 2026 00:00:00 +0900</pubDate>
-            <enclosure url="https://hyson.kr/downloads/hymo_update.zip" length="1432736" type="application/octet-stream" sparkle:edSignature="S7ZMmjPL+ON1JEgy7CeLNwdBcSs8l/vOShD78o9Aa8oyDdLlNmoNc3M4I5+CAnJINgDT/JiTbD0SO5OEN4lXDw=="/>
+            <enclosure url="https://hyson.kr/downloads/hymo_update.zip" length="1384414" type="application/octet-stream" sparkle:edSignature="1yEPAlVv2y/Y5FDL1ztmhsoTKA/tXkZrVxR48kKhrJsGrcmYeRc26o8PAG8j6uBM+OHe8YH2QFanZ6situVPCw=="/>
             <sparkle:minimumSystemVersion>15.7</sparkle:minimumSystemVersion>
         </item>
     </channel>
