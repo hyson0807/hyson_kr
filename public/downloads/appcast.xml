@@ -7,7 +7,7 @@
         <language>ko</language>
         <item>
             <title>Version 1.6</title>
-            <sparkle:version>8</sparkle:version>
+            <sparkle:version>7</sparkle:version>
             <sparkle:shortVersionString>1.6</sparkle:shortVersionString>
             <pubDate>Sat, 07 Mar 2026 01:00:00 +0900</pubDate>
             <enclosure url="https://hyson.kr/downloads/hymo_update.zip" length="1383904" type="application/octet-stream" sparkle:edSignature="FziOizl5u2tQZoYaTLSy+roek3Dh6EruCwz61jkB3u/A/4Yt/dw+0prEoGnEsPASsVDQHt97JMAFydP3axK8Ag=="/>
