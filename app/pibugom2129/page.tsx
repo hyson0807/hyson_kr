@@ -132,13 +132,19 @@ export default function PibugomAdminPage() {
 
   const updateStatus = async (reportId: string, status: "resolved" | "dismissed") => {
     try {
+      const body: Record<string, string> = { id: reportId, status };
+      if (status === "resolved" && selectedReport) {
+        body.targetType = selectedReport.targetType;
+        body.targetId = selectedReport.targetId;
+      }
+
       const res = await fetch("/api/pibugom/reports", {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${password}`,
         },
-        body: JSON.stringify({ id: reportId, status }),
+        body: JSON.stringify(body),
       });
 
       if (!res.ok) {
@@ -155,6 +161,33 @@ export default function PibugomAdminPage() {
     } catch (err) {
       console.error("상태 변경 실패:", err);
       alert("상태 변경 실패");
+    }
+  };
+
+  const blacklistUser = async (userId: string) => {
+    try {
+      const res = await fetch("/api/pibugom/reports/blacklist", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${password}`,
+        },
+        body: JSON.stringify({ userId }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        alert(data.error || `블랙리스트 처리 실패 (${res.status})`);
+        return;
+      }
+
+      alert("블랙리스트 처리가 완료되었습니다.");
+      if (selectedReport) {
+        fetchContent(selectedReport.targetType, selectedReport.targetId);
+      }
+    } catch (err) {
+      console.error("블랙리스트 처리 실패:", err);
+      alert("블랙리스트 처리 실패");
     }
   };
 
@@ -447,10 +480,13 @@ export default function PibugomAdminPage() {
               {selectedReport.status === "pending" && (
                 <div className="flex items-center gap-3">
                   <button
-                    onClick={() => updateStatus(selectedReport.id, "resolved")}
+                    onClick={() => {
+                      if (!confirm("신고된 콘텐츠가 삭제됩니다. 처리하시겠습니까?")) return;
+                      updateStatus(selectedReport.id, "resolved");
+                    }}
                     className="px-6 py-2.5 text-sm bg-green-600 text-white rounded-lg hover:bg-green-500 transition-colors font-medium"
                   >
-                    처리 완료
+                    처리 완료 (삭제)
                   </button>
                   <button
                     onClick={() => updateStatus(selectedReport.id, "dismissed")}
@@ -458,6 +494,17 @@ export default function PibugomAdminPage() {
                   >
                     기각
                   </button>
+                  {reportedContent && (
+                    <button
+                      onClick={() => {
+                        if (!confirm(`작성자 "${reportedContent.authorNickname ?? "익명"}"을(를) 블랙리스트 처리하시겠습니까?\n계정이 비활성화되고 모든 개인정보가 삭제됩니다.`)) return;
+                        blacklistUser(reportedContent.authorId);
+                      }}
+                      className="px-6 py-2.5 text-sm bg-red-600 text-white rounded-lg hover:bg-red-500 transition-colors font-medium"
+                    >
+                      블랙리스트
+                    </button>
+                  )}
                 </div>
               )}
             </div>

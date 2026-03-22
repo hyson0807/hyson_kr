@@ -31,12 +31,22 @@ export async function PATCH(request: Request) {
   if (authError) return authError;
 
   try {
-    const { id, status } = await request.json();
+    const { id, status, targetType, targetId } = await request.json();
     if (!id || !["resolved", "dismissed"].includes(status)) {
       return NextResponse.json({ error: "Invalid request" }, { status: 400 });
     }
 
     const sql = getDb();
+
+    // 처리 완료 시 콘텐츠 삭제
+    if (status === "resolved" && targetType && targetId) {
+      if (targetType === "question") {
+        await sql`DELETE FROM question WHERE id = ${targetId}`;
+      } else if (targetType === "answer") {
+        await sql`UPDATE answer SET deleted_at = NOW() WHERE id = ${targetId} AND deleted_at IS NULL`;
+      }
+    }
+
     const result = await sql`
       UPDATE report SET status = ${status}, updated_at = NOW()
       WHERE id = ${id}
