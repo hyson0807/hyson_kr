@@ -19,6 +19,22 @@ export const apps: App[] = [
       playStore: 'https://play.google.com/store/apps/details?id=com.hyson.isoLog'
     },
   },
+  {
+    id: 'pibugom',
+    title: '피부곰',
+    description: '피부 고민 커뮤니티',
+    longDescription:
+      '피부 고민을 익명으로 나누고, 서로 답변해주는 커뮤니티 앱입니다. 나이, 성별, 피부 고민별로 맞춤 질문을 찾아보고, 경험을 공유할 수 있습니다.',
+    tags: ['React Native', 'NestJS'],
+    status: 'released',
+    platforms: ['ios', 'android'],
+    projectType: 'internal',
+    image: '/images/apps/pibugom.png',
+    storeLinks: {
+      appStore:
+        'https://apps.apple.com/kr/app/%ED%94%BC%EB%B6%80%EA%B3%B0-%ED%94%BC%EB%B6%80-%EA%B3%A0%EB%AF%BC-%EC%BB%A4%EB%AE%A4%EB%8B%88%ED%8B%B0/id6760972457',
+    },
+  },
   // 협업 프로젝트
   {
     id: 'linkjob',
