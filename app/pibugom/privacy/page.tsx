@@ -20,7 +20,7 @@ export default function PrivacyPage() {
             개인정보처리방침
           </h1>
           <p className="text-lg text-gray-500 dark:text-gray-500 mb-12">
-            피부곰 · 시행일: 2026년 3월 22일
+            피부곰 · 시행일: 2026년 4월 2일
           </p>
         </AnimatedSection>
 
@@ -59,10 +59,15 @@ export default function PrivacyPage() {
                     <td className="py-3 pr-4">생년월, 성별</td>
                     <td className="py-3">온보딩 시 입력</td>
                   </tr>
-                  <tr>
+                  <tr className="border-b border-zinc-800/50">
                     <td className="py-3 pr-4">선택</td>
                     <td className="py-3 pr-4">피부 고민 카테고리</td>
                     <td className="py-3">온보딩 시 선택</td>
+                  </tr>
+                  <tr>
+                    <td className="py-3 pr-4">서비스 이용</td>
+                    <td className="py-3 pr-4">채팅 메시지 내용, 채팅방 참여·퇴장 기록</td>
+                    <td className="py-3">채팅 서비스 이용 시 자동 생성</td>
                   </tr>
                 </tbody>
               </table>
@@ -75,6 +80,7 @@ export default function PrivacyPage() {
               <li>회원 식별 및 가입 의사 확인</li>
               <li>서비스 제공 및 맞춤형 콘텐츠 추천</li>
               <li>서비스 개선 및 신규 기능 개발</li>
+              <li>채팅 서비스 제공 및 부적절한 콘텐츠 방지</li>
               <li>부정 이용 방지 및 서비스 운영</li>
               <li>이용자 문의 및 불만 처리</li>
             </ul>
@@ -115,6 +121,7 @@ export default function PrivacyPage() {
               <li>회원 탈퇴 요청 시 개인정보는 즉시 파기됩니다.</li>
               <li>전자적 파일 형태의 정보는 복구 불가능한 방법으로 삭제합니다.</li>
               <li>탈퇴 후 작성한 게시물은 익명으로 유지되며, 개인정보와의 연결은 해제됩니다.</li>
+              <li>채팅 메시지는 회원 탈퇴 시 발신자 정보가 삭제되며, 채팅방 운영을 위해 메시지 내용은 익명으로 보관될 수 있습니다.</li>
             </ul>
           </AnimatedSection>
 
