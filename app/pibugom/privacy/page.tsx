@@ -20,7 +20,7 @@ export default function PrivacyPage() {
             개인정보처리방침
           </h1>
           <p className="text-lg text-gray-500 dark:text-gray-500 mb-12">
-            피부곰 · 시행일: 2026년 4월 2일
+            피부곰 · 시행일: 2026년 4월 3일
           </p>
         </AnimatedSection>
 
@@ -64,10 +64,15 @@ export default function PrivacyPage() {
                     <td className="py-3 pr-4">피부 고민 카테고리</td>
                     <td className="py-3">온보딩 시 선택</td>
                   </tr>
-                  <tr>
+                  <tr className="border-b border-zinc-800/50">
                     <td className="py-3 pr-4">서비스 이용</td>
                     <td className="py-3 pr-4">채팅 메시지 내용, 채팅방 참여·퇴장 기록</td>
                     <td className="py-3">채팅 서비스 이용 시 자동 생성</td>
+                  </tr>
+                  <tr>
+                    <td className="py-3 pr-4">서비스 이용</td>
+                    <td className="py-3 pr-4">광고 노출·클릭 기록</td>
+                    <td className="py-3">광고 배너 이용 시 자동 생성</td>
                   </tr>
                 </tbody>
               </table>
@@ -81,6 +86,7 @@ export default function PrivacyPage() {
               <li>서비스 제공 및 맞춤형 콘텐츠 추천</li>
               <li>서비스 개선 및 신규 기능 개발</li>
               <li>채팅 서비스 제공 및 부적절한 콘텐츠 방지</li>
+              <li>광고 제공 및 광고 성과 측정</li>
               <li>부정 이용 방지 및 서비스 운영</li>
               <li>이용자 문의 및 불만 처리</li>
             </ul>
@@ -113,6 +119,12 @@ export default function PrivacyPage() {
               <li>이용자가 사전에 동의한 경우</li>
               <li>법령에 의하여 요구되는 경우</li>
             </ul>
+            <p className="mt-4">
+              서비스 내 광고 배너를 통해 외부 광고주의 콘텐츠가 노출될 수 있으며,
+              광고 클릭 시 해당 광고주의 페이지로 이동합니다. 이 경우 광고주의
+              개인정보처리방침이 적용되며, 회사는 광고주에게 이용자의 개인정보를
+              직접 제공하지 않습니다.
+            </p>
           </AnimatedSection>
 
           <AnimatedSection animation="fadeUp" delay={500}>
