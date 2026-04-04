@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { AnimatedSection } from '../../../components/AnimatedSection';
+import { AnimatedSection } from '../../components/AnimatedSection';
 
 export const metadata: Metadata = {
   title: '계정 삭제 안내 - 피부곰',
