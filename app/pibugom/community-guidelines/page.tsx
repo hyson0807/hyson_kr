@@ -75,6 +75,12 @@ export default function CommunityGuidelinesPage() {
                 <strong className="text-gray-300">도용 및 사칭</strong> — 타인의 콘텐츠를 무단으로 사용하거나,
                 다른 사용자를 사칭하는 행위
               </li>
+              <li>
+                <strong className="text-gray-300">아동 성적 학대 및 착취(CSAE)</strong> — 아동을 성적으로 착취하거나
+                학대하는 콘텐츠, 아동의 신체를 성적으로 묘사하는 콘텐츠, 아동과의 부적절한 접촉을
+                조장하는 행위는 엄격히 금지됩니다. 해당 콘텐츠 발견 시 즉시 삭제 및 계정 영구 정지
+                조치를 취하며, 관련 법률에 따라 수사기관에 신고합니다.
+              </li>
             </ul>
           </AnimatedSection>
 
