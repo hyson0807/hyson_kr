@@ -76,7 +76,7 @@ export default function GgumteulMathPage() {
           aria-disabled="true"
         >
           <AppleIcon />
-          App Store 출시 준비 중
+          App Store 곧 출시 예정
         </span>
 
         <p className="mt-4 text-xs" style={{ color: '#555555' }}>
@@ -118,10 +118,137 @@ export default function GgumteulMathPage() {
         ))}
       </div>
 
+      <section
+        id="support"
+        className="mt-20 w-full max-w-2xl"
+        aria-labelledby="support-heading"
+      >
+        <div
+          className="rounded-2xl p-8"
+          style={{ backgroundColor: '#1A1A1A', border: '1px solid #2A2A2A' }}
+        >
+          <h2
+            id="support-heading"
+            className="text-2xl font-bold mb-2 text-center"
+            style={{ color: '#F0F0F0' }}
+          >
+            고객 지원
+          </h2>
+          <p
+            className="text-sm text-center mb-6"
+            style={{ color: '#8A8A8A' }}
+          >
+            앱 사용 중 궁금한 점이나 문제가 있으시면 언제든 연락 주세요.
+          </p>
+
+          <div
+            className="rounded-xl p-5 mb-4"
+            style={{ backgroundColor: '#0F0F0F', border: '1px solid #2A2A2A' }}
+          >
+            <p className="text-xs mb-1" style={{ color: '#8A8A8A' }}>
+              이메일 문의
+            </p>
+            <a
+              href="mailto:contact@hyson.kr?subject=%5B%EA%BF%88%ED%8B%80%EB%A7%A4%EC%93%B0%5D%20%EB%AC%B8%EC%9D%98"
+              className="text-lg font-semibold hover:underline"
+              style={{ color: '#C8956C' }}
+            >
+              contact@hyson.kr
+            </a>
+            <p className="mt-2 text-xs" style={{ color: '#8A8A8A' }}>
+              영업일 기준 1~2일 이내에 답변드립니다 (한국 시간 기준).
+            </p>
+          </div>
+
+          <p
+            className="text-xs text-center"
+            style={{ color: '#555555' }}
+          >
+            계정 삭제는{' '}
+            <Link
+              href="/ggumteul-math/delete-account"
+              className="hover:underline"
+              style={{ color: '#8A8A8A' }}
+            >
+              계정 삭제 안내
+            </Link>{' '}
+            페이지에서 직접 진행하실 수 있습니다.
+          </p>
+        </div>
+      </section>
+
+      <section
+        className="mt-12 w-full max-w-2xl"
+        aria-labelledby="faq-heading"
+      >
+        <h2
+          id="faq-heading"
+          className="text-2xl font-bold mb-6 text-center"
+          style={{ color: '#F0F0F0' }}
+        >
+          자주 묻는 질문
+        </h2>
+
+        <div className="space-y-3">
+          {[
+            {
+              q: '코인은 어떻게 모으나요?',
+              a: '수학 문제를 맞히면 코인을 받을 수 있습니다. 정답 1개당 기본 10코인이 지급되며, 문제 난이도와 풀이 속도에 따라 추가 보너스 코인이 더해집니다. 별도의 결제나 충전은 없습니다.',
+            },
+            {
+              q: '코인은 어디에 사용하나요?',
+              a: '상점에서 지렁이 캐릭터를 꾸미는 모자, 옷, 액세서리 같은 꾸미기 아이템을 구매할 때 사용합니다. 코인은 게임 내 보상이며, 현금으로 환전하거나 다른 용도로 사용할 수 없습니다.',
+            },
+            {
+              q: '학습 진도는 어떻게 구성되어 있나요?',
+              a: '초등학교 1학년 1학기부터 3학년 2학기까지 총 6단계 학기 진도로 구성되어 있습니다. 각 단계의 모든 노드를 클리어하면 다음 학기로 진급합니다.',
+            },
+            {
+              q: '계정을 삭제하고 싶어요.',
+              a: '앱 내 [프로필 → 설정 → 계정 삭제] 메뉴에서 직접 삭제할 수 있으며, 위의 “계정 삭제 안내” 페이지에서도 절차를 확인할 수 있습니다. 삭제 시 모든 학습 기록과 코인이 영구적으로 삭제됩니다.',
+            },
+            {
+              q: '비밀번호를 잊어버렸어요. / 로그인이 안 돼요.',
+              a: 'contact@hyson.kr 으로 가입하신 이메일 주소와 함께 문의 주시면 도와드리겠습니다.',
+            },
+          ].map((item) => (
+            <details
+              key={item.q}
+              className="group rounded-xl p-4"
+              style={{ backgroundColor: '#1A1A1A', border: '1px solid #2A2A2A' }}
+            >
+              <summary
+                className="cursor-pointer font-semibold text-sm flex justify-between items-center list-none"
+                style={{ color: '#F0F0F0' }}
+              >
+                <span>{item.q}</span>
+                <span
+                  className="ml-3 transition-transform group-open:rotate-45 text-lg"
+                  style={{ color: '#C8956C' }}
+                  aria-hidden="true"
+                >
+                  +
+                </span>
+              </summary>
+              <p
+                className="mt-3 text-sm leading-relaxed"
+                style={{ color: '#8A8A8A' }}
+              >
+                {item.a}
+              </p>
+            </details>
+          ))}
+        </div>
+      </section>
+
       <div
         className="mt-16 flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs"
         style={{ color: '#555555' }}
       >
+        <a href="#support" className="hover:underline">
+          고객 지원
+        </a>
+        <span>·</span>
         <Link href="/ggumteul-math/terms" className="hover:underline">
           이용약관
         </Link>
