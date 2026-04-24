@@ -35,6 +35,19 @@ export const apps: App[] = [
         'https://apps.apple.com/kr/app/%ED%94%BC%EB%B6%80%EA%B3%B0-%ED%94%BC%EB%B6%80-%EA%B3%A0%EB%AF%BC-%EC%BB%A4%EB%AE%A4%EB%8B%88%ED%8B%B0/id6760972457',
     },
   },
+  {
+    id: 'ggumteul-math',
+    title: '꿈틀매쓰',
+    description: '초등 1~3학년 수학 게이미피케이션',
+    longDescription:
+      '문제를 풀어 코인과 별을 모으고, 지렁이를 키우고, 마을을 꾸미는 초등 저학년 수학 학습 앱입니다. 학년·학기별 커리큘럼에 맞춰 단계별로 진도를 나가고, 자율 학습 동기를 높입니다.',
+    tags: ['React Native', 'NestJS'],
+    status: 'coming_soon',
+    platforms: ['ios'],
+    projectType: 'internal',
+    image: '/images/apps/ggumteul-math.png',
+    storeLinks: {},
+  },
   // 협업 프로젝트
   {
     id: 'linkjob',
