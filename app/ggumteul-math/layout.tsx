@@ -45,16 +45,18 @@ export default function GgumteulMathLayout({
           </span>
         </a>
 
-        <span
-          className="px-4 py-1.5 rounded-full text-xs font-semibold cursor-not-allowed"
+        <a
+          href="https://apps.apple.com/kr/app/%EA%BF%88%ED%8B%80%EB%A7%A4%EC%93%B0-%EC%B4%88%EB%93%B1-%EC%88%98%ED%95%99%ED%95%99%EC%8A%B5-%ED%94%8C%EB%9E%AB%ED%8F%BC/id6763516927"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="px-4 py-1.5 rounded-full text-xs font-semibold transition-opacity hover:opacity-90"
           style={{
-            backgroundColor: '#3A3A3A',
-            color: '#9A9A9A',
+            background: 'linear-gradient(135deg, #C8956C, #A0522D)',
+            color: '#FFFFFF',
           }}
-          aria-disabled="true"
         >
-          App Store 준비 중
-        </span>
+          App Store
+        </a>
       </header>
 
       <div className="pt-14">{children}</div>
