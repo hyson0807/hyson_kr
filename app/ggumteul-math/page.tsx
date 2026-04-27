@@ -2,6 +2,9 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 
+const APP_STORE_URL =
+  'https://apps.apple.com/kr/app/%EA%BF%88%ED%8B%80%EB%A7%A4%EC%93%B0-%EC%B4%88%EB%93%B1-%EC%88%98%ED%95%99%ED%95%99%EC%8A%B5-%ED%94%8C%EB%9E%AB%ED%8F%BC/id6763516927';
+
 export const metadata: Metadata = {
   title: '꿈틀매쓰 - 초등 저학년 수학 게이미피케이션',
   description:
@@ -66,21 +69,22 @@ export default function GgumteulMathPage() {
           나만의 마을을 꾸며보세요.
         </p>
 
-        <span
-          className="inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl font-semibold text-base cursor-not-allowed"
+        <a
+          href={APP_STORE_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl font-semibold text-base transition-opacity hover:opacity-90"
           style={{
             background: 'linear-gradient(135deg, #C8956C, #A0522D)',
             color: '#FFFFFF',
-            opacity: 0.55,
           }}
-          aria-disabled="true"
         >
           <AppleIcon />
-          App Store 곧 출시 예정
-        </span>
+          App Store에서 다운로드
+        </a>
 
         <p className="mt-4 text-xs" style={{ color: '#555555' }}>
-          곧 만나요!
+          iOS · 무료
         </p>
       </div>
 

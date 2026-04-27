@@ -42,11 +42,14 @@ export const apps: App[] = [
     longDescription:
       '문제를 풀어 코인과 별을 모으고, 지렁이를 키우고, 마을을 꾸미는 초등 저학년 수학 학습 앱입니다. 학년·학기별 커리큘럼에 맞춰 단계별로 진도를 나가고, 자율 학습 동기를 높입니다.',
     tags: ['React Native', 'NestJS'],
-    status: 'coming_soon',
+    status: 'released',
     platforms: ['ios'],
     projectType: 'internal',
     image: '/images/apps/ggumteul-math.png',
-    storeLinks: {},
+    storeLinks: {
+      appStore:
+        'https://apps.apple.com/kr/app/%EA%BF%88%ED%8B%80%EB%A7%A4%EC%93%B0-%EC%B4%88%EB%93%B1-%EC%88%98%ED%95%99%ED%95%99%EC%8A%B5-%ED%94%8C%EB%9E%AB%ED%8F%BC/id6763516927',
+    },
   },
   // 협업 프로젝트
   {
