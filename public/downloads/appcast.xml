@@ -6,11 +6,17 @@
         <description>Hymo app updates</description>
         <language>ko</language>
         <item>
-            <title>Version 1.6</title>
-            <sparkle:version>7</sparkle:version>
-            <sparkle:shortVersionString>1.6</sparkle:shortVersionString>
-            <pubDate>Sat, 07 Mar 2026 01:00:00 +0900</pubDate>
-            <enclosure url="https://hyson.kr/downloads/hymo_update.zip" length="1383904" type="application/octet-stream" sparkle:edSignature="FziOizl5u2tQZoYaTLSy+roek3Dh6EruCwz61jkB3u/A/4Yt/dw+0prEoGnEsPASsVDQHt97JMAFydP3axK8Ag=="/>
+            <title>Version 1.7</title>
+            <description><![CDATA[
+                <ul>
+                    <li>창을 드래그로 이동할 수 있고, 바깥을 클릭해도 닫히지 않습니다.</li>
+                    <li>Server 탭 추가 — 실행 중인 로컬 dev 서버를 보고 Kill / Pause 할 수 있습니다.</li>
+                </ul>
+            ]]></description>
+            <sparkle:version>8</sparkle:version>
+            <sparkle:shortVersionString>1.7</sparkle:shortVersionString>
+            <pubDate>Sat, 30 May 2026 15:18:04 +0900</pubDate>
+            <enclosure url="https://hyson.kr/downloads/hymo_update.zip" length="1424000" type="application/octet-stream" sparkle:edSignature="JEjvihnmhjDBuKeVw61ujdNhmfwjR0vbDSbyNGYqbeK3iHpc769HSPqywyo2nuFr6aqEfC1TzpUmBiI/JCb4Dw=="/>
             <sparkle:minimumSystemVersion>15.7</sparkle:minimumSystemVersion>
         </item>
     </channel>
