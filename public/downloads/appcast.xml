@@ -6,13 +6,13 @@
         <description>Hymo app updates</description>
         <language>ko</language>
         <item>
-            <title>Version 1.8</title>
-            <description><![CDATA[<ul><li>Chat 탭 추가 · 메모 높이 조절 시 창 이동 버그 수정 · 안정성 개선</li></ul>]]></description>
-            <sparkle:version>9</sparkle:version>
-            <sparkle:shortVersionString>1.8</sparkle:shortVersionString>
-            <pubDate>Thu, 04 Jun 2026 01:02:55 +0900</pubDate>
-            <enclosure url="https://hyson.kr/downloads/hymo_update.zip" length="1572370" type="application/octet-stream" sparkle:edSignature="CHYdzSFh7N+lLQfVoQFPngN+CaTfA/msyH/A12U+nEVslMl9ufeMYPYMmW0TcVtOmCryf9gUa0irQbjFVc95CA=="/>
-            <sparkle:minimumSystemVersion>15.7</sparkle:minimumSystemVersion>
+            <title>Version 1.9</title>
+            <description><![CDATA[<ul><li>macOS 14(Sonoma) 이상 지원 — 낮은 버전 맥에서 설치되지 않던 문제 해결</li></ul>]]></description>
+            <sparkle:version>10</sparkle:version>
+            <sparkle:shortVersionString>1.9</sparkle:shortVersionString>
+            <pubDate>Thu, 04 Jun 2026 01:11:29 +0900</pubDate>
+            <enclosure url="https://hyson.kr/downloads/hymo_update.zip" length="1572601" type="application/octet-stream" sparkle:edSignature="pHy1UOPhA+hFmxghP67w9NEllHpoYxBUjDJP4vab0A6XOzgE61AzH2Fl7pxGmHvZVhmAIaWkYFvJo0qv/bStCw=="/>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
         </item>
     </channel>
 </rss>
