@@ -101,7 +101,19 @@ function AppCard({ app, showCollabBadge = false }: { app: App; showCollabBadge?:
       <div className="grid md:grid-cols-2">
         {/* 앱 썸네일 */}
         <div className="relative aspect-[4/3] md:aspect-auto md:h-80">
-          <Image src={app.image} alt={app.title} fill className="object-contain" />
+          {app.storeLinks.website ? (
+            <a
+              href={app.storeLinks.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${app.title} 웹사이트 열기`}
+              className="block w-full h-full transition-opacity hover:opacity-90"
+            >
+              <Image src={app.image} alt={app.title} fill className="object-contain" />
+            </a>
+          ) : (
+            <Image src={app.image} alt={app.title} fill className="object-contain" />
+          )}
         </div>
 
         {/* 앱 정보 */}
