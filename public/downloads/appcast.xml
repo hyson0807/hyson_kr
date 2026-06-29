@@ -6,12 +6,12 @@
         <description>Hymo app updates</description>
         <language>ko</language>
         <item>
-            <title>Version 1.9</title>
-            <description><![CDATA[<ul><li>macOS 공증 적용 — 다른 맥에서 '확인되지 않은 개발자' 경고 없이 설치</li></ul>]]></description>
-            <sparkle:version>10</sparkle:version>
-            <sparkle:shortVersionString>1.9</sparkle:shortVersionString>
-            <pubDate>Thu, 04 Jun 2026 01:26:00 +0900</pubDate>
-            <enclosure url="https://hyson.kr/downloads/hymo_update.zip" length="1700469" type="application/octet-stream" sparkle:edSignature="veLXYd4JUlhFGFkaaDFKwcz9kN48T9VVunAD4Cnpny/K9EZEZ5weBfBj2zuAIocJtmOD4BGgrSMwVP7aYpktAQ=="/>
+            <title>Version 1.10</title>
+            <description><![CDATA[<ul><li>채팅 서버 이전(AWS Lightsail) — 채팅 연결 안정화</li></ul>]]></description>
+            <sparkle:version>11</sparkle:version>
+            <sparkle:shortVersionString>1.10</sparkle:shortVersionString>
+            <pubDate>Mon, 29 Jun 2026 14:17:20 +0900</pubDate>
+            <enclosure url="https://hyson.kr/downloads/hymo_update.zip" length="1699141" type="application/octet-stream" sparkle:edSignature="rk69PifxFj9bSlin37fB60S8/yZGjVWfNNOfrsT77QIPl/yfivhAWUndT+GOuXu27FwsMXBfGgB+VdfjfQ4EAQ=="/>
             <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
         </item>
     </channel>
