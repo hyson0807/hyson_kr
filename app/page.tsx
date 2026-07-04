@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { getReleasedApps, getAvailablePrograms, App, Program } from './data';
 import { AnimatedSection } from './components/AnimatedSection';
+import { HeroSection } from './components/HeroSection';
 import { calcDelay } from './components/animation-utils';
 
 const focusRing = "focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-zinc-950";
@@ -16,43 +17,7 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="min-h-screen flex items-start px-6 pt-16 md:px-12 md:pt-30 lg:px-24 lg:pt-52">
-        <div className="w-full max-w-6xl mx-auto">
-          <AnimatedSection animation="fadeIn" duration={700}>
-            <h1 className="text-6xl md:text-8xl font-bold mb-6 text-blue-600 dark:text-blue-400">
-              Hyson Works
-            </h1>
-          </AnimatedSection>
-          <AnimatedSection animation="fadeUp" delay={100}>
-            <p className="text-2xl md:text-3xl text-gray-600 dark:text-gray-400 mb-8">
-              꾸준히, 더 나은 제품을 만듭니다
-            </p>
-          </AnimatedSection>
-          <AnimatedSection animation="fadeUp" delay={200}>
-            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-12 max-w-2xl">
-              좋은 앱은 설명이 필요 없습니다.
-              <br />
-              iOS, Android, 웹을 아우르는 제품을 만드는 1인 개발 스튜디오입니다.
-            </p>
-          </AnimatedSection>
-          <AnimatedSection animation="fadeUp" delay={300}>
-            <div className="flex gap-4 flex-wrap">
-              <Link
-                href="/projects"
-                className={`px-8 py-4 bg-blue-600 text-white rounded-lg font-medium hover:opacity-90 transition-opacity ${focusRing}`}
-              >
-                프로젝트 둘러보기
-              </Link>
-              <Link
-                href="/contact"
-                className={`px-8 py-4 border-2 border-gray-200 dark:border-zinc-800 rounded-lg font-medium hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors ${focusRing}`}
-              >
-                문의하기
-              </Link>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
+      <HeroSection />
 
       {/* About Preview Section */}
       <section className="py-24 px-6 md:px-12 lg:px-24 border-t border-gray-200 dark:border-zinc-800">

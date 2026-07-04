@@ -16,6 +16,7 @@ export default function GgumteulMathLayout({
             .min-h-screen > header,
             .min-h-screen > div[class*="lg:block"] { display: none !important; }
             .min-h-screen > main { margin-left: 0 !important; padding-top: 0 !important; }
+            .site-bg-grid { display: none !important; }
           `,
         }}
       />

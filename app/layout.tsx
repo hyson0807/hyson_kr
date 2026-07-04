@@ -104,7 +104,13 @@ export default function RootLayout({
             }),
           }}
         />
-        <div className={`min-h-screen ${currentTheme.bg} ${currentTheme.text}`}>
+        <div className={`relative min-h-screen ${currentTheme.bg} ${currentTheme.text}`}>
+          {/* 전역 격자 배경 */}
+          <div
+            aria-hidden
+            className="site-bg-grid pointer-events-none fixed inset-0 z-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"
+          />
+
           {/* 사이드바 (데스크톱) */}
           <Sidebar theme={currentTheme} />
 
@@ -112,7 +118,7 @@ export default function RootLayout({
           <MobileHeader theme={currentTheme} />
 
           {/* 메인 콘텐츠 */}
-          <main className="lg:ml-20 pt-16 lg:pt-0">{children}</main>
+          <main className="relative z-10 lg:ml-20 pt-16 lg:pt-0">{children}</main>
         </div>
       </body>
     </html>
