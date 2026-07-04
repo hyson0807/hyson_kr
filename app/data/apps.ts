@@ -118,3 +118,9 @@ export const getAppById = (id: string): App | undefined => {
 export const getReleasedApps = (): App[] => {
   return apps.filter((app) => app.status === 'released');
 };
+
+export type AppCategory = 'app' | 'website';
+
+// 모바일(ios/android) 플랫폼이 있으면 '앱', web 전용이면 '웹사이트'
+export const getAppCategory = (app: App): AppCategory =>
+  app.platforms.some((p) => p === 'ios' || p === 'android') ? 'app' : 'website';

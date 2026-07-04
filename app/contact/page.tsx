@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { AnimatedSection } from '../components/AnimatedSection';
+import { PageHero } from '../components/PageHero';
 import { calcDelay } from '../components/animation-utils';
 import ContactForm from './ContactForm';
 
@@ -43,14 +44,10 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen py-24 px-6 md:px-12 lg:px-24">
       <div className="max-w-6xl mx-auto">
-        <AnimatedSection animation="fadeIn">
-          <div className="mb-12 text-center">
-            <h1 className="text-5xl md:text-6xl font-bold mb-4 text-blue-600 dark:text-blue-400">Contact</h1>
-            <p className="text-xl text-gray-600 dark:text-gray-400">
-              앱 개발 문의, 협업 제안, 또는 궁금한 점이 있으시다면 언제든 연락 주세요!
-            </p>
-          </div>
-        </AnimatedSection>
+        <PageHero
+          title="Contact"
+          subtitle="앱 개발 문의, 협업 제안, 또는 궁금한 점이 있으시다면 언제든 연락 주세요!"
+        />
 
         <div className="grid md:grid-cols-2 gap-12">
           {/* 연락 방법 */}

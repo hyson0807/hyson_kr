@@ -9,6 +9,8 @@ export type {
   ProgramPlatform,
 } from './types';
 
+export type { AppCategory } from './apps';
+
 export {
   apps,
   getAppsByType,
@@ -16,6 +18,7 @@ export {
   getCollaborationApps,
   getAppById,
   getReleasedApps,
+  getAppCategory,
 } from './apps';
 
 export { programs, getAvailablePrograms } from './programs';
