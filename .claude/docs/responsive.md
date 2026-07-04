@@ -13,8 +13,8 @@
 // 그리드
 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-// 사이드바 여백
-<main className="lg:ml-20 pt-16 lg:pt-0">
+// 상단 고정 헤더 여백 (헤더 높이 h-16 만큼)
+<main className="pt-16">
 
 // 숨김/표시
 <div className="hidden lg:block"> // 데스크톱만

@@ -1,8 +1,7 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
-import Sidebar from './components/Sidebar';
-import MobileHeader from './components/MobileHeader';
+import Header from './components/Header';
 import { themes } from './components/types';
 
 const geistSans = Geist({
@@ -111,14 +110,11 @@ export default function RootLayout({
             className="site-bg-grid pointer-events-none fixed inset-0 z-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"
           />
 
-          {/* 사이드바 (데스크톱) */}
-          <Sidebar theme={currentTheme} />
-
-          {/* 모바일 헤더 */}
-          <MobileHeader theme={currentTheme} />
+          {/* 상단 헤더 */}
+          <Header theme={currentTheme} />
 
           {/* 메인 콘텐츠 */}
-          <main className="relative z-10 lg:ml-20 pt-16 lg:pt-0">{children}</main>
+          <main className="relative z-10 pt-16">{children}</main>
         </div>
       </body>
     </html>

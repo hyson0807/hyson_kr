@@ -5,35 +5,50 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ThemeConfig } from './types';
 
-interface MobileHeaderProps {
+interface HeaderProps {
   theme: ThemeConfig;
 }
 
-export default function MobileHeader({ theme }: MobileHeaderProps) {
+const navItems = [
+  { name: 'Home', path: '/' },
+  { name: 'Apps', path: '/projects' },
+  { name: 'Programs', path: '/programs' },
+  { name: 'Contact', path: '/contact' },
+];
+
+export default function Header({ theme }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  const navItems = [
-    { name: 'Home', path: '/' },
-    { name: 'About', path: '/about' },
-    { name: 'Apps', path: '/projects' },
-    { name: 'Programs', path: '/programs' },
-    { name: 'Contact', path: '/contact' },
-  ];
-
   return (
     <header
-      className={`lg:hidden fixed top-0 left-0 right-0 z-50 ${theme.sidebar} border-b ${theme.border} px-4 py-3`}
+      className={`fixed top-0 left-0 right-0 z-50 bg-zinc-950/70 backdrop-blur-md border-b ${theme.border}`}
     >
-      <div className="flex items-center justify-between">
-        <Link href="/" className={`text-xl font-bold ${theme.accent}`}>
-          Hyson Works
-        </Link>
+      <div className="relative mx-auto flex h-16 max-w-6xl items-center justify-center px-4 md:px-8 lg:px-12">
+        {/* 데스크톱 네비게이션 (가운데 정렬) */}
+        <nav className="hidden md:flex items-center gap-1">
+          {navItems.map((item) => {
+            const isActive = pathname === item.path;
+            return (
+              <Link
+                key={item.path}
+                href={item.path}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${theme.hover} ${
+                  isActive ? theme.accent : theme.textSecondary
+                }`}
+              >
+                {item.name}
+              </Link>
+            );
+          })}
+        </nav>
+
+        {/* 모바일 햄버거 */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label={mobileMenuOpen ? '메뉴 닫기' : '메뉴 열기'}
           aria-expanded={mobileMenuOpen}
-          className={`p-2 rounded-lg ${theme.hover}`}
+          className={`md:hidden absolute right-4 p-2 rounded-lg ${theme.hover}`}
         >
           {mobileMenuOpen ? (
             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -49,7 +64,7 @@ export default function MobileHeader({ theme }: MobileHeaderProps) {
 
       {/* 모바일 메뉴 */}
       {mobileMenuOpen && (
-        <nav className={`absolute top-full left-0 right-0 ${theme.sidebar} border-b ${theme.border} py-4`}>
+        <nav className={`md:hidden bg-zinc-950/90 backdrop-blur-md border-t ${theme.border} py-2`}>
           {navItems.map((item) => {
             const isActive = pathname === item.path;
             return (
@@ -57,8 +72,8 @@ export default function MobileHeader({ theme }: MobileHeaderProps) {
                 key={item.path}
                 href={item.path}
                 onClick={() => setMobileMenuOpen(false)}
-                className={`block w-full text-left px-4 py-3 ${theme.hover} ${
-                  isActive ? theme.accent + ' font-medium' : ''
+                className={`block w-full px-4 py-3 ${theme.hover} ${
+                  isActive ? theme.accent + ' font-medium' : theme.textSecondary
                 }`}
               >
                 {item.name}

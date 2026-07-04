@@ -19,32 +19,6 @@ export default function Home() {
       {/* Hero Section */}
       <HeroSection />
 
-      {/* About Preview Section */}
-      <section className="py-24 px-6 md:px-12 lg:px-24 border-t border-gray-200 dark:border-zinc-800">
-        <div className="max-w-6xl mx-auto">
-          <AnimatedSection animation="fadeUp">
-            <h2 className="text-4xl md:text-5xl font-bold mb-8 text-blue-600 dark:text-blue-400">About Us</h2>
-          </AnimatedSection>
-          <AnimatedSection animation="fadeUp" delay={100}>
-            <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
-              기능을 쌓기보다, 경험을 다듬습니다.
-              사용자가 앱을 열었을 때 고민 없이 사용할 수 있도록 — 그것이 Hyson Works가 제품을 만드는 방식입니다.
-            </p>
-          </AnimatedSection>
-          <AnimatedSection animation="fadeUp" delay={300}>
-            <Link
-              href="/about"
-              className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 font-medium hover:underline"
-            >
-              더 알아보기
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </Link>
-          </AnimatedSection>
-        </div>
-      </section>
-
       {/* Apps Section */}
       <section className="py-24 px-6 md:px-12 lg:px-24 border-t border-gray-200 dark:border-zinc-800">
         <div className="max-w-6xl mx-auto">

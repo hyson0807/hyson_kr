@@ -43,7 +43,7 @@ const socials = [
 
 export function HeroSection() {
   return (
-    <section className="relative flex min-h-screen w-full items-center justify-center overflow-hidden px-6">
+    <section className="relative flex min-h-[calc(100vh-4rem)] w-full items-center justify-center overflow-hidden px-6">
       <div className="relative z-10 mx-auto max-w-5xl text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

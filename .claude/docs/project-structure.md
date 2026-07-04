@@ -3,8 +3,8 @@
 ```
 app/
 ├── components/        # 공통 컴포넌트
-│   ├── Sidebar.tsx    # 데스크톱 네비게이션
-│   ├── MobileHeader.tsx # 모바일 헤더
+│   ├── Header.tsx     # 상단 헤더 네비게이션 (데스크톱 가로 메뉴 + 모바일 햄버거)
+│   ├── HeroSection.tsx # 홈 히어로 (framer-motion)
 │   ├── AnimatedSection.tsx # 스크롤 애니메이션 래퍼
 │   └── types.ts       # 테마 타입 정의
 ├── hooks/             # 커스텀 훅
@@ -22,8 +22,7 @@ app/
 │   └── delete/route.ts    # 콘텐츠 영구 삭제
 ├── admin2129/page.tsx # IsoLog 콘텐츠 관리자 페이지
 ├── layout.tsx         # 전역 레이아웃
-├── page.tsx           # 홈 (Hero, About, Apps, Contact CTA)
-├── about/page.tsx     # 회사 소개 (핵심 가치, 기술 스택, 서비스)
+├── page.tsx           # 홈 (Hero, Apps, Contact CTA)
 ├── projects/page.tsx  # 앱 소개 (내부 프로젝트 + 참여 프로젝트)
 └── contact/page.tsx   # 연락처 및 문의 폼
 ```
