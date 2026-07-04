@@ -168,7 +168,10 @@ function AppCard({ app, showCollabBadge = false }: { app: App; showCollabBadge?:
 
 function ProgramCard({ program }: { program: Program }) {
   return (
-    <div className="bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-lg p-8 hover:shadow-xl transition-all">
+    <div
+      id={program.id}
+      className="bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-lg p-8 hover:shadow-xl transition-all"
+    >
       <div className="flex items-center gap-3 mb-4">
         {program.image && (
           <Image src={program.image} alt={program.name} width={48} height={48} className="rounded-lg" />

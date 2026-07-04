@@ -40,7 +40,7 @@ export default function Home() {
             {featuredProjects.map((project, index) => (
               <AnimatedSection key={project.id} animation="fadeUp" delay={calcDelay(index, 3)}>
                 <Link
-                  href={isProgram(project) ? '/programs' : `/projects#${project.id}`}
+                  href={`/projects#${project.id}`}
                   className="bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-lg p-6 hover:bg-gray-100 dark:hover:bg-zinc-800 transition-all hover:shadow-lg cursor-pointer block h-full"
                 >
                   <div className="relative w-full aspect-[4/3] rounded-lg mb-4 overflow-hidden">

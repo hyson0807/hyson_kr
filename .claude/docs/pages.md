@@ -6,15 +6,11 @@
 - Contact CTA: 연락 유도
 
 ## Apps (projects/page.tsx)
-- 내부 프로젝트: 직접 개발한 앱
+- 내부 프로젝트: 직접 개발한 앱 + 데스크톱 프로그램(Hymo 등, ProgramCard)
 - 참여 프로젝트: 외부 협업 앱
 - Coming Soon 카드
-- App Store / Google Play 링크
-
-## Programs (programs/page.tsx)
-- 데스크톱 프로그램 목록 (Hymo 등)
-- 다운로드 버튼 (status에 따라 활성/비활성)
-- Coming Soon 카드
+- App Store / Google Play / 프로그램 다운로드 링크
+- 프로그램 데이터는 `data/programs.ts`에서 관리 (별도 /programs 페이지 없음)
 
 ## Contact (contact/page.tsx)
 - 연락 방법 (이메일, GitHub)
