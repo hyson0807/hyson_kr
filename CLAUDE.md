@@ -37,9 +37,12 @@
   - **콘텐츠 흐름**: 관리자 페이지에서 인증(verify)된 글만 앱의 정보탭에 표시됨
 
 ### 참여 프로젝트
+- **꿈틀매쓰**: 초등 1~3학년 수학 게이미피케이션 앱 (React Native, iOS)
 - **LinkJob**: 외국인 구인구직 플랫폼 (React Native, iOS, Android)
 - **이루빛터**: 장애인 근로자와 기업을 매칭하는 웹 플랫폼 (Web)
 - **Young Cosmed**: K-Beauty 의료미용 제품 B2B 플랫폼 (Web)
+- **KLOW**: 외국인 대상 K-뷰티 이커머스 플랫폼 (Web)
+- **KLOW Brand**: K-뷰티 브랜드 글로벌 입점 플랫폼 (Web)
 
 ---
 

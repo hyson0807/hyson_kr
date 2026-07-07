@@ -36,6 +36,7 @@ export const apps: App[] = [
         'https://apps.apple.com/kr/app/%ED%94%BC%EB%B6%80%EA%B3%B0-%ED%94%BC%EB%B6%80-%EA%B3%A0%EB%AF%BC-%EC%BB%A4%EB%AE%A4%EB%8B%88%ED%8B%B0/id6760972457',
     },
   },
+  // 협업 프로젝트
   {
     id: 'ggumteul-math',
     title: '꿈틀매쓰',
@@ -45,14 +46,13 @@ export const apps: App[] = [
     tags: ['React Native', 'NestJS'],
     status: 'released',
     platforms: ['ios'],
-    projectType: 'internal',
+    projectType: 'collaboration',
     image: '/images/apps/ggumteul-math.png',
     storeLinks: {
       appStore:
         'https://apps.apple.com/kr/app/%EA%BF%88%ED%8B%80%EB%A7%A4%EC%93%B0-%EC%B4%88%EB%93%B1-%EC%88%98%ED%95%99%ED%95%99%EC%8A%B5-%ED%94%8C%EB%9E%AB%ED%8F%BC/id6763516927',
     },
   },
-  // 협업 프로젝트
   {
     id: 'linkjob',
     title: 'LinkJob',
@@ -84,6 +84,36 @@ export const apps: App[] = [
     image: '/images/apps/irubitteo.png',
     storeLinks: {
       website: 'https://www.irubitteo.com',
+    },
+  },
+  {
+    id: 'klow',
+    title: 'KLOW',
+    description: '외국인 대상 K-뷰티 이커머스 플랫폼',
+    longDescription:
+      '외국인 고객이 K-뷰티 제품을 쉽게 구매할 수 있는 글로벌 이커머스 플랫폼입니다. 80개국 해외 배송과 USD 결제를 지원하며, 피부 타입·고민 기반 온보딩으로 맞춤 상품을 추천합니다.',
+    tags: ['NextJs', 'NestJs', 'Postgres'],
+    status: 'released',
+    platforms: ['web'],
+    projectType: 'collaboration',
+    image: '/images/apps/klow.png',
+    storeLinks: {
+      website: 'https://www.klow.kr',
+    },
+  },
+  {
+    id: 'klow-brand',
+    title: 'KLOW Brand',
+    description: 'K-뷰티 브랜드 글로벌 입점 플랫폼',
+    longDescription:
+      'K-뷰티 브랜드의 글로벌 진출 파트너. 3분 만에 80개국 B2C 판매 채널을 개설할 수 있는 브랜드 셀프 온보딩 포털입니다. 상품 등록 스튜디오, 캠페인·크리에이터 시딩, 구독 결제까지 브랜드 운영에 필요한 기능을 제공합니다.',
+    tags: ['NextJs', 'NestJs', 'Postgres'],
+    status: 'released',
+    platforms: ['web'],
+    projectType: 'collaboration',
+    image: '/images/apps/klow-brand.png',
+    storeLinks: {
+      website: 'https://brand.klow.kr',
     },
   },
   {
