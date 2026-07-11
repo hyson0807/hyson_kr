@@ -9,8 +9,6 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@aws-sdk/client-dynamodb": "^3.958.0",
-    "@aws-sdk/lib-dynamodb": "^3.958.0",
     "@neondatabase/serverless": "^1.0.2",
     "framer-motion": "^12.42.2",
     "next": "^16.0.10",
