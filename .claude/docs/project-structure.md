@@ -1,6 +1,10 @@
 # 폴더 구조
 
 ```
+components/ui/         # shadcn/ui 컴포넌트 (select, card, badge, button)
+lib/
+└── utils.ts           # cn() 클래스 병합 유틸 (shadcn)
+components.json        # shadcn CLI 설정
 app/
 ├── components/        # 공통 컴포넌트
 │   ├── Header.tsx     # 상단 헤더 네비게이션 (데스크톱 가로 메뉴 + 모바일 햄버거)

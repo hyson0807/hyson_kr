@@ -9,6 +9,7 @@
 
 ## 기술 스택
 - Next.js 16 (App Router) + TypeScript + Tailwind CSS 4
+- shadcn/ui (Radix 베이스) — 컴포넌트는 `components/ui/`, 추가는 `npx shadcn@latest add <name>`
 
 ---
 
