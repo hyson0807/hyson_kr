@@ -16,6 +16,7 @@ app/
 ├── data/              # 앱 데이터 중앙 관리
 │   ├── types.ts       # App 인터페이스 및 타입 정의
 │   ├── apps.ts        # 앱 데이터 + 헬퍼 함수
+│   ├── hydo-notices.ts # hydo 앱 공지사항 본문 (index.ts 로 re-export 하지 않는다)
 │   └── index.ts       # export 통합
 ├── lib/               # 외부 서비스 연동
 │   └── dynamodb.ts    # AWS DynamoDB 클라이언트
@@ -24,6 +25,8 @@ app/
 │   ├── ban/route.ts       # 콘텐츠 Ban 토글
 │   ├── verify/route.ts    # 콘텐츠 검증 토글
 │   └── delete/route.ts    # 콘텐츠 영구 삭제
+├── api/hydo/          # hydo iOS 앱이 읽는 공개 API
+│   └── notices/route.ts   # 공지사항 피드 (인증 없음, CDN 5분)
 ├── admin2129/page.tsx # IsoLog 콘텐츠 관리자 페이지
 ├── layout.tsx         # 전역 레이아웃
 ├── page.tsx           # 홈 (Hero, Apps, Contact CTA)
