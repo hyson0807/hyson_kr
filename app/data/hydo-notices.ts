@@ -69,4 +69,13 @@ export type HydoNotice = {
  *     expiresAt: '2026-09-05T09:00:00+09:00',
  *   },
  */
-export const hydoNotices: HydoNotice[] = [];
+export const hydoNotices: HydoNotice[] = [
+    {
+    id: '2026-08-02-update',
+    title: 'hydo 위젯 기능이 추가되었습니다',
+    body: '이제 홈화면 또는 잠금화면에서 일정을 바로 확인할 수 있습니다\n이용해 주셔서 감사합니다',
+    publishedAt: '2026-08-02T09:00:00+09:00',
+    expiresAt: '2026-08-10T09:00:00+09:00',
+    },
+
+];
