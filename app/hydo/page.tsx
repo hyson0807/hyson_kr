@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import { APP_STORE_URL } from './constants';
 
 const DESCRIPTION =
   '아이폰 잠금화면에 이번 달 달력을 띄우고, 친구·가족·팀과 일정을 공유하는 캘린더 앱';
@@ -44,6 +45,7 @@ const features = [
 /// 지원 문의는 이메일 하나로 받는다. 앱에 문의 화면을 따로 두지 않는다.
 const SUPPORT_EMAIL = 'contact@hyson.kr';
 
+
 export default function HydoPage() {
   return (
     <div className="min-h-screen flex flex-col items-center px-6 py-16">
@@ -72,17 +74,21 @@ export default function HydoPage() {
           친구·가족·팀과 일정을 함께 관리하세요.
         </p>
 
-        <div
-          className="w-full rounded-2xl px-6 py-5"
-          style={{ backgroundColor: '#131318', border: '1px solid #24242C' }}
+        <a
+          href={APP_STORE_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center justify-center gap-2.5 w-full rounded-2xl px-6 py-4 text-base font-semibold transition-opacity hover:opacity-90"
+          style={{ backgroundColor: '#F0F0F0', color: '#08080B' }}
         >
-          <p className="text-sm font-semibold mb-1" style={{ color: '#F0F0F0' }}>
-            App Store 출시를 준비하고 있습니다
-          </p>
-          <p className="text-xs leading-relaxed" style={{ color: '#8A8A8A' }}>
-            출시되면 이 페이지에 다운로드 링크가 올라갑니다.
-          </p>
-        </div>
+          <svg className="size-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+          </svg>
+          App Store에서 받기
+        </a>
+        <p className="mt-3 text-xs" style={{ color: '#555555' }}>
+          iPhone · iOS 17.0 이상 · 무료
+        </p>
       </div>
 
       <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-lg sm:max-w-2xl w-full">

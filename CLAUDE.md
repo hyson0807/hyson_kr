@@ -36,6 +36,12 @@
   - **관리자 페이지**: `/admin2129` - 앱 콘텐츠 verify 페이지 (상세: `.claude/docs/admin-page.md`)
   - **앱 프로젝트 경로**: `../IsoLog/`
   - **콘텐츠 흐름**: 관리자 페이지에서 인증(verify)된 글만 앱의 정보탭에 표시됨
+- **피부곰**: 피부 고민 커뮤니티 앱 (React Native, iOS, Android)
+- **hydo**: 아이폰 잠금화면에 달력을 띄우는 일정 공유 앱 (SwiftUI, iOS) — 2026-07-28 출시
+  - **앱 프로젝트 경로**: `../hydo/hydo-app/`
+  - **지원 / 약관 페이지**: `/hydo`, `/hydo/terms`, `/hydo/privacy`
+  - **공지사항 피드**: `/api/hydo/notices` — 원본은 `app/data/hydo-notices.ts`.
+    항목을 추가하고 push 하면 앱 심사 없이 공지가 나간다 (`id`는 배포 후 변경 금지)
 
 ### 참여 프로젝트
 - **꿈틀매쓰**: 초등 1~3학년 수학 게이미피케이션 앱 (React Native, iOS)

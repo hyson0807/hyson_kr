@@ -36,6 +36,23 @@ export const apps: App[] = [
         'https://apps.apple.com/kr/app/%ED%94%BC%EB%B6%80%EA%B3%B0-%ED%94%BC%EB%B6%80-%EA%B3%A0%EB%AF%BC-%EC%BB%A4%EB%AE%A4%EB%8B%88%ED%8B%B0/id6760972457',
     },
   },
+  {
+    id: 'hydo',
+    title: 'hydo',
+    description: '아이폰 잠금화면에 달력을 띄우는 일정 공유 앱',
+    longDescription:
+      '월간 달력을 배경화면으로 구워 폰을 켜자마자 이번 달 일정이 보이게 합니다. 초대 코드 하나로 친구·가족·팀과 같은 달력을 쓰고, 일정이 바뀌면 단축어 자동화가 배경화면을 다시 그립니다. 잠금화면·홈 화면 위젯으로 오늘 일정도 함께 확인할 수 있습니다.',
+    tags: ['SwiftUI', 'NestJS', 'Postgres'],
+    status: 'released',
+    platforms: ['ios'],
+    projectType: 'internal',
+    image: '/images/apps/hydo.png',
+    storeLinks: {
+      appStore:
+        'https://apps.apple.com/kr/app/hydo-%EC%9E%A0%EA%B8%88%ED%99%94%EB%A9%B4-%EC%BA%98%EB%A6%B0%EB%8D%94-%EA%B3%B5%EC%9C%A0-%EC%95%B1/id6794805038',
+      website: 'https://hyson.kr/hydo',
+    },
+  },
   // 협업 프로젝트
   {
     id: 'ggumteul-math',

@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { APP_STORE_URL } from './constants';
 
 export default function HydoLayout({
   children,
@@ -49,16 +50,19 @@ export default function HydoLayout({
           </span>
         </Link>
 
-        <span
-          className="px-3 py-1 rounded-full text-[11px] font-medium"
+        <a
+          href={APP_STORE_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="px-3 py-1 rounded-full text-[11px] font-medium transition-opacity hover:opacity-80"
           style={{
             color: '#7C9CFF',
             backgroundColor: 'rgba(124, 156, 255, 0.12)',
             border: '1px solid rgba(124, 156, 255, 0.22)',
           }}
         >
-          출시 준비 중
-        </span>
+          App Store에서 받기
+        </a>
       </header>
 
       <div className="pt-14">{children}</div>

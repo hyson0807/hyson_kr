@@ -44,6 +44,22 @@ const STORE_ICONS = {
   ),
 } as const;
 
+// 출시만 초록, 나머지는 아직 받을 수 없다는 뜻이라 색을 따로 준다
+const STATUS_BADGE: Record<App['status'], { label: string; className: string }> = {
+  released: {
+    label: '출시',
+    className: 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400',
+  },
+  coming_soon: {
+    label: '출시 예정',
+    className: 'bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400',
+  },
+  development: {
+    label: '개발 중',
+    className: 'bg-gray-100 dark:bg-zinc-800 text-gray-600 dark:text-gray-400',
+  },
+};
+
 const STORE_LABELS = {
   appStore: 'App Store',
   playStore: 'Google Play',
@@ -140,8 +156,8 @@ const AppCard = memo(function AppCard({
         <div className="p-8">
           <div className="flex items-center gap-3 mb-4">
             <h2 className="text-3xl font-bold">{app.title}</h2>
-            <Badge className="h-auto rounded-full px-3 py-1 text-sm bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400">
-              {app.status === 'released' ? '출시' : app.status === 'coming_soon' ? '출시 예정' : '개발 중'}
+            <Badge className={`h-auto rounded-full px-3 py-1 text-sm ${STATUS_BADGE[app.status].className}`}>
+              {STATUS_BADGE[app.status].label}
             </Badge>
             {showCollabBadge && (
               <Badge className="h-auto rounded-full px-3 py-1 text-sm bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400">
