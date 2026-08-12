@@ -80,9 +80,8 @@ export function HeroSection() {
               Steadily crafting better apps.
             </p>
             <p className="mx-auto mb-12 max-w-3xl text-base text-gray-400 md:text-lg">
-              A one-person studio building beautiful, performant products across iOS,
-              Android, and the web — passionate about clean code and exceptional user
-              experiences.
+              A studio building beautiful, performant products across iOS, Android, and
+              the web — passionate about exceptional user experiences.
             </p>
           </motion.div>
 
