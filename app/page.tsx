@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { getReleasedApps, getAvailablePrograms, App, Program } from './data';
+import { getLiveApps, getAvailablePrograms, App, Program } from './data';
 import { AnimatedSection } from './components/AnimatedSection';
 import { HeroSection } from './components/HeroSection';
 import { calcDelay } from './components/animation-utils';
@@ -8,7 +8,7 @@ import { calcDelay } from './components/animation-utils';
 const focusRing = "focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-zinc-950";
 
 export default function Home() {
-  const apps = getReleasedApps();
+  const apps = getLiveApps();
   const hymoPrograms = getAvailablePrograms().filter((program) => program.id === 'hymo');
   const featuredProjects: (App | Program)[] = [...apps, ...hymoPrograms];
 

@@ -17,7 +17,7 @@ export {
   getInternalApps,
   getCollaborationApps,
   getAppById,
-  getReleasedApps,
+  getLiveApps,
   getAppCategory,
 } from './apps';
 

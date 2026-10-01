@@ -1,4 +1,5 @@
-export type AppStatus = 'released' | 'coming_soon' | 'development';
+// operating: 운영 중 / released: 출시만 해 둔 상태 / discontinued: 서비스 중단
+export type AppStatus = 'operating' | 'released' | 'discontinued' | 'coming_soon' | 'development';
 
 export type ProjectType = 'internal' | 'collaboration';
 

@@ -8,7 +8,7 @@ interface App {
   description: string;     // 짧은 설명
   longDescription?: string; // 상세 설명
   tags: string[];
-  status: AppStatus;       // 'released' | 'coming_soon' | 'development'
+  status: AppStatus;       // 'operating' | 'released' | 'discontinued' | 'coming_soon' | 'development'
   platforms: Platform[];   // 'ios' | 'android' | 'web'
   projectType: ProjectType; // 'internal' | 'collaboration'
   image: string;
@@ -19,7 +19,7 @@ interface App {
 ## 헬퍼 함수
 - `getInternalApps()` - 내부 프로젝트만
 - `getCollaborationApps()` - 협업 프로젝트만
-- `getReleasedApps()` - 출시된 앱만
+- `getLiveApps()` - 중단(discontinued)된 프로젝트를 뺀 목록 (홈 노출용)
 - `getAppById(id)` - ID로 앱 찾기
 
 ## hydo-notices.ts — hydo 앱 공지사항

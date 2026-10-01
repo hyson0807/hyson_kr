@@ -44,11 +44,19 @@ const STORE_ICONS = {
   ),
 } as const;
 
-// 출시만 초록, 나머지는 아직 받을 수 없다는 뜻이라 색을 따로 준다
+// 운영중만 초록. 출시는 받을 수는 있지만 활발하지 않다는 뜻이라 회색, 중단은 빨강
 const STATUS_BADGE: Record<App['status'], { label: string; className: string }> = {
+  operating: {
+    label: '운영중',
+    className: 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400',
+  },
   released: {
     label: '출시',
-    className: 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400',
+    className: 'bg-gray-100 dark:bg-zinc-800 text-gray-500 dark:text-gray-400',
+  },
+  discontinued: {
+    label: '중단됨',
+    className: 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400',
   },
   coming_soon: {
     label: '출시 예정',
@@ -217,7 +225,7 @@ const ProgramCard = memo(function ProgramCard({ program }: { program: Program })
           데스크톱 프로그램
         </Badge>
         <Badge className="h-auto rounded-full px-3 py-1 text-sm bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400">
-          {program.status === 'available' ? '다운로드 가능' : '준비 중'}
+          {program.status === 'available' ? '운영중' : '준비 중'}
         </Badge>
       </div>
       <p className="text-xl text-gray-700 dark:text-gray-300 mb-4 font-medium">{program.description}</p>
