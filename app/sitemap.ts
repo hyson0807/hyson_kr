@@ -61,5 +61,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'yearly',
       priority: 0.3,
     },
+    // Play 데이터 보안의 계정 삭제 URL
+    {
+      url: `${baseUrl}/prup/delete-account`,
+      lastModified: new Date(),
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
   ];
 }

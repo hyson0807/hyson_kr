@@ -56,7 +56,7 @@ const faqs = [
   },
   {
     q: '계정을 삭제하고 싶습니다',
-    a: '앱의 설정 › 계정 › 회원 탈퇴에서 바로 지울 수 있습니다. 모든 기록이 함께 삭제되며 되돌릴 수 없습니다. 구독은 탈퇴와 별개로 스토어에서 해지해야 합니다.',
+    a: '앱의 설정 › 계정 › 회원 탈퇴에서 바로 지울 수 있습니다. 모든 기록이 함께 삭제되며 되돌릴 수 없습니다. 구독은 탈퇴와 별개로 스토어에서 해지해야 합니다. 앱을 이미 지웠다면 계정 삭제 페이지(hyson.kr/prup/delete-account)를 참고하세요.',
   },
 ];
 
@@ -158,6 +158,10 @@ export default function PrupPage() {
         <span>·</span>
         <Link href="/prup/privacy" className="hover:underline">
           개인정보처리방침
+        </Link>
+        <span>·</span>
+        <Link href="/prup/delete-account" className="hover:underline">
+          계정 삭제
         </Link>
       </div>
 
