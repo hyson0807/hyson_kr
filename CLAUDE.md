@@ -42,6 +42,10 @@
   - **지원 / 약관 페이지**: `/hydo`, `/hydo/terms`, `/hydo/privacy`
   - **공지사항 피드**: `/api/hydo/notices` — 원본은 `app/data/hydo-notices.ts`.
     항목을 추가하고 push 하면 앱 심사 없이 공지가 나간다 (`id`는 배포 후 변경 금지)
+- **PRUP**: 5대 운동(스쿼트·벤치·데드·OHP·로우) 기록 경신 앱 (React Native, iOS·Android) — 출시 준비 중
+  - **앱 프로젝트 경로**: `../prup/prup-app/`
+  - **지원 / 약관 페이지**: `/prup`, `/prup/terms`, `/prup/privacy` — 앱 결제 화면이 약관·방침을 링크한다.
+    무료 범위(운동한 날 3일)·구독 조건이 바뀌면 약관 제6·7조와 FAQ 를 같이 고친다
 
 ### 참여 프로젝트
 - **꿈틀매쓰**: 초등 1~3학년 수학 게이미피케이션 앱 (React Native, iOS)
