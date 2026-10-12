@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { PRUP_ACCENT, SUPPORT_EMAIL } from './constants';
+import { APP_STORE_RELEASED, APP_STORE_URL, GOOGLE_PLAY_URL, PRUP_ACCENT, SUPPORT_EMAIL } from './constants';
 
 const DESCRIPTION =
   '스쿼트·벤치·데드리프트·오버헤드프레스·바벨로우, 5대 운동의 기록 경신만 다루는 앱';
@@ -87,11 +87,35 @@ export default function PrupPage() {
           지금 드는 무게를 넣으면 다음 운동에 도전할 무게를 알려줍니다.
         </p>
 
-        <div
-          className="w-full px-6 py-4 text-base font-bold"
-          style={{ border: '2px solid #333333', color: '#8A8A8A' }}
-        >
-          App Store · Google Play 출시 예정
+        {/* 다운로드 — 출시된 스토어는 오렌지 버튼, 아직 심사 중인 스토어는 흐린 칸 */}
+        <div id="download" className="w-full flex flex-col gap-3">
+          <a
+            href={GOOGLE_PLAY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full px-6 py-4 text-base font-bold"
+            style={{ backgroundColor: PRUP_ACCENT, color: '#0A0A0A' }}
+          >
+            Google Play에서 받기
+          </a>
+          {APP_STORE_RELEASED ? (
+            <a
+              href={APP_STORE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full px-6 py-4 text-base font-bold"
+              style={{ backgroundColor: PRUP_ACCENT, color: '#0A0A0A' }}
+            >
+              App Store에서 받기
+            </a>
+          ) : (
+            <div
+              className="w-full px-6 py-4 text-base font-bold"
+              style={{ border: '2px solid #333333', color: '#8A8A8A' }}
+            >
+              App Store 곧 출시
+            </div>
+          )}
         </div>
         <p className="mt-3 text-xs" style={{ color: '#555555' }}>
           운동한 날 3일 무료 · 이후 PRUP Pro 구독

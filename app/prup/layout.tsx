@@ -39,12 +39,13 @@ export default function PrupLayout({
           </span>
         </Link>
 
-        <span
+        <Link
+          href="/prup#download"
           className="px-3 py-1 text-[11px] font-semibold tracking-wider"
           style={{ color: PRUP_ACCENT, border: `2px solid ${PRUP_ACCENT}` }}
         >
-          출시 예정
-        </span>
+          다운로드
+        </Link>
       </header>
 
       <div className="pt-14">{children}</div>
