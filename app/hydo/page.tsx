@@ -87,7 +87,7 @@ export default function HydoPage() {
           App Store에서 받기
         </a>
         <p className="mt-3 text-xs" style={{ color: '#555555' }}>
-          iPhone · iOS 17.0 이상 · 무료
+          iPhone · iOS 17.0 이상 · 무료 · Mac 앱은 hydo 프리미엄
         </p>
       </div>
 
@@ -150,6 +150,10 @@ export default function HydoPage() {
           {
             q: '그룹에 들어온 사람은 무엇을 할 수 있나요',
             a: '그룹 멤버는 그 그룹의 모든 일정을 보고 수정하고 삭제할 수 있습니다. 방장·뷰어 같은 권한 구분이 없으므로, 초대 코드는 믿을 수 있는 사람에게만 알려주세요.',
+          },
+          {
+            q: 'hydo 프리미엄은 무엇이고 어떻게 해지하나요',
+            a: 'Mac 앱(큰 창 · 메뉴 막대)을 쓸 수 있게 하는 구독입니다. iPhone 앱의 기능은 구독 없이 그대로 쓸 수 있습니다. 해지는 iPhone 설정 › [이름] › 구독 또는 Mac App Store › 계정 설정 › 구독에서 합니다. 앱 삭제나 계정 삭제만으로는 해지되지 않습니다.',
           },
           {
             q: '계정을 삭제하고 싶습니다',

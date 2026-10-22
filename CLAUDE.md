@@ -40,6 +40,8 @@
 - **hydo**: 아이폰 잠금화면에 달력을 띄우는 일정 공유 앱 (SwiftUI, iOS) — 2026-07-28 출시
   - **앱 프로젝트 경로**: `../hydo/hydo-app/`
   - **지원 / 약관 페이지**: `/hydo`, `/hydo/terms`, `/hydo/privacy`
+    Mac 앱 · hydo 프리미엄(구독, RevenueCat) 반영 — 2026-10-22. 구독 조건이 바뀌면 약관 제8·9조와
+    방침 1·7·8조(RevenueCat 국외 이전)와 지원 페이지 FAQ 를 같이 고친다. 앱 결제 화면이 약관·방침을 링크한다
   - **공지사항 피드**: `/api/hydo/notices` — 원본은 `app/data/hydo-notices.ts`.
     항목을 추가하고 push 하면 앱 심사 없이 공지가 나간다 (`id`는 배포 후 변경 금지)
 - **PRUP**: 5대 운동(스쿼트·벤치·데드·OHP·로우) 기록 경신 앱 (React Native, iOS·Android) — 출시 준비 중
