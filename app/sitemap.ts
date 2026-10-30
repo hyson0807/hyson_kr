@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next';
+import { projects } from './data';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://hyson.kr';
@@ -16,6 +17,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 0.9,
     },
+    ...projects.map((project) => ({
+      url: `${baseUrl}/projects/${project.slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    })),
     {
       url: `${baseUrl}/contact`,
       lastModified: new Date(),

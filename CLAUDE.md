@@ -5,7 +5,8 @@
 - **슬로건**: 꾸준히, 더 나은 앱을 만듭니다
 - **이메일**: contact@hyson.kr
 - **GitHub**: github.com/hyson0807
-- **서비스**: 크로스플랫폼 앱 개발 (React Native)
+- **서비스**: iOS · Android · Web · Mac 앱 기획 · 개발 · 운영 (프로덕트 스튜디오)
+- **디자인 레퍼런스**: toktokhan.dev (2026-10 리디자인) — 프로젝트 데이터는 `app/data/projects.ts`
 
 ## 기술 스택
 - Next.js 16 (App Router) + TypeScript + Tailwind CSS 4
@@ -48,10 +49,13 @@
   - **앱 프로젝트 경로**: `../prup/prup-app/`
   - **지원 / 약관 페이지**: `/prup`, `/prup/terms`, `/prup/privacy` — 앱 결제 화면이 약관·방침을 링크한다.
     무료 범위(운동한 날 3일)·구독 조건이 바뀌면 약관 제6·7조와 FAQ 를 같이 고친다
+- **스키동행 (withski)**: 스키장 카풀 매칭 웹 서비스 (Next.js) — withski.com, 앱 프로젝트 경로 `../withski/`
+- **Hymo**: macOS 개발자 도구 (SwiftUI) — `/downloads/hymo_app.dmg` 로 배포
 
 ### 참여 프로젝트
+(사이트에서는 내부/참여를 나누지 않고 모두 "Hyson Works가 진행한 프로젝트"로 소개한다)
 - **꿈틀매쓰**: 초등 1~3학년 수학 게이미피케이션 앱 (React Native, iOS)
-- **LinkJob**: 외국인 구인구직 플랫폼 (React Native, iOS, Android)
+- **LinkJob**: 외국인 구인구직 플랫폼 (React Native, iOS, Android) — 서비스 종료
 - **이루빛터**: 장애인 근로자와 기업을 매칭하는 웹 플랫폼 (Web)
 - **Young Cosmed**: K-Beauty 의료미용 제품 B2B 플랫폼 (Web)
 - **KLOW**: 외국인 대상 K-뷰티 이커머스 플랫폼 (Web)
@@ -68,4 +72,4 @@
 
 ---
 
-**업데이트**: 2026-03-05
+**업데이트**: 2026-10-30

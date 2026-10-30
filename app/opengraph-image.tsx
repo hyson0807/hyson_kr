@@ -25,7 +25,7 @@ export default function Image() {
           style={{
             fontSize: 72,
             fontWeight: 700,
-            color: '#3b82f6',
+            color: '#4b4bf5',
             marginBottom: 16,
           }}
         >

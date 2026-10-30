@@ -2,34 +2,25 @@
 
 ```
 components/ui/         # shadcn/ui 컴포넌트 (select, card, badge, button)
-lib/
-└── utils.ts           # cn() 클래스 병합 유틸 (shadcn)
-components.json        # shadcn CLI 설정
+lib/utils.ts           # cn() 클래스 병합 유틸 (shadcn)
 app/
-├── components/        # 공통 컴포넌트
-│   ├── Header.tsx     # 상단 헤더 네비게이션 (데스크톱 가로 메뉴 + 모바일 햄버거)
-│   ├── HeroSection.tsx # 홈 히어로 (framer-motion)
-│   ├── AnimatedSection.tsx # 스크롤 애니메이션 래퍼
-│   └── types.ts       # 테마 타입 정의
-├── hooks/             # 커스텀 훅
-│   └── useInView.ts   # Intersection Observer 기반 가시성 감지
-├── data/              # 앱 데이터 중앙 관리
-│   ├── types.ts       # App 인터페이스 및 타입 정의
-│   ├── apps.ts        # 앱 데이터 + 헬퍼 함수
-│   ├── hydo-notices.ts # hydo 앱 공지사항 본문 (index.ts 로 re-export 하지 않는다)
-│   └── index.ts       # export 통합
-├── lib/               # 외부 서비스 연동
-│   └── dynamodb.ts    # AWS DynamoDB 클라이언트
-├── api/isolog/        # IsoLog 관리 API
-│   ├── contents/route.ts  # 콘텐츠 목록 조회
-│   ├── ban/route.ts       # 콘텐츠 Ban 토글
-│   ├── verify/route.ts    # 콘텐츠 검증 토글
-│   └── delete/route.ts    # 콘텐츠 영구 삭제
-├── api/hydo/          # hydo iOS 앱이 읽는 공개 API
-│   └── notices/route.ts   # 공지사항 피드 (인증 없음, CDN 5분)
-├── admin2129/page.tsx # IsoLog 콘텐츠 관리자 페이지
-├── layout.tsx         # 전역 레이아웃
-├── page.tsx           # 홈 (Hero, Apps, Contact CTA)
-├── projects/page.tsx  # 앱 소개 (내부 프로젝트 + 참여 프로젝트)
-└── contact/page.tsx   # 연락처 및 문의 폼
+├── (site)/            # 메인 사이트 — layout.tsx 가 Header · Footer · FloatingCta 를 붙인다
+│   ├── page.tsx       # 홈
+│   ├── projects/      # 목록(ProjectsGrid) + [slug] 상세
+│   └── contact/       # 문의 (ContactForm)
+├── components/
+│   ├── site/          # Header, Footer, FloatingCta, CtaCapsule, Wordmark, Reveal
+│   ├── home/          # 홈 섹션 (Hero, ProjectMosaic, Intro, WhyUs, HomeCanvas, Stats, Banner, ...)
+│   ├── projects/      # ProjectCard, DeviceFrames(PhoneFrame, VideoPhoneFrame, BrowserFrame, ImagePanel)
+│   ├── AnimatedSection.tsx # 제품 지원 페이지에서 쓰는 스크롤 애니메이션 래퍼
+│   └── ErrorBoundary.tsx
+├── hooks/             # useSectionTone(헤더/CTA 톤), useInView
+├── data/              # projects.ts, types.ts, hydo-notices.ts, hydo-holidays.ts, index.ts
+├── fonts/             # PretendardVariable.woff2
+├── lib/               # auth.ts, neon.ts
+├── api/hydo/          # hydo 앱이 읽는 공개 API (notices, holidays)
+├── api/pibugom/       # 피부곰 신고 관리 API
+├── hydo/ prup/ pibugom/ ggumteul-math/  # 제품 지원 · 약관 페이지 (각자 헤더)
+├── pibugom2129/       # 피부곰 관리자
+└── layout.tsx         # 루트 — 폰트 · 메타데이터만
 ```

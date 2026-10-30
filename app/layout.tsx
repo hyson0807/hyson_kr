@@ -1,12 +1,13 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Geist_Mono } from 'next/font/google';
+import localFont from 'next/font/local';
 import './globals.css';
-import Header from './components/Header';
-import { themes } from './components/types';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
+const pretendard = localFont({
+  src: './fonts/PretendardVariable.woff2',
+  variable: '--font-pretendard',
+  weight: '45 920',
+  display: 'swap',
 });
 
 const geistMono = Geist_Mono({
@@ -16,11 +17,11 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Hyson Works - 하이슨 워크 | 앱 · 웹 · 소프트웨어 개발',
+    default: 'Hyson Works - 하이슨 워크 | 꾸준히, 더 나은 앱을 만듭니다',
     template: '%s | Hyson Works',
   },
   description:
-    'Hyson Works는 모바일 앱부터 웹 서비스, 데스크톱 프로그램까지 직접 기획하고 개발하는 1인 스튜디오입니다.',
+    'Hyson Works는 iOS · Android · Web · Mac 앱을 기획부터 출시, 운영까지 함께 만드는 프로덕트 스튜디오입니다. 꾸준히, 더 나은 앱을 만듭니다.',
   keywords: [
     '하이슨 워크',
     '하이슨',
@@ -36,7 +37,7 @@ export const metadata: Metadata = {
     '크로스플랫폼',
     'iOS',
     'Android',
-    '1인 개발 스튜디오',
+    '앱 개발 스튜디오',
   ],
   authors: [{ name: 'Hyson Works', url: 'https://hyson.kr' }],
   creator: 'Hyson Works',
@@ -53,15 +54,15 @@ export const metadata: Metadata = {
     locale: 'ko_KR',
     url: 'https://hyson.kr',
     siteName: 'Hyson Works - 하이슨 워크',
-    title: 'Hyson Works - 하이슨 워크 | 앱 · 웹 · 소프트웨어 개발',
+    title: 'Hyson Works - 하이슨 워크 | 꾸준히, 더 나은 앱을 만듭니다',
     description:
-      'Hyson Works는 모바일 앱부터 웹 서비스, 데스크톱 프로그램까지 직접 기획하고 개발하는 1인 스튜디오입니다.',
+      'Hyson Works는 iOS · Android · Web · Mac 앱을 기획부터 출시, 운영까지 함께 만드는 프로덕트 스튜디오입니다. 꾸준히, 더 나은 앱을 만듭니다.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Hyson Works - 하이슨 워크 | 앱 · 웹 · 소프트웨어 개발',
+    title: 'Hyson Works - 하이슨 워크 | 꾸준히, 더 나은 앱을 만듭니다',
     description:
-      'Hyson Works는 모바일 앱부터 웹 서비스, 데스크톱 프로그램까지 직접 기획하고 개발하는 1인 스튜디오입니다.',
+      'Hyson Works는 iOS · Android · Web · Mac 앱을 기획부터 출시, 운영까지 함께 만드는 프로덕트 스튜디오입니다. 꾸준히, 더 나은 앱을 만듭니다.',
   },
   robots: {
     index: true,
@@ -81,12 +82,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // 모던 다크 테마로 고정
-  const currentTheme = themes.dark;
-
   return (
     <html lang="ko" className="dark">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${pretendard.variable} ${geistMono.variable} antialiased`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -97,25 +95,13 @@ export default function RootLayout({
               alternateName: '하이슨 워크',
               url: 'https://hyson.kr',
               description:
-                'Hyson Works는 모바일 앱부터 웹 서비스, 데스크톱 프로그램까지 직접 기획하고 개발하는 1인 스튜디오입니다.',
+                'Hyson Works는 iOS · Android · Web · Mac 앱을 기획부터 출시, 운영까지 함께 만드는 프로덕트 스튜디오입니다. 꾸준히, 더 나은 앱을 만듭니다.',
               email: 'contact@hyson.kr',
               sameAs: ['https://github.com/hyson0807'],
             }),
           }}
         />
-        <div className={`relative min-h-screen ${currentTheme.bg} ${currentTheme.text}`}>
-          {/* 전역 격자 배경 */}
-          <div
-            aria-hidden
-            className="site-bg-grid pointer-events-none fixed inset-0 z-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"
-          />
-
-          {/* 상단 헤더 */}
-          <Header theme={currentTheme} />
-
-          {/* 메인 콘텐츠 */}
-          <main className="relative z-10 pt-16">{children}</main>
-        </div>
+        {children}
       </body>
     </html>
   );

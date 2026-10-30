@@ -1,24 +1,22 @@
 export type {
-  App,
-  AppStatus,
-  ProjectType,
-  Platform,
-  StoreLinks,
-  Program,
-  ProgramStatus,
-  ProgramPlatform,
+  Project,
+  ProjectCategory,
+  ProjectPlatform,
+  ProjectStatus,
+  ProjectImage,
+  ProjectImageKind,
+  ProjectSection,
+  ProjectLinks,
 } from './types';
 
-export type { AppCategory } from './apps';
-
 export {
-  apps,
-  getAppsByType,
-  getInternalApps,
-  getCollaborationApps,
-  getAppById,
-  getLiveApps,
-  getAppCategory,
-} from './apps';
-
-export { programs, getAvailablePrograms } from './programs';
+  projects,
+  categories,
+  categoryLabels,
+  getProjects,
+  getProjectBySlug,
+  getProjectsByCategory,
+  getFeaturedProjects,
+  getAdjacentProject,
+  getProjectKind,
+} from './projects';

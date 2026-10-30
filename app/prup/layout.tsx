@@ -8,20 +8,6 @@ export default function PrupLayout({
 }) {
   return (
     <>
-      {/* Hide main site sidebar/header, reset main padding (hydo와 같은 방식) */}
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-            .min-h-screen > aside,
-            .min-h-screen > nav,
-            .min-h-screen > header,
-            .min-h-screen > div[class*="lg:block"] { display: none !important; }
-            .min-h-screen > main { margin-left: 0 !important; padding-top: 0 !important; }
-            .site-bg-grid { display: none !important; }
-          `,
-        }}
-      />
-
       {/* PRUP 헤더 — 앱처럼 블랙 + 2px 선, 둥근 모서리 없음 */}
       <header
         className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 h-14"

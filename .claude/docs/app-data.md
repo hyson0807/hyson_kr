@@ -1,26 +1,31 @@
 # 앱 데이터 구조 (app/data/)
 
-## App 인터페이스
+## projects.ts — 메인 사이트 프로젝트 (홈 · /projects · 상세 · 푸터 · sitemap)
 ```typescript
-interface App {
-  id: string;              // URL hash용 (isolog, linkjob, irubitteo)
-  title: string;
-  description: string;     // 짧은 설명
-  longDescription?: string; // 상세 설명
-  tags: string[];
-  status: AppStatus;       // 'operating' | 'released' | 'discontinued' | 'coming_soon' | 'development'
-  platforms: Platform[];   // 'ios' | 'android' | 'web'
-  projectType: ProjectType; // 'internal' | 'collaboration'
-  image: string;
-  storeLinks: StoreLinks;  // appStore?, playStore?, website?
+interface Project {
+  slug: string;                 // /projects/[slug]
+  title: string; subtitle: string;
+  categories: ProjectCategory[]; // 'app'|'web'|'mac'|'commerce'|'health'|'education'|'community'|'b2b' — 사이드바 필터
+  platforms: ('ios'|'android'|'web'|'macos')[];
+  year: number; launch?: string; // '2026.07'
+  status: 'live' | 'beta' | 'ended';
+  featured?: boolean;           // 홈 노출 (배열 순서대로)
+  thumbnail: string;            // 카드 · 모자이크 · 상세 대표 이미지
+  theme: { from; to; dark? };   // 이미지 패널 그라디언트
+  intro: string;
+  sections: { title; body; images: ProjectImage[] }[]; // 2~4개
+  highlights: string[];         // 핵심 포인트 3개
+  stack: string[];
+  links: { appStore?; playStore?; website?; download? };
 }
+// ProjectImage.kind: 'phone' | 'video'(poster 필수) | 'browser' | 'plain' | 'icon'
 ```
+- 헬퍼: `getProjects`, `getProjectBySlug`, `getProjectsByCategory`, `getFeaturedProjects`, `getAdjacentProject`, `getProjectKind`
+- 문구 원칙: 모든 프로젝트를 "Hyson Works가 진행한 프로젝트"로 쓴다 (내부/외부 구분 · 1인 표현 없음)
 
-## 헬퍼 함수
-- `getInternalApps()` - 내부 프로젝트만
-- `getCollaborationApps()` - 협업 프로젝트만
-- `getLiveApps()` - 중단(discontinued)된 프로젝트를 뺀 목록 (홈 노출용)
-- `getAppById(id)` - ID로 앱 찾기
+## 이미지
+- `public/images/projects/<slug>/` — 실제 화면 (스토어 스크린샷, 사이트 캡처, hydo 홍보 영상) webp
+- `public/images/generated/` — OpenAI 이미지 생성으로 만든 키 비주얼 · WhyUs 카드 · 배너 (실제 화면이 아닌 분위기용)
 
 ## hydo-notices.ts — hydo 앱 공지사항
 

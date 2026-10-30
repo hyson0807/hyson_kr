@@ -1,25 +1,27 @@
 # 페이지별 구성
 
-## 홈 (page.tsx)
-- Hero Section: 회사명 + 슬로건 (framer-motion 애니메이션, HeroSection 컴포넌트)
-- Our Apps: 출시 앱 카드 (내부 + 협업 프로젝트)
-- Contact CTA: 연락 유도
+메인 사이트 페이지는 `app/(site)/` 라우트 그룹에 있고, `(site)/layout.tsx` 가 Header · Footer · FloatingCta 를 붙인다.
+제품 지원 페이지(hydo, prup, pibugom, ggumteul-math)와 관리자(pibugom2129)는 그룹 밖이라 메인 헤더/푸터가 없다.
 
-## Apps (projects/page.tsx)
-- 내부 프로젝트: 직접 개발한 앱 + 데스크톱 프로그램(Hymo 등, ProgramCard)
-- 참여 프로젝트: 외부 협업 앱
-- Coming Soon 카드
-- App Store / Google Play / 프로그램 다운로드 링크
-- 프로그램 데이터는 `data/programs.ts`에서 관리 (별도 /programs 페이지 없음)
+## 홈 (`(site)/page.tsx`, 컴포넌트는 `app/components/home/`)
+1. Hero — 2줄 헤드라인 + CTA 2개
+2. ProjectMosaic — 5열(모바일 3열) 프로젝트 타일, 열마다 다른 속도로 스크롤 패럴랙스, hydo 타일은 홍보 영상
+3. Intro (`#about`) — 2단 소개 + 서비스 카드 3개
+4. WhyUs — 왼쪽 제목 고정, 카드가 겹쳐 올라오는 4가지 이유
+5. Stats — 카운트업 숫자 4개 (프로젝트 데이터에서 계산) — 여기서 배경이 흰색으로 전환
+6. Banner — 스크롤하면 화면 가득 펼쳐지는 이미지
+7. FeaturedProjects — `featured` 프로젝트 6개
+8. TechMarquee — 기술 스택 마퀴
+9. FinalCta — `data-cta-inline` (이 구간에선 플로팅 CTA 숨김)
 
-## Contact (contact/page.tsx)
-- 연락 방법 (이메일, GitHub)
-- 회사 정보 카드
-- ContactForm 컴포넌트 (Web3Forms 연동, 환경변수 검증 포함)
+## 프로젝트 목록 (`(site)/projects/`)
+- 왼쪽 카테고리(모바일은 가로 칩) + 3열 카드 그리드, 선택값은 `?category=` 로 URL 동기화
 
-## IsoLog Admin (admin2129/page.tsx)
-- 비밀번호 인증 (sessionStorage 기반)
-- 콘텐츠 목록 (좌측 패널) + 미리보기 (우측 패널)
-- 필터: 전체 / 미확인 / 확인됨 / Ban됨
-- 액션: 확인(Verify), Ban, 삭제(영구 제거)
-- DynamoDB 연동 API 사용
+## 프로젝트 상세 (`(site)/projects/[slug]/page.tsx`)
+- 배지 · 제목 · 소개 / 오른쪽 메타(Launch, Platform, Studio, Stack, Links) → 대표 이미지
+- 섹션 `01 / 0N` — 제목, 본문, 이미지 패널(`ImagePanel`: phone / video / browser / plain / icon)
+- 핵심 포인트 박스 → 목록으로 / 다음 사례 → 문의 CTA
+- `generateStaticParams` 로 정적 생성
+
+## Contact (`(site)/contact/`)
+- 바로 연락하기(이메일, GitHub) + ContactForm (Web3Forms)
