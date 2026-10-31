@@ -68,10 +68,9 @@ function ReasonRow({ reason, index }: { reason: (typeof reasons)[number]; index:
   const progress = useSpring(scrollYProgress, { stiffness: 60, damping: 20, mass: 0.6 });
   const x = useTransform(progress, [0, 1], [fromLeft ? '-30%' : '30%', '0%']);
   const opacity = useTransform(progress, [0, 0.5, 1], [0, 0.75, 1]);
-  const rotate = useTransform(progress, [0, 1], [fromLeft ? -3 : 3, 0]);
 
   return (
-    <motion.div ref={ref} style={{ x, opacity, rotate }}>
+    <motion.div ref={ref} style={{ x, opacity }}>
       <div
         className={cn(
           'grid items-center gap-8 rounded-[32px] bg-white/[0.05] p-5 md:grid-cols-2 md:gap-14 md:p-8',
