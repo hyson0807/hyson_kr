@@ -1,4 +1,9 @@
+'use client';
+
 import Image from 'next/image';
+import { useRef } from 'react';
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
+import { cn } from '@/lib/utils';
 import { Reveal } from '../site/Reveal';
 
 const reasons = [
@@ -29,50 +34,64 @@ const reasons = [
 ];
 
 /**
- * 왼쪽 제목은 고정되고, 카드가 하나씩 겹쳐 올라오는 레퍼런스 섹션.
- * 마지막 카드도 고정 위치까지 올라가 잠시 머문 뒤 넘어가도록 카드 목록 끝에 빈 공간을 둔다.
+ * 카드가 스크롤에 맞춰 왼쪽 → 오른쪽 → 왼쪽 … 번갈아 밀려 들어오는 섹션.
+ * 이미지와 글의 위치도 카드마다 좌우가 바뀐다 (지그재그).
+ * 아래 여백(40vh)은 마지막 카드가 다 들어와 자리 잡은 뒤에 배경 전환(HomeCanvas)이 시작되게 하는 공간.
  */
 export function WhyUs() {
   return (
-    <section data-tone="dark" className="bg-inherit px-6 pt-16 pb-8 text-white md:pt-24">
-      <div className="mx-auto grid max-w-6xl gap-10 bg-inherit lg:grid-cols-[300px_1fr] lg:gap-6">
-        <div className="lg:sticky lg:top-32 lg:self-start">
-          <Reveal>
-            <h2 className="text-3xl leading-[1.3] font-bold text-display md:text-[40px]">
-              앱 개발부터 운영까지,
-              <br />
-              Hyson Works가
-              <br />
-              필요한 이유
-            </h2>
-          </Reveal>
-        </div>
+    <section data-tone="dark" className="overflow-hidden px-6 pt-16 pb-[40vh] text-white md:pt-24">
+      <div className="mx-auto max-w-6xl">
+        <Reveal>
+          <h2 className="text-3xl leading-[1.3] font-bold text-display md:text-[40px]">
+            앱 개발부터 운영까지,
+            <br />
+            Hyson Works가 필요한 이유
+          </h2>
+        </Reveal>
 
-        <div className="relative bg-inherit">
+        <div className="mt-16 flex flex-col gap-24 md:mt-20 md:gap-40">
           {reasons.map((reason, i) => (
-            <div
-              key={reason.title}
-              className="sticky top-24 mb-[18vh] bg-inherit pt-8 md:top-28"
-              style={{ zIndex: i + 1 }}
-            >
-              <Reveal className="grid items-start gap-8 sm:grid-cols-[minmax(0,340px)_1fr] sm:gap-12">
-                <div className="relative aspect-square overflow-hidden rounded-[28px]">
-                  <Image src={reason.image} alt="" fill sizes="340px" className="object-cover" />
-                  <span className="absolute right-5 bottom-5 left-5 rounded-full bg-white/90 px-4 py-2.5 text-center text-[13px] font-semibold text-neutral-900 shadow-lg backdrop-blur">
-                    {reason.chip}
-                  </span>
-                </div>
-                <div className="sm:pt-4">
-                  <h3 className="text-2xl leading-[1.35] font-bold whitespace-pre-line text-display">{reason.title}</h3>
-                  <p className="mt-5 max-w-sm text-sm leading-7 text-white/55 keep-all">{reason.body}</p>
-                </div>
-              </Reveal>
-            </div>
+            <ReasonRow key={reason.title} reason={reason} index={i} />
           ))}
-          {/* 마지막 카드도 고정 위치에 멈춰 있다가 넘어가도록 하는 여유 공간 (margin 은 부모 밖으로 새어 나가 sticky 가 풀린다) */}
-          <div aria-hidden className="h-[12vh]" />
         </div>
       </div>
     </section>
+  );
+}
+
+function ReasonRow({ reason, index }: { reason: (typeof reasons)[number]; index: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const fromLeft = index % 2 === 0;
+  // 들어오는 구간을 길게 잡고(화면 아래 → 위쪽 20%) 스프링으로 늦게 따라오게 해 휙 지나가지 않도록 한다
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'start 20%'] });
+  const progress = useSpring(scrollYProgress, { stiffness: 60, damping: 20, mass: 0.6 });
+  const x = useTransform(progress, [0, 1], [fromLeft ? '-30%' : '30%', '0%']);
+  const opacity = useTransform(progress, [0, 0.5, 1], [0, 0.75, 1]);
+  const rotate = useTransform(progress, [0, 1], [fromLeft ? -3 : 3, 0]);
+
+  return (
+    <motion.div ref={ref} style={{ x, opacity, rotate }}>
+      <div
+        className={cn(
+          'grid items-center gap-8 rounded-[32px] bg-white/[0.05] p-5 md:grid-cols-2 md:gap-14 md:p-8',
+          !fromLeft && 'md:[&>*:first-child]:order-2',
+        )}
+      >
+        <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
+          <Image src={reason.image} alt="" fill sizes="(min-width: 768px) 520px, 90vw" className="object-cover" />
+          <span className="absolute right-5 bottom-5 left-5 rounded-full bg-white/90 px-4 py-2.5 text-center text-[13px] font-semibold text-neutral-900 shadow-lg backdrop-blur">
+            {reason.chip}
+          </span>
+        </div>
+        <div className="px-1 pb-2 md:px-4 md:pb-0">
+          <p className="font-mono text-sm text-brand">{String(index + 1).padStart(2, '0')}</p>
+          <h3 className="mt-3 text-2xl leading-[1.35] font-bold whitespace-pre-line text-display md:text-[32px]">
+            {reason.title}
+          </h3>
+          <p className="mt-5 max-w-md text-[15px] leading-7 text-white/55 keep-all">{reason.body}</p>
+        </div>
+      </div>
+    </motion.div>
   );
 }

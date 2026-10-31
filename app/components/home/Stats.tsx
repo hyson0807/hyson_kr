@@ -17,7 +17,7 @@ const stats = [
 
 export function Stats() {
   return (
-    <section data-tone="light" className="px-6 pt-36 pb-24 text-neutral-900 md:pt-44">
+    <section data-tone="light" className="px-6 pt-16 pb-24 text-neutral-900 md:pt-20">
       <div className="mx-auto max-w-5xl">
         <Reveal>
           <h2 className="text-3xl leading-[1.3] font-bold text-display md:text-[40px]">
