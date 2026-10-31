@@ -75,5 +75,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'yearly',
       priority: 0.3,
     },
+    // 피부곰 · 꿈틀매쓰 — 스토어 지원 URL 과 앱이 링크하는 약관 · 방침 문서
+    ...supportPages('pibugom', ['terms', 'privacy', 'community-guidelines', 'licenses', 'delete-account']),
+    ...supportPages('ggumteul-math', ['terms', 'privacy', 'licenses', 'delete-account']),
   ];
+
+  function supportPages(app: string, docs: string[]): MetadataRoute.Sitemap {
+    return [
+      { url: `${baseUrl}/${app}`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
+      ...docs.map((doc) => ({
+        url: `${baseUrl}/${app}/${doc}`,
+        lastModified: new Date(),
+        changeFrequency: 'yearly' as const,
+        priority: 0.3,
+      })),
+    ];
+  }
 }

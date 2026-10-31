@@ -16,8 +16,8 @@ app/
 │   └── ErrorBoundary.tsx
 ├── hooks/             # useSectionTone(헤더/CTA 톤), useInView
 ├── data/              # projects.ts, types.ts, hydo-notices.ts, hydo-holidays.ts, index.ts
-├── fonts/             # PretendardVariable.woff2
-├── lib/               # auth.ts, neon.ts
+├── fonts/             # pretendard.css (다이내믹 서브셋 @font-face, 파일은 public/fonts/pretendard/)
+├── lib/               # seo.ts(pageMetadata · toMetaDescription), auth.ts, neon.ts
 ├── api/hydo/          # hydo 앱이 읽는 공개 API (notices, holidays)
 ├── api/pibugom/       # 피부곰 신고 관리 API
 ├── hydo/ prup/ pibugom/ ggumteul-math/  # 제품 지원 · 약관 페이지 (각자 헤더)

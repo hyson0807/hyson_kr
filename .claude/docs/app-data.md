@@ -26,6 +26,7 @@ interface Project {
 ## 이미지
 - `public/images/projects/<slug>/` — 실제 화면 (스토어 스크린샷, 사이트 캡처, hydo 홍보 영상) webp
 - `public/images/generated/` — OpenAI 이미지 생성으로 만든 키 비주얼 · WhyUs 카드 · 배너 (실제 화면이 아닌 분위기용)
+- `public/images/og/<slug>.jpg` — 상세 페이지 공유 이미지(1200×630 JPG, 카카오톡 등 webp 미지원 대비). `thumbnail` 을 바꾸면 같이 다시 만든다
 
 ## hydo-notices.ts — hydo 앱 공지사항
 
@@ -48,3 +49,10 @@ type HydoNotice = {
 ```
 
 공지 발행 = 배열에 항목 추가 + `main` push. 상세는 파일 맨 위 주석에 있다.
+## SEO
+- 하위 페이지 메타데이터는 `app/lib/seo.ts` 의 `pageMetadata()` 로 만든다 — Next 는 openGraph · twitter 를 통째로 덮어써서,
+  직접 쓰면 og:image · siteName · locale 이 빠진다. 긴 소개문은 `toMetaDescription()` 으로 150자 안쪽으로 줄인다
+- 구조화 데이터: 루트 레이아웃에 Organization(+logo `public/logo.png`) · WebSite, 상세 페이지에 BreadcrumbList · CreativeWork
+- `/projects` 목록은 `useSearchParams` 때문에 정적 렌더가 Suspense fallback 으로 대체된다 — fallback 에 `ProjectsGridView active="all"` 을
+  넘겨 정적 HTML 에도 h1 · 카드 · 링크가 들어가게 했다. 이 fallback 을 지우면 목록이 검색엔진에 안 보인다
+- 새 페이지를 만들면 `app/sitemap.ts` 에 추가한다

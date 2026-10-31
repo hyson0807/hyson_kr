@@ -21,7 +21,7 @@
 ```
 `<html>` 에 `dark` 클래스가 남아 있으므로(제품 페이지용) 메인 사이트 컴포넌트에는 `dark:` variant 를 쓰지 않는다.
 
-## 타이포그래피 (Pretendard Variable, `app/fonts/`)
+## 타이포그래피 (Pretendard Variable 다이내믹 서브셋 — `app/fonts/pretendard.css` + `public/fonts/pretendard/`)
 ```css
 히어로: text-[34px] sm:text-5xl md:text-[64px] font-bold text-display
 섹션 제목: text-3xl md:text-[40px] leading-[1.3] font-bold text-display

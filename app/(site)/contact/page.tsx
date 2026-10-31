@@ -1,19 +1,14 @@
 import { Metadata } from 'next';
+import { pageMetadata } from '@/app/lib/seo';
 import { Reveal } from '../../components/site/Reveal';
 import ContactForm from './ContactForm';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: '문의하기',
   description:
-    'Hyson Works에 프로젝트 문의, 협업 제안을 보내주세요. 빠른 시일 내에 답변드리겠습니다.',
-  alternates: {
-    canonical: '/contact',
-  },
-  openGraph: {
-    title: '문의하기 | Hyson Works',
-    description: 'Hyson Works에 프로젝트 문의, 협업 제안을 보내주세요.',
-  },
-};
+    'Hyson Works에 앱 · 웹 개발 프로젝트 문의와 협업 제안을 보내 주세요. 아이디어 단계여도 괜찮습니다. 빠르게 답변드리겠습니다.',
+  path: '/contact',
+});
 
 const contactMethods = [
   {

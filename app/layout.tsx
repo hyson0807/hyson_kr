@@ -1,14 +1,8 @@
 import type { Metadata } from 'next';
 import { Geist_Mono } from 'next/font/google';
-import localFont from 'next/font/local';
+// Pretendard 다이내믹 서브셋 — 페이지에 쓰인 글자 묶음(unicode-range)만 내려받는다 (전체 파일은 2MB)
+import './fonts/pretendard.css';
 import './globals.css';
-
-const pretendard = localFont({
-  src: './fonts/PretendardVariable.woff2',
-  variable: '--font-pretendard',
-  weight: '45 920',
-  display: 'swap',
-});
 
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
@@ -84,20 +78,35 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className="dark">
-      <body className={`${pretendard.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${geistMono.variable} antialiased`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               '@context': 'https://schema.org',
-              '@type': 'Organization',
-              name: 'Hyson Works',
-              alternateName: '하이슨 워크',
-              url: 'https://hyson.kr',
-              description:
-                'Hyson Works는 iOS · Android · Web · Mac 앱을 기획부터 출시, 운영까지 함께 만드는 프로덕트 스튜디오입니다. 꾸준히, 더 나은 앱을 만듭니다.',
-              email: 'contact@hyson.kr',
-              sameAs: ['https://github.com/hyson0807'],
+              '@graph': [
+                {
+                  '@type': 'Organization',
+                  '@id': 'https://hyson.kr/#organization',
+                  name: 'Hyson Works',
+                  alternateName: '하이슨 워크',
+                  url: 'https://hyson.kr',
+                  logo: 'https://hyson.kr/logo.png',
+                  description:
+                    'Hyson Works는 iOS · Android · Web · Mac 앱을 기획부터 출시, 운영까지 함께 만드는 프로덕트 스튜디오입니다. 꾸준히, 더 나은 앱을 만듭니다.',
+                  email: 'contact@hyson.kr',
+                  sameAs: ['https://github.com/hyson0807'],
+                },
+                {
+                  '@type': 'WebSite',
+                  '@id': 'https://hyson.kr/#website',
+                  url: 'https://hyson.kr',
+                  name: 'Hyson Works',
+                  alternateName: '하이슨 워크',
+                  inLanguage: 'ko-KR',
+                  publisher: { '@id': 'https://hyson.kr/#organization' },
+                },
+              ],
             }),
           }}
         />

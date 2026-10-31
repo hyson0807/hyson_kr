@@ -7,6 +7,7 @@ import type { Project, ProjectPlatform } from '@/app/data';
 import { getAdjacentProject, getProjectBySlug, projects } from '@/app/data';
 import { ImagePanel } from '@/app/components/projects/DeviceFrames';
 import { Reveal } from '@/app/components/site/Reveal';
+import { SITE_URL, pageMetadata, toMetaDescription } from '@/app/lib/seo';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -35,16 +36,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const project = getProjectBySlug(slug);
   if (!project) return {};
 
-  return {
+  return pageMetadata({
     title: `${project.title} — ${project.subtitle}`,
-    description: project.intro,
-    alternates: { canonical: `/projects/${project.slug}` },
-    openGraph: {
-      title: `${project.title} | Hyson Works`,
-      description: project.subtitle,
-      images: [{ url: project.thumbnail }],
-    },
-  };
+    description: toMetaDescription(project.intro),
+    path: `/projects/${project.slug}`,
+    // 카카오톡 등 webp 미리보기를 못 띄우는 곳이 있어 공유 이미지는 1200×630 JPG 로 따로 둔다 (public/images/og)
+    image: `/images/og/${project.slug}.jpg`,
+    type: 'article',
+  });
 }
 
 export default async function ProjectDetailPage({ params }: Props) {
@@ -57,6 +56,10 @@ export default async function ProjectDetailPage({ params }: Props) {
 
   return (
     <article data-tone="light" className="bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(projectJsonLd(project)) }}
+      />
       {/* 상단 — 배지 · 제목 · 소개 / 메타 */}
       <header className="mx-auto max-w-6xl px-6 pt-32 pb-14 md:pt-40">
         <Reveal className="grid gap-12 lg:grid-cols-[1fr_280px] lg:gap-20">
@@ -242,4 +245,40 @@ function ProjectLinks({ project }: { project: Project }) {
       </dd>
     </>
   );
+}
+
+/** 검색엔진용 구조화 데이터 — 이동 경로(홈 › 프로젝트 › 상세)와 프로젝트 정보 */
+function projectJsonLd(project: Project) {
+  const url = `${SITE_URL}/projects/${project.slug}`;
+  const sameAs = [project.links.appStore, project.links.playStore, project.links.website]
+    .filter((link): link is string => Boolean(link))
+    .map((link) => (link.startsWith('/') ? `${SITE_URL}${link}` : link));
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: '홈', item: SITE_URL },
+          { '@type': 'ListItem', position: 2, name: '프로젝트', item: `${SITE_URL}/projects` },
+          { '@type': 'ListItem', position: 3, name: project.title, item: url },
+        ],
+      },
+      {
+        '@type': 'CreativeWork',
+        '@id': `${url}#project`,
+        name: project.title,
+        headline: `${project.title} — ${project.subtitle}`,
+        description: project.intro,
+        url,
+        image: `${SITE_URL}${project.thumbnail}`,
+        dateCreated: String(project.year),
+        inLanguage: 'ko-KR',
+        keywords: project.stack.join(', '),
+        creator: { '@id': `${SITE_URL}/#organization` },
+        ...(sameAs.length > 0 && { sameAs }),
+      },
+    ],
+  };
 }

@@ -17,17 +17,27 @@ const filters: { value: Filter; label: string }[] = [
 const isFilter = (value: string | null): value is Filter =>
   value === 'all' || categories.includes(value as ProjectCategory);
 
+/** ?category= 를 읽어 필터를 고르는 래퍼 — useSearchParams 때문에 정적 렌더에서는 Suspense fallback 이 대신 그려진다 */
 export function ProjectsGrid() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const param = searchParams.get('category');
   const active: Filter = isFilter(param) ? param : 'all';
-  const items = getProjectsByCategory(active);
 
   const select = (value: Filter) => {
     const query = value === 'all' ? '' : `?category=${value}`;
     router.replace(`/projects${query}`, { scroll: false });
   };
+
+  return <ProjectsGridView active={active} onSelect={select} />;
+}
+
+/**
+ * 목록 화면. 페이지의 Suspense fallback 으로 '전체' 상태를 그대로 넘겨,
+ * 정적 HTML 에도 h1 과 모든 프로젝트 카드 · 링크가 들어가게 한다 (검색엔진 수집용).
+ */
+export function ProjectsGridView({ active, onSelect }: { active: Filter; onSelect?: (value: Filter) => void }) {
+  const items = getProjectsByCategory(active);
 
   return (
     <div className="grid gap-10 lg:grid-cols-[180px_1fr] lg:gap-14">
@@ -38,7 +48,7 @@ export function ProjectsGrid() {
             <li key={filter.value} className="shrink-0">
               <button
                 type="button"
-                onClick={() => select(filter.value)}
+                onClick={() => onSelect?.(filter.value)}
                 className={cn(
                   'w-full rounded-lg px-3.5 py-2 text-left text-[15px] whitespace-nowrap transition-colors',
                   active === filter.value
