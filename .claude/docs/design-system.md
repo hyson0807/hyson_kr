@@ -7,9 +7,14 @@
 - /projects, 상세, /contact 는 흰 배경
 - 섹션은 `data-tone="dark" | "light"` 를 단다 — 헤더와 플로팅 CTA 가 이 값을 보고 색을 바꾼다 (`useSectionTone`)
 
+## 로고
+- C안: 소문자 워드마크 "hyson works" (Poppins 600), hyson 의 o 는 점이 도는 브랜드 컬러 링
+- 코드로 그린다 — `app/components/site/Wordmark.tsx` (`Wordmark`, 심볼만은 `LogoRing`), 파비콘 `app/icon.svg`
+- 글자는 currentColor, 링은 항상 `text-brand`
+
 ## 색상
 ```css
-브랜드: bg-brand (#4b4bf5), hover:bg-brand-hover (#3b3be0)
+브랜드: bg-brand (#1074f8 — 로고 C안 링 색), hover:bg-brand-hover (#0b5fd6)
 다크 배경: bg-[#0a0a0a], 카드 bg-white/[0.06]
 라이트 텍스트: text-neutral-900 / 본문 text-neutral-500~600 / 메타 text-neutral-400
 라이트 면: bg-neutral-50 · bg-neutral-100, 보더 border-neutral-200

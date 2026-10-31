@@ -21,17 +21,20 @@ const reasons = [
     body: '앱만 넘기고 끝나지 않습니다. API 서버와 데이터베이스, 배포 파이프라인, 무중단 서버 이전까지 서비스가 계속 돌아가는 데 필요한 것을 함께 설계하고 운영합니다.',
   },
   {
-    image: '/images/generated/why-4.webp',
-    chip: '14 Languages · Global Payments',
-    title: '해외 출시를\n경험해 봤기 때문에',
-    body: '최대 14개 언어의 다국어 앱, 국가별 가격과 해외 결제, 글로벌 스토어 출시를 진행했습니다. 처음부터 해외 사용자를 고려한 구조로 만듭니다.',
+    image: '/images/generated/why-payments.webp',
+    chip: 'Domestic PG · Global PG · In-App',
+    title: '국내 · 해외 결제를\n직접 연동해 봤기 때문에',
+    body: '국내 PG 카드 정기 결제부터 해외 PG의 달러 결제와 PayPal, 앱스토어 인앱 구독까지 직접 연동했습니다. 결제 검증과 웹훅, 환불, 실패 시 재시도까지 돈이 오가는 흐름을 안전하게 설계합니다.',
   },
 ];
 
-/** 왼쪽 제목은 고정되고, 카드가 하나씩 겹쳐 올라오는 레퍼런스 섹션 */
+/**
+ * 왼쪽 제목은 고정되고, 카드가 하나씩 겹쳐 올라오는 레퍼런스 섹션.
+ * 마지막 카드도 고정 위치까지 올라가 잠시 머문 뒤 넘어가도록 카드 목록 끝에 빈 공간을 둔다.
+ */
 export function WhyUs() {
   return (
-    <section data-tone="dark" className="bg-inherit px-6 pt-16 pb-32 text-white md:pt-24">
+    <section data-tone="dark" className="bg-inherit px-6 pt-16 pb-8 text-white md:pt-24">
       <div className="mx-auto grid max-w-6xl gap-10 bg-inherit lg:grid-cols-[300px_1fr] lg:gap-6">
         <div className="lg:sticky lg:top-32 lg:self-start">
           <Reveal>
@@ -49,7 +52,7 @@ export function WhyUs() {
           {reasons.map((reason, i) => (
             <div
               key={reason.title}
-              className="sticky top-24 mb-[18vh] bg-inherit pt-8 last:mb-0 md:top-28"
+              className="sticky top-24 mb-[18vh] bg-inherit pt-8 md:top-28"
               style={{ zIndex: i + 1 }}
             >
               <Reveal className="grid items-start gap-8 sm:grid-cols-[minmax(0,340px)_1fr] sm:gap-12">
@@ -66,6 +69,8 @@ export function WhyUs() {
               </Reveal>
             </div>
           ))}
+          {/* 마지막 카드도 고정 위치에 멈춰 있다가 넘어가도록 하는 여유 공간 (margin 은 부모 밖으로 새어 나가 sticky 가 풀린다) */}
+          <div aria-hidden className="h-[12vh]" />
         </div>
       </div>
     </section>
