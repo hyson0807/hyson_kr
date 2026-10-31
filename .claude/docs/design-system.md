@@ -31,7 +31,7 @@
 `text-display` = 자간 -0.03em + 단어 단위 줄바꿈, `keep-all` = 단어 단위 줄바꿈.
 
 ## 모션 (framer-motion)
-- 등장: `Reveal` (아래에서 28px 떠오름, 0.7s, ease [0.22,1,0.36,1], 한 번만)
+- 등장: `Reveal` (아래에서 28px 떠오름, 0.9s, ease [0.22,1,0.36,1], 한 번만)
 - 스크롤 연동: 모자이크 열 패럴랙스, 배너 확장, 배경 다크→화이트
 - 카드 hover: 이미지 `scale-105` `duration-500`
 - 마퀴: `animate-marquee` / `animate-marquee-reverse` (globals.css)
